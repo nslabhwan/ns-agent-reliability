@@ -83,6 +83,14 @@ def audit_markdown(lines: list[str]) -> list[str]:
         if any(len(cells) != expected for _, cells in table[1:]):
             details = ",".join(f"L{ln}:{len(cells)}" for ln, cells in table)
             issues.append(f"MARKDOWN_TABLE_COLUMNS:{details}")
+        if expected >= 3:
+            for ln, cells in table:
+                if is_separator(cells):
+                    continue
+                prose_lengths = [len(HTML_TAG.sub("", INLINE_CODE.sub("", cell)).strip()) for cell in cells]
+                if max(prose_lengths, default=0) >= 55:
+                    issues.append(f"MOBILE_PROSE_TABLE:L{ln}:cols={expected}:max_prose={max(prose_lengths)}")
+                    break
         if expected >= 5:
             for ln, cells in table:
                 if is_separator(cells):
