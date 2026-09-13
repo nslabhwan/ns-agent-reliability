@@ -2,7 +2,7 @@
 
 ## Reporting
 
-Do not open a public issue containing credentials, private infrastructure identifiers, provider tokens, or unredacted logs. Use the repository owner's private security-reporting mechanism once the publication repository is created.
+Do not open a public issue containing credentials, private infrastructure identifiers, provider tokens, or unredacted logs. Use GitHub Private Vulnerability Reporting from this repository's Security tab for sensitive security reports.
 
 ## Security model
 

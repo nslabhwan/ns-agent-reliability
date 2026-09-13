@@ -4,14 +4,14 @@
   "source_tree": "$PUBLIC_CANDIDATE_ROOT",
   "first_public_wedge": "Agent Reliability Doctor",
   "recommended_repository_mode": "one standalone public repository centered on the Doctor and portable reliability/control regressions; keep historical architecture material inside the same repository rather than creating multiple repos",
-  "recommended_top_level_name": "agent-reliability-doctor",
+  "recommended_top_level_name": "ns-agent-reliability",
   "completed_before_push": [
     "Doctor source/example/test included in FILE_INDEX tracked scope",
     "fresh Python 3.11 venv pip install PASS",
     "installed ns-reliability CLI smoke PASS with 15 findings",
     "32/32 tests PASS",
     "Python source compile PASS",
-    "current FILE_INDEX tracked-tree public-content scrub PASS (88 files at this update)",
+    "current FILE_INDEX tracked-tree public-content scrub PASS (90 files at current 2026-09-14 re-audit)",
     "JSON parse PASS",
     "Doctor-first README first-value path added",
     "public GitHub remote created, pushed and verified"
@@ -50,6 +50,7 @@
     "PASS: public GitHub repository exists under approved owner",
     "PASS: remote default branch contains approved tracked tree",
     "PASS: fresh unauthenticated public clone + install + CLI smoke",
-    "PASS: remote commit/tree evidence recorded internally"
+    "PASS: remote commit/tree evidence recorded internally",
+    "PASS: automated public quality gate runs on every push and pull request"
   ]
 }

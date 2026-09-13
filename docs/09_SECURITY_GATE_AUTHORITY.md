@@ -83,7 +83,7 @@ Negative tests are first-class. Historical tests covered examples such as traver
 
 ## Open-source scrub requirement
 
-This publication candidate intentionally uses portable aliases. Before public push, a scrub must scan all files for:
+This public release candidate intentionally uses portable aliases. Before each public update, a scrub must scan all tracked files for:
 
 - private home/server paths;
 - usernames/account identifiers;

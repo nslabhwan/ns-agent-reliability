@@ -2,6 +2,20 @@
 
 Status: 0.1.0rc1 RELEASE CANDIDATE / REPOSITORY CHECKS PASS
 
+## Current public re-audit — 2026-09-14 KST
+
+- [x] Local `main` exactly matches `origin/main` before this re-audit.
+- [x] Git tracked tree and `FILE_INDEX.json` match exactly: 90 / 90.
+- [x] Deterministic content/mobile QA: 39 text surfaces / 0 issues.
+- [x] Public scrub / JSON / package metadata scan: 90 / 90 PASS.
+- [x] Full regression suite: 32 / 32 PASS.
+- [x] Fresh Python 3.11 package build/install and installed CLI smoke PASS; Doctor fixture returns 15 findings.
+- [x] Relative repository links checked: 14 references / 0 missing.
+- [x] Public external links checked: 15 URLs / 0 failing at audit time.
+- [x] Current GitHub quality workflow and Pages deployment both completed successfully on `dd80ce20689228bd841160214994ee1305d5ad45`.
+- [x] GitHub Private Vulnerability Reporting enabled; `SECURITY.md` points to the live private reporting path.
+- [x] Public quality workflow extended to run content QA, prepublish scrub, package install, 32-test regression and installed CLI smoke on push/PR.
+
 ## First public wedge
 
 - [x] Agent Reliability Doctor selected as the first public wedge.
