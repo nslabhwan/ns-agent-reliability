@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import re
 import subprocess
+from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,6 +22,25 @@ COMMON_MISSPELLINGS = {
     "mutiple": "multiple", "enviroment": "environment",
     "relevent": "relevant", "adress": "address",
 }
+
+
+class VisibleHTMLText(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.skip_depth = 0
+        self.fragments: list[tuple[int, str]] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag.lower() in {"style", "script"}:
+            self.skip_depth += 1
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag.lower() in {"style", "script"} and self.skip_depth:
+            self.skip_depth -= 1
+
+    def handle_data(self, data: str) -> None:
+        if not self.skip_depth and data.strip():
+            self.fragments.append((self.getpos()[0], data.strip()))
 
 
 def tracked_text_files() -> list[Path]:
@@ -162,9 +182,31 @@ def audit_plain(lines: list[str]) -> list[str]:
     return issues
 
 
+def audit_html(text: str) -> list[str]:
+    issues = audit_plain(text.splitlines())
+    parser = VisibleHTMLText()
+    parser.feed(text)
+    for no, fragment in parser.fragments:
+        if ";" in fragment:
+            issues.append(f"LOCALIZATION_SEMICOLON:L{no}:{fragment[:80]}")
+        match = DETACHED_KO.search(fragment)
+        if match:
+            issues.append(f"DETACHED_KO_PARTICLE:L{no}:{match.group(1)} {match.group(2)}")
+        for word in WORD_RE.findall(fragment):
+            suggestion = COMMON_MISSPELLINGS.get(word.lower())
+            if suggestion:
+                issues.append(f"COMMON_MISSPELLING:L{no}:{word}->{suggestion}")
+    return issues
+
+
 def audit(path: Path) -> list[str]:
-    lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
-    return audit_markdown(lines) if path.suffix.lower() == ".md" else audit_plain(lines)
+    text = path.read_text(encoding="utf-8", errors="replace")
+    lines = text.splitlines()
+    if path.suffix.lower() == ".md":
+        return audit_markdown(lines)
+    if path.suffix.lower() in {".html", ".htm"}:
+        return audit_html(text)
+    return audit_plain(lines)
 
 
 def main() -> int:
