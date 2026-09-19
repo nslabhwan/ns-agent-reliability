@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0a1 OpenSynapse Alpha candidate — 2026-09-19
+## 0.2.0a1 OpenSynapse Alpha — 2026-09-19
 
 - Shifted the public product identity from a Doctor-first wedge to the **OpenSynapse** umbrella while preserving Reliability Doctor as a module.
 - Consolidated the portable Direct Channel MCP core into the existing publication candidate instead of creating a competing repository.
@@ -11,7 +11,7 @@
 - Declared `fastmcp>=4.0.3,<5` and updated provenance/SBOM.
 - Added `UNIFIED_BASE.md`, `USER_VALUE.md`, `QUICKSTART.md`, and preserved the former Doctor README under `docs/RELIABILITY_DOCTOR.md`.
 - Tracked public scope expanded for the OpenSynapse candidate.
-- This candidate is **not yet claimed as live** until public push and remote fresh-clone/install verification complete.
+- Published to the public repository and verified by remote SHA match, fresh unauthenticated clone, fresh `install.sh`, installed Doctor, and real HTTP MCP write/readback/bounded-command E2E.
 
 ## Main — distribution/social preview asset — 2026-09-09
 

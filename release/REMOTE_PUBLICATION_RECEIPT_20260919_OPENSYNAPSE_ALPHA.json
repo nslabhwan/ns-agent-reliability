@@ -1,0 +1,32 @@
+{
+  "schema_version": "OPENSYNAPSE_REMOTE_PUBLICATION_RECEIPT_V1",
+  "observed_at_utc": "2026-09-19T04:46:07Z",
+  "status": "PUBLIC_LIVE_REMOTE_VERIFIED",
+  "public_repository": "https://github.com/nslabhwan/ns-agent-reliability",
+  "branch": "main",
+  "remote_commit_sha": "43525fd95889bc56d49afaa260dea5851b61d8f5",
+  "release": "0.2.0a1",
+  "product": "OpenSynapse",
+  "verification": {
+    "remote_head_matches_pushed_commit": "PASS",
+    "fresh_unauthenticated_clone": "PASS",
+    "fresh_public_install_sh": "PASS",
+    "installed_doctor": "PASS",
+    "installed_product": "OpenSynapse",
+    "installed_component": "Direct Channel",
+    "installed_python": "3.11.13",
+    "http_mcp_write": "PASS",
+    "http_mcp_readback": "OPENSYNAPSE_E2E_OK",
+    "bounded_command": "PASS",
+    "bounded_command_shell": false
+  },
+  "remaining_not_public_ready": [
+    "authenticated zero-config HTTPS gateway",
+    "public ChatGPT plugin connection flow",
+    "portable Android Phone Local package",
+    "multi-device pairing/routing",
+    "desktop packaging",
+    "resumable long-running jobs"
+  ],
+  "truth_rule": "This receipt proves the OpenSynapse 0.2.0a1 Linux Alpha is live and installable from the public GitHub repository at the recorded commit. It does not claim the remaining milestones are public-ready."
+}

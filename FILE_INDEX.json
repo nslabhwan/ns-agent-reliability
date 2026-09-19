@@ -108,7 +108,8 @@
     "tests/opensynapse_http_e2e_probe.py",
     "release/TECHNICAL_PREPUBLICATION_RECEIPT_20260919_OPENSYNAPSE_ALPHA.json",
     ".github/workflows/public-quality-gate.yml",
-    "tools/content_quality_check.py"
+    "tools/content_quality_check.py",
+    "release/REMOTE_PUBLICATION_RECEIPT_20260919_OPENSYNAPSE_ALPHA.json"
   ],
   "excluded_runtime_artifacts": [
     ".ns-direct-channel.lock",

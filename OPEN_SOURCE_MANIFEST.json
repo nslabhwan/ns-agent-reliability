@@ -1,19 +1,22 @@
 {
   "schema_version": "OPENSYNAPSE_OPEN_SOURCE_MANIFEST_V1",
   "authority": "GPT_SANDBOX_NON_SSOT",
-  "publication_status": "PUBLIC_0.1.0RC1_LIVE__0.2.0A1_OPENSYNAPSE_CANDIDATE",
+  "publication_status": "PUBLIC_LIVE_0.2.0A1_OPENSYNAPSE_ALPHA",
   "updated_kst": "2026-09-19",
   "public_repository": "https://github.com/nslabhwan/ns-agent-reliability",
   "product_identity": "OpenSynapse",
   "public_user_promise": "Install once. Let AI work on machines you own through explicit bounded access, and verify the result.",
   "current_public_release": {
-    "version": "0.1.0rc1",
-    "wedge": "Agent Reliability Doctor",
-    "remotely_verified": true
+    "version": "0.2.0a1",
+    "wedge": "OpenSynapse Linux Alpha",
+    "remotely_verified": true,
+    "remote_commit_sha": "43525fd95889bc56d49afaa260dea5851b61d8f5",
+    "fresh_public_install": "PASS",
+    "http_mcp_e2e": "PASS"
   },
   "candidate": {
     "version": "0.2.0a1",
-    "status": "CANDIDATE_READY_NOT_PUSHED",
+    "status": "PUBLIC_LIVE_REMOTE_VERIFIED",
     "first_value": "opensynapse install --root <workspace>",
     "tested_python": "3.11.13",
     "tests": "41/41 PASS",
@@ -21,7 +24,8 @@
     "real_http_mcp_write_readback_e2e": "PASS",
     "public_scan": "PASS",
     "runtime_dependency": "fastmcp>=4.0.3,<5",
-    "runtime_dependency_license": "Apache-2.0"
+    "runtime_dependency_license": "Apache-2.0",
+    "remote_commit_sha": "43525fd95889bc56d49afaa260dea5851b61d8f5"
   },
   "current_proven_components": [
     "OpenSynapse Linux node CLI and one-install bootstrap",
@@ -51,5 +55,6 @@
     "narrative_docs": "CC-BY-4.0",
     "brand_assets": "reserved as described in TRADEMARKS.md"
   },
-  "truth_rule": "Historical evidence remains historical. Candidate readiness is not public-release completion; remote push and fresh public clone/install verification are required."
+  "truth_rule": "Historical evidence remains historical. Candidate readiness is not public-release completion; remote push and fresh public clone/install verification are required.",
+  "remote_publication_receipt": "release/REMOTE_PUBLICATION_RECEIPT_20260919_OPENSYNAPSE_ALPHA.json"
 }

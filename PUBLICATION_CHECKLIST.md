@@ -1,6 +1,6 @@
 # Publication Checklist
 
-Status: **OpenSynapse 0.2.0a1 CANDIDATE READY / NOT YET PUSHED**
+Status: **OpenSynapse 0.2.0a1 PUBLIC LIVE / REMOTE VERIFIED**
 
 Public repository: `nslabhwan/ns-agent-reliability`
 
@@ -30,17 +30,19 @@ Public repository: `nslabhwan/ns-agent-reliability`
 - [x] OpenSynapse files added to `FILE_INDEX.json`.
 - [x] Full tracked-tree public-content scrub PASS.
 
-## Remaining publication boundary
+## Remote publication verification
 
-- [ ] Copy the exact tracked candidate tree to the current public repository.
-- [ ] Review staged diff.
-- [ ] Commit and push.
-- [ ] Verify remote HEAD matches the pushed commit.
-- [ ] Fresh unauthenticated clone.
-- [ ] Fresh public install and `opensynapse` smoke.
-- [ ] Record the verified remote SHA.
+- [x] Exact tracked candidate tree pushed to the current public repository.
+- [x] Staged diff reviewed.
+- [x] Commit and push completed.
+- [x] Remote HEAD matched the pushed commit.
+- [x] Fresh unauthenticated clone PASS.
+- [x] Fresh public `install.sh` PASS.
+- [x] Installed `opensynapse doctor` PASS.
+- [x] Real HTTP MCP write/readback/bounded-command E2E PASS.
+- [x] Verified remote SHA recorded: `43525fd95889bc56d49afaa260dea5851b61d8f5`.
 
-Until those items pass, **0.2.0a1 is not claimed as live on GitHub**.
+OpenSynapse 0.2.0a1 Linux Alpha is **public live and remotely verified**.
 
 ## Product boundaries that remain NOT public-ready
 
