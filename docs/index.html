@@ -2,116 +2,115 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NS Agent Reliability — Find silent agent control-plane failures</title>
-<meta name="description" content="Find silent AI agent and MCP reliability failures: duplicate execution, stale ownership, retry loops, evidence gaps, contract drift and unsafe rollback.">
-<link rel="canonical" href="https://nslabhwan.github.io/ns-agent-reliability/">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://nslabhwan.github.io/ns-agent-reliability/">
-<meta property="og:title" content="Your agent said DONE. Did it actually happen? — NS Agent Reliability">
-<meta property="og:description" content="Find silent AI agent and MCP reliability failures before they become repeated production incidents.">
-<meta property="og:image" content="https://nslabhwan.github.io/ns-agent-reliability/assets/social-preview.png">
-<meta property="og:image:width" content="1280">
-<meta property="og:image:height" content="640">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Your agent said DONE. Did it actually happen? — NS Agent Reliability">
-<meta name="twitter:description" content="Find silent AI agent and MCP reliability failures before they become repeated production incidents.">
-<meta name="twitter:image" content="https://nslabhwan.github.io/ns-agent-reliability/assets/social-preview.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenSynapse — Let AI work on the machines you own</title>
+<meta name="description" content="Open-source infrastructure that lets AI work on authorized computers and servers through bounded access, then verify the result.">
 <style>
-:root{color-scheme:dark;--bg:#0d1117;--panel:#161b22;--panel2:#0f141b;--line:#30363d;--text:#f0f6fc;--muted:#8b949e;--accent:#58a6ff;--ok:#3fb950;--warn:#d29922}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;word-break:keep-all;overflow-wrap:break-word}a{color:var(--accent)}.wrap{max-width:1080px;margin:auto;padding:28px 20px 76px}.top{display:flex;justify-content:space-between;gap:20px;align-items:center}.brand{font-weight:800}.pill{border:1px solid var(--line);border-radius:999px;padding:6px 11px;color:var(--muted);font-size:13px}.hero{padding:66px 0 34px}.hero h1{font-size:clamp(38px,7vw,72px);line-height:1.02;letter-spacing:-.045em;max-width:930px;margin:0 0 22px}.hero p{max-width:790px;font-size:20px;color:#c9d1d9}.eyebrow{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:11px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}.btn{display:inline-block;padding:12px 16px;border-radius:9px;text-decoration:none;font-weight:750;border:1px solid var(--line)}.primary{background:var(--text);color:var(--bg)}.secondary{background:var(--panel);color:var(--text)}.section{padding:38px 0;border-top:1px solid var(--line)}.section h2{font-size:clamp(26px,4vw,38px);line-height:1.15;letter-spacing:-.025em;margin:0 0 12px}.lead{max-width:780px;color:#c9d1d9;margin:0 0 22px}.route-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.route{display:flex;flex-direction:column;min-height:290px;border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:23px}.route .num{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-weight:800;margin-bottom:18px}.route h3{font-size:23px;line-height:1.18;margin:0 0 10px}.route p{color:#c9d1d9;margin:0}.route .signal{color:var(--muted);font-size:14px;margin:12px 0}.route .route-action{margin-top:auto;padding-top:22px}.route .route-action a{font-weight:800;text-decoration:none}.path{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:24px;border:1px solid var(--line);border-radius:14px;overflow:hidden}.path div{padding:18px;background:var(--panel2);border-right:1px solid var(--line)}.path div:last-child{border-right:0}.path strong{display:block;margin-bottom:4px}.path span{font-size:14px;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:26px 0}.card{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:22px}.card h3{margin:0 0 8px}.price{font-size:24px;font-weight:850;margin:14px 0}.meta{color:var(--muted);font-size:14px}.checks{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px}.check:before{content:"✓";color:var(--ok);font-weight:900;margin-right:9px}.proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.proof{border:1px solid var(--line);border-radius:14px;padding:22px}.proof.good{background:var(--panel)}.proof.open{background:var(--panel2)}.proof h3{margin-top:0}.proof ul{padding-left:20px}.note{border-left:3px solid var(--line);padding-left:14px;color:var(--muted)}.assurance{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:22px}.assurance strong{color:var(--text)}img{max-width:100%;height:auto;border-radius:14px;border:1px solid var(--line)}.hero-proof{display:block;margin-top:28px;width:100%;max-width:920px}.tiny{font-size:13px;color:var(--muted)}@media(max-width:780px){.route-grid,.grid,.proof-grid{grid-template-columns:1fr}.path{grid-template-columns:1fr}.path div{border-right:0;border-bottom:1px solid var(--line)}.path div:last-child{border-bottom:0}.checks{grid-template-columns:1fr}.hero{padding-top:48px}.top{align-items:flex-start}.pill{white-space:nowrap}}
+:root{--bg:#0b0d10;--panel:#12161c;--text:#f4f7fb;--muted:#a8b0bd;--line:#242b36;--accent:#8ae6c8;--accent2:#82b7ff;--max:1080px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}.wrap{max-width:var(--max);margin:auto;padding:0 24px}.nav{display:flex;align-items:center;justify-content:space-between;padding:24px 0}.brand{font-weight:800;letter-spacing:-.03em}.navlinks{display:flex;gap:18px;color:var(--muted);font-size:14px}.navlinks a{text-decoration:none}
+.hero{padding:88px 0 72px}.eyebrow{color:var(--accent);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.12em}.hero h1{font-size:clamp(42px,8vw,78px);line-height:1.02;letter-spacing:-.055em;max-width:920px;margin:18px 0 24px}.hero p{font-size:clamp(19px,2.4vw,26px);color:var(--muted);max-width:820px;margin:0 0 34px}.actions{display:flex;flex-wrap:wrap;gap:12px}.btn{display:inline-block;padding:13px 18px;border-radius:12px;text-decoration:none;font-weight:750;border:1px solid var(--line)}.primary{background:var(--text);color:var(--bg);border-color:var(--text)}.secondary{background:var(--panel)}
+.proof{margin-top:44px;padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--muted)}.proof strong{color:var(--text)}
+section{padding:68px 0;border-top:1px solid var(--line)}h2{font-size:clamp(30px,5vw,48px);line-height:1.08;letter-spacing:-.04em;margin:0 0 18px}.lead{font-size:20px;color:var(--muted);max-width:800px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px}.card h3{margin:0 0 8px;font-size:20px}.card p{margin:0;color:var(--muted)}
+.flow{display:grid;gap:12px;margin-top:28px}.step{display:flex;gap:18px;align-items:flex-start;padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}.num{flex:0 0 34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#1d2530;font-weight:800;color:var(--accent2)}.step strong{display:block;margin-bottom:4px}.step span{color:var(--muted)}
+pre{overflow:auto;background:#07090c;border:1px solid var(--line);border-radius:14px;padding:18px;color:#dbe7f7}.tag{display:inline-block;padding:5px 9px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:13px;margin:4px 4px 0 0}
+.status{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}.ok,.next{border-radius:16px;padding:24px;border:1px solid var(--line)}.ok{background:#0f1917}.next{background:var(--panel)}.ok h3,.next h3{margin-top:0}.check{color:var(--accent)}.muted{color:var(--muted)}
+.callout{padding:34px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(135deg,#141a22,#101613)}.callout h2{margin-bottom:12px}.footer{padding:42px 0 64px;color:var(--muted);font-size:14px}
+@media(max-width:760px){.navlinks{display:none}.hero{padding-top:52px}.grid,.status{grid-template-columns:1fr}.card{padding:20px}}
 </style>
 </head>
-<body><main class="wrap">
-<div class="top"><div class="brand">NS Agent Reliability</div><div class="pill">Open-source Doctor · bounded audits</div></div>
+<body>
+<div class="wrap">
+<nav class="nav">
+<div class="brand">OpenSynapse</div>
+<div class="navlinks"><a href="#why">Why</a><a href="#how">How it works</a><a href="#alpha">Alpha</a><a href="#safety">Safety</a></div>
+</nav>
 
-<section class="hero">
-<div class="eyebrow">Agent control-plane reliability diagnostics</div>
-<h1>Your agent said DONE.<br>Did it actually happen?</h1>
-<p>Find silent reliability failures in AI agent and MCP systems before they become repeated production incidents — duplicate execution, stale ownership, retry loops, evidence gaps, contract drift and unsafe rollback.</p>
-<div class="actions"><a class="btn primary" href="https://github.com/nslabhwan/ns-agent-reliability#60-second-first-value">Run the free Doctor</a><a class="btn secondary" href="https://github.com/nslabhwan/ns-agent-reliability/blob/main/docs/SAMPLE_AUDIT_REPORT.md">See a sample audit</a></div>
-<p class="tiny">No new runtime. No new observability database. No framework migration.</p>
-<img class="hero-proof" src="assets/doctor-demo.svg" alt="Agent Reliability Doctor terminal demo showing evidence-backed findings">
-</section>
-
-<section class="section">
-<h2>Has any of this happened?</h2>
-<p class="lead">These are the symptoms buyers recognize before they know the words “fencing”, “CAS”, “authority” or “evidence convergence”.</p>
-<div class="checks">
-<div class="check"><strong>DONE, but nothing changed.</strong> The agent reported success, but the external state did not change.</div>
-<div class="check"><strong>The same task ran twice.</strong> Retry or recovery created duplicate execution.</div>
-<div class="check"><strong>A stale worker wrote after recovery.</strong> Old authority survived longer than it should.</div>
-<div class="check"><strong>Retries became a loop.</strong> Cost and API calls kept growing without bounded convergence.</div>
-<div class="check"><strong>MCP permissions became unclear.</strong> Tool count and schemas grew faster than the authority model.</div>
-<div class="check"><strong>Rollback brought an old path back.</strong> Deprecated behavior regained authority.</div>
+<header class="hero">
+<div class="eyebrow">Open-source AI work infrastructure</div>
+<h1>Let AI actually work on the machines you own.</h1>
+<p>Stop copying commands, logs, and files back and forth. OpenSynapse gives an AI client bounded access to an authorized machine, lets it do real work, and checks the result.</p>
+<div class="actions">
+<a class="btn primary" href="https://github.com/nslabhwan/ns-agent-reliability/blob/main/QUICKSTART.md">Install Linux Alpha</a>
+<a class="btn secondary" href="https://github.com/nslabhwan/ns-agent-reliability">View source on GitHub</a>
+<a class="btn secondary" href="https://github.com/nslabhwan/ns-agent-reliability/issues/new?template=opensynapse-feedback.yml">I tried it — send feedback</a>
 </div>
-</section>
+<div class="proof"><strong>Public Alpha evidence:</strong> fresh public install passed, 41/41 regressions passed, and a real HTTP MCP write → readback → bounded-command E2E passed with shell disabled.</div>
+</header>
 
-<section class="section">
-<h2>One reliability path, three layers</h2>
-<p class="lead">The free product finds the failure pattern. The paid audit proves the cause against your evidence. Hardening changes the system only when you explicitly want implementation.</p>
-<div class="path" aria-label="NS Agent Reliability product path">
-<div><strong>FREE — Reliability Doctor</strong><span>Find the failure · ~60-second first value · 15 current failure classes</span></div>
-<div><strong>AUDIT — AI Agent Reliability Audit</strong><span>Prove the cause · evidence-ranked findings · prioritized fix plan</span></div>
-<div><strong>HARDEN — Reliability Hardening</strong><span>Fix the system · bounded change control · approval + rollback</span></div>
-<div><strong>MCP entry</strong><span>Tool/schema/authority problem? Start with the $750 MCP Quick Audit.</span></div>
-</div>
-</section>
-
-<section class="section" id="services">
-<h2>Paid diagnosis and repair, only when the problem calls for them</h2>
-<p class="note">Founding engagements are open. Customer case studies have not been published yet. USD is primary global pricing. KRW is fixed Korea launch pricing, not a daily FX conversion.</p>
+<section id="why">
+<h2>The human relay is the problem.</h2>
+<p class="lead">AI can already explain what to do. The frustrating part is still you moving commands, error logs, files, and machine state between the chat and the place where work actually happens.</p>
 <div class="grid">
-<article class="card"><h3>I have an MCP problem</h3><div class="meta">MCP Surface & Contract Quick Audit</div><div class="price">$750</div><div class="meta">Korea: ₩990,000</div><div class="meta">2–3 business days · one bounded surface</div><p>For tool/schema sprawl, stale contracts, read/write authority leakage and rollback-resurrection risk.</p><p><a href="https://github.com/nslabhwan/ns-agent-reliability/issues/new?template=audit-fit-check.yml">Check fit first →</a></p></article>
-<article class="card"><h3>My agents are running and something feels unsafe</h3><div class="meta">AI Agent Reliability Audit</div><div class="price">Founding $1,100<br>Standard $2,200</div><div class="meta">Korea: ₩1,490,000 / ₩2,900,000</div><div class="meta">3–5 business days · one bounded stack</div><p>For execution, authority, retry/resume, evidence and deployment/rollback failure modes.</p><p><a href="https://github.com/nslabhwan/ns-agent-reliability/blob/main/docs/SAMPLE_AUDIT_REPORT.md">See the illustrative report shape →</a></p></article>
-<article class="card"><h3>We know what is broken. We need it fixed</h3><div class="meta">Safe Deployment & Agent Reliability Hardening</div><div class="price">from $5,000</div><div class="meta">Korea: ₩6,900,000 current bounded launch scope</div><div class="meta">5–10 business days · one bounded deployment path</div><p>For an already diagnosed change path requiring one-live-commit/CAS/evidence controls and rollback/replay regression checks.</p><p><a href="https://github.com/nslabhwan/ns-agent-reliability/blob/main/SERVICES.md">Read the full boundary →</a></p></article>
+<div class="card"><h3>No command copy-paste</h3><p>Ask for the outcome. The authorized node performs bounded work instead of handing the terminal back to you.</p></div>
+<div class="card"><h3>Real result verification</h3><p>“Done” is not enough. Meaningful actions should finish with an observable check when the target can be verified.</p></div>
+<div class="card"><h3>Your machines, one model</h3><p>Server first. Desktop and Android nodes follow the same public interaction model while remaining independent runtimes.</p></div>
 </div>
 </section>
 
-<section class="section">
-<h2>Built from failures, not hypothetical checklists</h2>
-<p class="lead">The technical terms are not the product pitch. They are the evidence underneath it.</p>
+<section id="how">
+<h2>Ask naturally. Let the node do the work.</h2>
+<div class="flow">
+<div class="step"><div class="num">1</div><div><strong>Install on a machine you own</strong><span>The Linux Alpha creates an isolated environment and explicit access policy.</span></div></div>
+<div class="step"><div class="num">2</div><div><strong>Choose what AI may access</strong><span>Read roots, write roots, and allowed commands are explicit. Arbitrary shell is not enabled by default.</span></div></div>
+<div class="step"><div class="num">3</div><div><strong>Connect an AI client through MCP</strong><span>The local node exposes bounded tools. A zero-config authenticated gateway and ChatGPT plugin flow are the next integration milestone.</span></div></div>
+<div class="step"><div class="num">4</div><div><strong>Verify the requested outcome</strong><span>OpenSynapse is designed around observable results rather than worker self-report alone.</span></div></div>
+</div>
+</section>
+
+<section id="alpha">
+<h2>Linux Alpha is public now.</h2>
+<p class="lead">This is an early usable base, not a claim that the whole vision is finished.</p>
+<pre><code>git clone https://github.com/nslabhwan/ns-agent-reliability.git
+cd ns-agent-reliability
+OPENSYNAPSE_ROOT=/srv/my-app bash install.sh
+opensynapse doctor
+opensynapse serve --transport http</code></pre>
+<div class="status">
+<div class="ok"><h3 class="check">Verified now</h3><p>Linux one-install bootstrap<br>Bounded MCP read / write / commands<br>Doctor and effective policy status<br>Real write + readback E2E<br>Reliability Doctor regressions</p></div>
+<div class="next"><h3>Next</h3><p class="muted">Authenticated HTTPS gateway<br>One-time ChatGPT plugin connection<br>Portable Android Phone Local node<br>Multi-device pairing and routing<br>Desktop packaging and resumable jobs</p></div>
+</div>
+</section>
+
+<section>
+<h2>What should this feel like?</h2>
+<p class="lead">The target is not another dashboard. It is the AI interface you already use gaining a safe path to real work.</p>
 <div class="grid">
-<article class="card"><h3>83 → 26 → 7</h3><p><strong>Tool surface collapse.</strong> Operational failures drove the public agent-tool surface from 83 capabilities to 7 stable authority-class primitives.</p></article>
-<article class="card"><h3>Lease ≠ Session</h3><p><strong>Live client does not mean live authority.</strong> Mutation ownership must expire/reacquire independently of a connected session.</p></article>
-<article class="card"><h3>DONE ≠ Evidence</h3><p><strong>Worker self-report cannot prove external completion.</strong> The requested result must be observed.</p></article>
-<article class="card"><h3>Rollback ≠ Resurrection</h3><p><strong>Rollback must not restore deprecated authority.</strong> Historical state cannot silently become current truth again.</p></article>
+<div class="card"><h3>“Check this server and fix the failing test.”</h3><p>Inspect allowed files, run bounded commands, make the permitted change, then verify the test result.</p></div>
+<div class="card"><h3>“Do this on my phone.”</h3><p>Android itself becomes an independent work node. The portable public Phone Local package is the next major node.</p></div>
+<div class="card"><h3>“Continue the job and tell me when it is actually done.”</h3><p>Long-running resume and continuity are planned around the same verified-result principle.</p></div>
 </div>
 </section>
 
-<section class="section">
-<h2>Public proof today</h2>
-<p class="lead">Built from operational failures, public source and regression evidence — without invented customer logos or unsupported claims.</p>
-<div class="proof good"><h3>What you can verify now</h3><ul><li>Public open-source Doctor, source and regression tests.</li><li>Credential-free clone and install path.</li><li>Evidence-grounded failure rules derived from real operational incidents.</li><li>Illustrative audit report and explicit service-assurance boundary.</li><li>Read-only Audit and approval-gated Hardening operating procedures.</li></ul></div>
-<p class="note">Founding stage: no external customer case studies are published yet. NS does not claim that every defect will be detected or that an audit guarantees incident-free operation.</p>
+<section id="safety">
+<h2>Power without an open shell to the Internet.</h2>
+<p class="lead">Machine access is a trust problem, so safety has to be visible to the user rather than hidden in architecture diagrams.</p>
+<div>
+<span class="tag">Explicit roots</span>
+<span class="tag">Bounded actions</span>
+<span class="tag">shell=false</span>
+<span class="tag">Secret-path denial</span>
+<span class="tag">Atomic writes</span>
+<span class="tag">Open source</span>
+<span class="tag">Self-hostable core</span>
+</div>
+<p class="muted">The current local HTTP endpoint binds to loopback by default. Do not expose an unauthenticated local endpoint directly to the public Internet.</p>
 </section>
 
-<section class="section">
-<h2>Observe. Evaluate. Diagnose.</h2>
-<p class="lead">NS is not trying to replace tracing or model evaluation. The reliability question is different.</p>
-<div class="path">
-<div><strong>OBSERVE</strong><span>What happened? Traces, logs, tool calls, checkpoints.</span></div>
-<div><strong>EVALUATE</strong><span>Was the model or trajectory good enough?</span></div>
-<div><strong>DIAGNOSE</strong><span>Why did the control system allow duplicate, stale, unproven or unsafe execution?</span></div>
-<div><strong>NS POSITION</strong><span>Agent control-plane reliability diagnostics.</span></div>
+<section>
+<div class="callout">
+<h2>We need real users more than more hidden features.</h2>
+<p class="lead">Try the Linux Alpha on a disposable or non-critical workspace. Tell us where installation, trust, permissions, or the first real task feels confusing. Do not include secrets in public issues.</p>
+<div class="actions">
+<a class="btn primary" href="https://github.com/nslabhwan/ns-agent-reliability/blob/main/QUICKSTART.md">Try OpenSynapse</a>
+<a class="btn secondary" href="https://github.com/nslabhwan/ns-agent-reliability/issues/new?template=opensynapse-feedback.yml">Send Alpha feedback</a>
+<a class="btn secondary" href="https://github.com/nslabhwan/ns-agent-reliability/blob/main/docs/RELIABILITY_DOCTOR.md">Reliability Doctor</a>
+</div>
 </div>
 </section>
 
-<section class="section">
-<h2>Evidence, not framework replacement</h2>
-<p class="lead">Use evidence your stack already has. The Doctor does not require a new agent runtime, tracing vendor or observability database.</p>
-<p><a href="https://github.com/nslabhwan/ns-agent-reliability/blob/main/docs/INTEGRATIONS.md">LangGraph / CrewAI / OpenAI Agents SDK / MCP evidence mapping →</a><br><a href="https://github.com/nslabhwan/ns-agent-reliability/blob/main/docs/SAMPLE_AUDIT_REPORT.md">Illustrative sample audit report →</a></p>
-</section>
-
-<section class="section">
-<h2>Paid work is human-reviewed</h2>
-<div class="assurance"><p><strong>AI-assisted, evidence-reviewed, human-reviewed.</strong> CRITICAL/HIGH customer findings require human sign-off before delivery. Audits are read-only by default. UNKNOWN stays UNKNOWN. We do not promise to discover every defect or eliminate all future incidents.</p><p><a href="https://github.com/nslabhwan/ns-agent-reliability/blob/main/docs/SERVICE_ASSURANCE.md">Read the service assurance & responsibility boundary →</a></p></div>
-</section>
-
-<section class="section">
-<h2>One real symptom is enough to start.</h2>
-<p class="lead">Start with the free Doctor. If one bounded incident appears to fit, the public no-secret Fit Check can confirm scope before any customer material is accepted.</p>
-<div class="actions"><a class="btn primary" href="https://github.com/nslabhwan/ns-agent-reliability#60-second-first-value">Run the free Doctor</a><a class="btn secondary" href="https://github.com/nslabhwan/ns-agent-reliability/issues/new?template=audit-fit-check.yml">Public no-secret Fit Check</a></div>
-<p class="tiny">GitHub sign-in is required for the public fit-check issue. Never post credentials, private repositories, customer data, private endpoints or proprietary logs.</p>
-</section>
-</main></body></html>
+<footer class="footer">OpenSynapse is an early open-source project from the NS project lineage. Software is Apache-2.0 licensed. Public Alpha status is evidence-bounded and does not imply unfinished gateway, phone, desktop, or multi-device features are ready.</footer>
+</div>
+</body>
+</html>

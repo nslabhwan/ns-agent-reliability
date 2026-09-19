@@ -11,7 +11,7 @@
 - Declared `fastmcp>=4.0.3,<5` and updated provenance/SBOM.
 - Added `UNIFIED_BASE.md`, `USER_VALUE.md`, `QUICKSTART.md`, and preserved the former Doctor README under `docs/RELIABILITY_DOCTOR.md`.
 - Tracked public scope expanded for the OpenSynapse candidate.
-- Published to the public repository and verified by remote SHA match, fresh unauthenticated clone, fresh `install.sh`, installed Doctor, and real HTTP MCP write/readback/bounded-command E2E.
+- Published to the public repository and verified by remote SHA match, fresh unauthenticated clone, fresh `install.sh`, installed Doctor, and real HTTP MCP write/readback/bounded-command E2E.\n- Repositioned the GitHub Pages landing surface around OpenSynapse user value, Linux Alpha installation, current evidence, safety boundaries, and an explicit early-user feedback path.
 
 ## Main — distribution/social preview asset — 2026-09-09
 

@@ -1,0 +1,56 @@
+name: OpenSynapse Alpha feedback
+description: Share a real install or first-task experience without secrets.
+title: "[OpenSynapse Alpha] "
+labels: ["feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for trying OpenSynapse. Please do not post credentials, tokens, private URLs, private logs, customer data, or other secrets.
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Where did you get?
+      options:
+        - Installed successfully
+        - Doctor/status worked
+        - MCP connection worked
+        - Completed a real task
+        - Installation blocked
+        - Connection blocked
+        - Task execution blocked
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS/distribution and Python version only. Do not include hostnames or private addresses.
+      placeholder: Ubuntu 24.04, Python 3.11
+    validations:
+      required: true
+  - type: textarea
+    id: task
+    attributes:
+      label: What were you trying to do?
+      description: Describe the goal and expected outcome at a high level.
+      placeholder: I wanted ChatGPT to inspect a test project and run a safe command.
+    validations:
+      required: true
+  - type: textarea
+    id: friction
+    attributes:
+      label: What felt confusing or blocked you?
+      description: Redact any sensitive values before posting.
+  - type: textarea
+    id: value
+    attributes:
+      label: What would make you keep using it?
+      description: The most useful missing capability or workflow.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public issue safety
+      options:
+        - label: I removed secrets and private data from this issue.
+          required: true
