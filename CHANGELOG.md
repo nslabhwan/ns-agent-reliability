@@ -12,7 +12,7 @@
 - Uses an ephemeral loopback health listener to avoid fixed-port collisions.
 - Full local regression suite: **45/45 PASS**.
 - Official tunnel-client prepare-path E2E PASS.
-- Real OpenAI account tunnel / ChatGPT invocation remains **PENDING** and is not claimed as complete.
+- Public push, remote SHA verification, GitHub quality gate, fresh clone/install, and official tunnel prepare-only path all passed. Real OpenAI account tunnel / ChatGPT invocation remains **PENDING** and is not claimed as complete.
 
 ## 0.2.0a1 OpenSynapse Alpha — 2026-09-19
 

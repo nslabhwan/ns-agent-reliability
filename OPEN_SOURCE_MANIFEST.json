@@ -1,22 +1,23 @@
 {
   "schema_version": "OPENSYNAPSE_OPEN_SOURCE_MANIFEST_V1",
   "authority": "GPT_SANDBOX_NON_SSOT",
-  "publication_status": "PUBLIC_LIVE_0.2.0A1__0.2.0A2_TUNNEL_CANDIDATE",
+  "publication_status": "PUBLIC_LIVE_0.2.0A2_OPENSYNAPSE_ALPHA",
   "updated_kst": "2026-09-19",
   "public_repository": "https://github.com/nslabhwan/ns-agent-reliability",
   "product_identity": "OpenSynapse",
   "public_user_promise": "Install once. Let AI work on machines you own through explicit bounded access, and verify the result.",
   "current_public_release": {
-    "version": "0.2.0a1",
-    "wedge": "OpenSynapse Linux Alpha",
+    "version": "0.2.0a2",
+    "wedge": "OpenSynapse Linux Alpha + OpenAI Secure MCP Tunnel prepare path",
     "remotely_verified": true,
-    "remote_commit_sha": "43525fd95889bc56d49afaa260dea5851b61d8f5",
+    "remote_commit_sha": "c1dc2e675143b1113e5ffb0caff09fe576262169",
     "fresh_public_install": "PASS",
-    "http_mcp_e2e": "PASS"
+    "http_mcp_e2e": "PASS",
+    "openai_tunnel_prepare_path": "PASS"
   },
   "candidate": {
     "version": "0.2.0a2",
-    "status": "CANDIDATE_READY_NOT_PUSHED",
+    "status": "PUBLIC_LIVE_REMOTE_VERIFIED",
     "first_value": "opensynapse install --root <workspace>",
     "tested_python": "3.11.13",
     "tests": "45/45 PASS",
@@ -26,9 +27,10 @@
     "official_tunnel_client_pin": "v0.0.14",
     "official_linux_amd64_sha256": "15bd17e805cad39d412199115bb9e10a978dd35258a114cdf25dd2ae6681c7d3",
     "live_openai_account_tunnel_e2e": "PENDING",
-    "public_scan": "PENDING_AFTER_METADATA_UPDATE",
+    "public_scan": "PASS",
     "runtime_dependency": "fastmcp>=4.0.3,<5",
-    "runtime_dependency_license": "Apache-2.0"
+    "runtime_dependency_license": "Apache-2.0",
+    "remote_commit_sha": "c1dc2e675143b1113e5ffb0caff09fe576262169"
   },
   "current_proven_components": [
     "OpenSynapse Linux node CLI and one-install bootstrap",
@@ -60,5 +62,5 @@
     "brand_assets": "reserved as described in TRADEMARKS.md"
   },
   "truth_rule": "Historical evidence remains historical. Candidate readiness is not public-release completion; remote push and fresh public clone/install verification are required.",
-  "remote_publication_receipt": "release/REMOTE_PUBLICATION_RECEIPT_20260919_OPENSYNAPSE_ALPHA.json"
+  "remote_publication_receipt": "release/REMOTE_PUBLICATION_RECEIPT_20260919_OPENSYNAPSE_A2.json"
 }

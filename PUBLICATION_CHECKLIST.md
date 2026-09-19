@@ -1,6 +1,6 @@
 # Publication Checklist
 
-Status: **OpenSynapse 0.2.0a1 PUBLIC LIVE / 0.2.0a2 TUNNEL CANDIDATE**
+Status: **OpenSynapse 0.2.0a2 PUBLIC LIVE / REMOTE VERIFIED**
 
 Public repository: `nslabhwan/ns-agent-reliability`
 
@@ -23,11 +23,11 @@ Public repository: `nslabhwan/ns-agent-reliability`
 - [x] `CONTROL_PLANE_API_KEY` stored as environment reference only.
 - [x] fixed health port avoided with `127.0.0.1:0`.
 - [x] full local regression suite PASS: **45/45**.
-- [ ] tracked-tree content and public scrub PASS after final docs.
-- [ ] fresh candidate package install + tests PASS after final docs.
-- [ ] sync to public repository.
-- [ ] push and remote HEAD verification.
-- [ ] fresh public clone/install smoke for 0.2.0a2.
+- [x] tracked-tree content and public scrub PASS after final docs.
+- [x] fresh candidate package install + tests PASS after final docs.
+- [x] sync to public repository.
+- [x] push and remote HEAD verification.
+- [x] fresh public clone/install smoke for 0.2.0a2.
 
 ## Truth boundary
 
@@ -48,3 +48,11 @@ Do not publish credentials, private endpoints, account identifiers, private conv
 Do not expose an unrestricted unauthenticated remote shell by default.
 
 Do not silently weaken a failed check to finish a release.
+
+## Remote verification receipt
+
+- commit: `c1dc2e675143b1113e5ffb0caff09fe576262169`
+- GitHub quality gate: PASS
+- Pages deploy: PASS
+- fresh public install: PASS
+- fresh public tunnel prepare-only: PASS

@@ -1,0 +1,34 @@
+{
+  "schema_version": "OPENSYNAPSE_REMOTE_PUBLICATION_RECEIPT_V2",
+  "observed_at_utc": "2026-09-19T11:31:00Z",
+  "status": "PUBLIC_LIVE_REMOTE_VERIFIED",
+  "public_repository": "https://github.com/nslabhwan/ns-agent-reliability",
+  "branch": "main",
+  "remote_commit_sha": "c1dc2e675143b1113e5ffb0caff09fe576262169",
+  "release": "0.2.0a2",
+  "product": "OpenSynapse",
+  "verification": {
+    "remote_head_matches_pushed_commit": "PASS",
+    "github_public_quality_gate": "PASS",
+    "github_pages_deployment": "PASS",
+    "fresh_unauthenticated_clone": "PASS",
+    "fresh_public_install_sh": "PASS",
+    "installed_version": "0.2.0a2",
+    "installed_doctor": "PASS",
+    "remote_tunnel_prepare_only": "PASS",
+    "official_tunnel_client_tag": "v0.0.14",
+    "official_asset_sha256": "15bd17e805cad39d412199115bb9e10a978dd35258a114cdf25dd2ae6681c7d3",
+    "cloudflared_companion": "PASS",
+    "secret_reference": "env:CONTROL_PLANE_API_KEY",
+    "health_listener": "127.0.0.1:0"
+  },
+  "remaining_not_verified": [
+    "real OpenAI runtime key/control-plane Doctor",
+    "real authorized tunnel long-running health",
+    "ChatGPT connector discovery",
+    "ChatGPT invoking OpenSynapse through the tunnel",
+    "portable Android Phone Local package",
+    "multi-device pairing/routing",
+    "desktop packaging"
+  ]
+}
