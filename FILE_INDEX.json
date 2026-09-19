@@ -118,7 +118,8 @@
     "ANDROID_TERMUX.md",
     "src/ns_direct_channel/stdio_server.py",
     "tests/test_stdio_mcp.py",
-    "release/REMOTE_ANDROID_PUBLICATION_RECEIPT_20260919_OPENSYNAPSE_A3.json"
+    "release/REMOTE_ANDROID_PUBLICATION_RECEIPT_20260919_OPENSYNAPSE_A3.json",
+    "GETTING_STARTED.md"
   ],
   "excluded_runtime_artifacts": [
     ".ns-direct-channel.lock",

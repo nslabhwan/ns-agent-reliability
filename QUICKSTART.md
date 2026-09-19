@@ -1,6 +1,8 @@
-# OpenSynapse Linux Alpha — Quickstart
+# OpenSynapse Alpha — Quickstart
 
-OpenSynapse turns a Linux machine you own into a bounded MCP work node for AI clients.
+OpenSynapse turns Linux and Android/Termux machines you own into bounded MCP work nodes.
+
+For the easiest start-to-finish path, use [GETTING_STARTED.md](GETTING_STARTED.md). This file remains the command-focused reference.
 
 ## 1. Install
 

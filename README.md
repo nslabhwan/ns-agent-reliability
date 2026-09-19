@@ -4,6 +4,8 @@
 
 **Install once. Ask naturally. Let it work. Verify the result.**
 
+**New here? Start with [GETTING_STARTED.md](GETTING_STARTED.md).** It separates the verified Linux/Android paths from the still-pending ChatGPT account E2E so you can follow the current alpha without guessing.
+
 OpenSynapse is open-source AI work infrastructure built from a real long-running system. Its goal is simple: remove the human copy-paste loop between AI chat and your machines.
 
 Instead of:

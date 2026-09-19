@@ -2,6 +2,8 @@
 
 ## 0.2.0a3 Android / Termux verified — 2026-09-19
 
+- Added GETTING_STARTED.md as the canonical first-use guide for current Linux, Android/Termux, and OpenAI tunnel paths.
+
 - Extended the existing one-install bootstrap to detect Android/Termux.
 - Added generic Python 3.11+ discovery instead of requiring version-suffixed executables.
 - Added Termux prerequisite bootstrap for Python/Git when missing.
