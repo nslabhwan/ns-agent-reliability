@@ -1,99 +1,55 @@
 {
-  "schema_version": "NS_AGENT_RELIABILITY_OPEN_SOURCE_V4",
+  "schema_version": "OPENSYNAPSE_OPEN_SOURCE_MANIFEST_V1",
   "authority": "GPT_SANDBOX_NON_SSOT",
-  "publication_status": "PUBLIC_LIVE_0.1.0RC1_MAIN_PACKAGING_ENHANCED",
-  "updated_kst": "2026-09-08",
-  "historical_coverage": {
-    "from": "2026-07-05",
-    "to": "2026-09-08"
+  "publication_status": "PUBLIC_0.1.0RC1_LIVE__0.2.0A1_OPENSYNAPSE_CANDIDATE",
+  "updated_kst": "2026-09-19",
+  "public_repository": "https://github.com/nslabhwan/ns-agent-reliability",
+  "product_identity": "OpenSynapse",
+  "public_user_promise": "Install once. Let AI work on machines you own through explicit bounded access, and verify the result.",
+  "current_public_release": {
+    "version": "0.1.0rc1",
+    "wedge": "Agent Reliability Doctor",
+    "remotely_verified": true
   },
-  "first_public_wedge": "Agent Reliability Doctor",
-  "project_goal": "Provide outsider-usable diagnostics and portable reliability/control-plane regressions derived from real multi-agent operational incidents, while keeping the broader historical architecture as reference material rather than presenting another production-ready agent framework.",
-  "first_value_command": "ns-reliability examples/doctor_broken_system.json",
-  "current_portable_proven_components": [
+  "candidate": {
+    "version": "0.2.0a1",
+    "status": "CANDIDATE_READY_NOT_PUSHED",
+    "first_value": "opensynapse install --root <workspace>",
+    "tested_python": "3.11.13",
+    "tests": "41/41 PASS",
+    "one_install_linux_alpha": "PASS",
+    "real_http_mcp_write_readback_e2e": "PASS",
+    "public_scan": "PASS",
+    "runtime_dependency": "fastmcp>=4.0.3,<5",
+    "runtime_dependency_license": "Apache-2.0"
+  },
+  "current_proven_components": [
+    "OpenSynapse Linux node CLI and one-install bootstrap",
+    "bounded Direct Channel MCP read/write/command execution",
     "Agent Reliability Doctor normalized-evidence diagnostics",
-    "lease/session independence with monotonic fencing epoch reference behavior",
-    "one-live-commit deployment primitive with CAS/evidence binding/rollback-once/failed-candidate replay denial"
+    "lease/session independence reference behavior",
+    "one-live-commit deployment reference primitive"
   ],
-  "reference_or_partial_components": [
-    "broader Worker/Run orchestration",
-    "event-ledger and dashboard projections",
-    "provider governance",
-    "context/DNA continuity architecture",
-    "full durable runtime persistence"
-  ],
-  "maturity_boundary": "The public LeaseRegistry is an in-memory reference implementation of ownership/fencing semantics and must not be presented as a complete durable persistent workflow runtime.",
-  "lineage": [
-    "GPT advisory role with human relay",
-    "Playwright GPT bridge",
-    "server-side AI direct dialogue",
-    "Direct Channel MCP",
-    "bounded deterministic executor",
-    "lease/session independence and fencing",
-    "evidence-driven completion and deployment safety",
-    "83 -> 26 -> 7 stable primitive control-surface simplification",
-    "Agent Reliability Doctor"
-  ],
-  "included_domains": [
-    "Agent Reliability Doctor source, fixture and regression tests",
-    "lease/fencing reference semantics and regressions",
-    "one-live-commit deployment primitive and regressions",
-    "portable reliability/control-plane contracts",
-    "sanitized incidents and postmortems",
-    "historical architecture/reference documentation",
-    "security/publication guidance"
+  "next_not_yet_public_ready": [
+    "authenticated stable HTTPS gateway",
+    "one-time ChatGPT plugin connection flow",
+    "portable Android Phone Local node",
+    "multi-device pairing/routing",
+    "desktop packaging",
+    "resumable long-running jobs"
   ],
   "excluded_from_publication": [
-    "credentials or tokens",
-    "browser session material/cookies",
-    "private remote URLs",
-    "private account identifiers",
-    "server-specific secret files",
-    "raw private conversation exports",
-    "production trading or financial SSOT",
-    "provider-specific credential caches",
-    "unredacted logs",
-    "private deployment paths or account-bound command examples"
+    "credentials, tokens, cookies, private keys",
+    "private remote URLs and account identifiers",
+    "raw private conversations/customer data",
+    "production Trading strategy or financial SSOT",
+    "unredacted private logs",
+    "environment-specific secret bindings"
   ],
-  "technical_prepublication_evidence": {
-    "clean_python": "3.11",
-    "clean_install": "PASS",
-    "installed_cli_smoke": "PASS",
-    "doctor_fixture_findings": 15,
-    "tests": "32/32 PASS",
-    "tracked_files": 88,
-    "public_scan": "PASS",
-    "json_parse": "PASS",
-    "wheel_sdist_inspection": "PASS",
-    "spdx_validation": "PASS",
-    "wheel_metadata_license_scope": "PASS"
+  "license": {
+    "software": "Apache-2.0",
+    "narrative_docs": "CC-BY-4.0",
+    "brand_assets": "reserved as described in TRADEMARKS.md"
   },
-  "truth_rule": "Historical claims remain evidence with explicit maturity. UNKNOWN is not PASS. Reference/scaffold code must not be described as live production acceptance, and GitHub stars or internal tests do not constitute external market validation.",
-  "publish_gate_remaining": [],
-  "release_candidate": {
-    "version": "0.1.0rc1",
-    "first_public_wedge": "Agent Reliability Doctor",
-    "software_license": "Apache-2.0",
-    "narrative_docs_license": "CC-BY-4.0",
-    "technical_receipt": "release/TECHNICAL_PREPUBLICATION_RECEIPT_20260908.json",
-    "tests": "32/32 PASS",
-    "clean_install": "PASS",
-    "public_remote_verified": true,
-    "public_distribution_name": "ns-agent-reliability",
-    "python_namespace": "ns_agent_reliability",
-    "wheel_license_scope": "Apache-2.0 software; narrative CC docs not bundled in wheel",
-    "sdist_license_scope": "Apache-2.0 software + CC-BY-4.0 narrative docs with both canonical license texts",
-    "public_repository": "https://github.com/nslabhwan/ns-agent-reliability",
-    "current_main_packaging": "visual Doctor demo + use-case triage + integration guide + sample audit report + service assurance + commercial services + public no-secret fit-check + GitHub Pages sales surface"
-  },
-  "publish_gate": [
-    "tracked-tree secret/path scrub PASS",
-    "license/provenance metadata applied",
-    "portable clean Python 3.11 install + CLI smoke PASS",
-    "32/32 regressions PASS",
-    "target GitHub repository confirmed",
-    "FILE_INDEX exact staged-tree review PASS",
-    "remote push + README/install verification PASS"
-  ],
-  "public_distribution_name": "ns-agent-reliability"
+  "truth_rule": "Historical evidence remains historical. Candidate readiness is not public-release completion; remote push and fresh public clone/install verification are required."
 }

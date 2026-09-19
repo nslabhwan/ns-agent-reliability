@@ -1,56 +1,48 @@
 {
-  "schema_version": "NS_AGENT_RELIABILITY_PUBLISH_PLAN_V1",
-  "status": "PUBLIC_LIVE_RELEASE_CANDIDATE",
-  "source_tree": "$PUBLIC_CANDIDATE_ROOT",
-  "first_public_wedge": "Agent Reliability Doctor",
-  "recommended_repository_mode": "one standalone public repository centered on the Doctor and portable reliability/control regressions; keep historical architecture material inside the same repository rather than creating multiple repos",
-  "recommended_top_level_name": "ns-agent-reliability",
-  "completed_before_push": [
-    "Doctor source/example/test included in FILE_INDEX tracked scope",
-    "fresh Python 3.11 venv pip install PASS",
-    "installed ns-reliability CLI smoke PASS with 15 findings",
-    "32/32 tests PASS",
-    "Python source compile PASS",
-    "current FILE_INDEX tracked-tree public-content scrub PASS (90 files at current 2026-09-14 re-audit)",
-    "JSON parse PASS",
-    "Doctor-first README first-value path added",
-    "public GitHub remote created, pushed and verified"
+  "schema_version": "OPENSYNAPSE_PUBLISH_PLAN_V1",
+  "status": "0.2.0A1_CANDIDATE_READY_NOT_PUSHED",
+  "public_repository": "https://github.com/nslabhwan/ns-agent-reliability",
+  "publication_lineage": "reuse existing public repository; do not create a competing repo",
+  "product_identity": "OpenSynapse",
+  "current_public_version": "0.1.0rc1",
+  "candidate_version": "0.2.0a1",
+  "first_value_path": [
+    "install Linux node",
+    "run Doctor/status",
+    "connect through supported authenticated MCP ingress",
+    "perform one real bounded action",
+    "verify observable result"
   ],
-  "required_before_push": [],
-  "publish_actions": [
-    "for each future release: stage only FILE_INDEX tracked candidate files and canonical license files",
-    "review staged filenames and require exact FILE_INDEX match",
-    "run clean install/tests/scrub/artifact checks",
+  "candidate_checks_completed": [
+    "OpenSynapse README/user-value pivot",
+    "Direct Channel portable core consolidated into publication candidate",
+    "OpenSynapse CLI added",
+    "Linux one-install bootstrap PASS in isolated temp home",
+    "41/41 regressions PASS",
+    "installed HTTP MCP write/readback/bounded-command E2E PASS",
+    "fastmcp 4.0.5 license metadata observed as Apache-2.0",
+    "tracked-tree public scrub PASS"
+  ],
+  "required_before_publication_complete": [
+    "sync exact FILE_INDEX tracked tree to public repository",
     "commit and push through authenticated GitHub path",
-    "verify remote README rendering, public clone/install and repository tree",
-    "record remote commit SHA and release evidence",
-    "run post-push stale-state wording sweep"
+    "verify remote HEAD",
+    "fresh unauthenticated public clone",
+    "fresh install.sh or equivalent install path PASS",
+    "installed opensynapse CLI smoke PASS",
+    "record remote commit SHA"
+  ],
+  "next_product_milestones": [
+    "authenticated HTTPS gateway",
+    "public ChatGPT plugin flow",
+    "portable Android Phone Local",
+    "multi-device pairing/routing",
+    "desktop packages"
   ],
   "forbidden": [
-    "push raw private conversation exports",
-    "push browser authentication material",
-    "push credentials/tokens/private keys",
-    "push private Git remote URLs containing credentials",
-    "push production SSOT/runtime state",
-    "push Trading/financial logic",
-    "claim publication complete before remote commit verification",
-    "market the repository as a complete durable agent framework"
-  ],
-  "completed_prepublication": [
-    "Doctor-first CLI packaging",
-    "fresh Python 3.11 install/smoke PASS",
-    "32/32 tests PASS",
-    "tracked-tree scrub PASS",
-    "Apache-2.0 + CC BY 4.0 split applied",
-    "NOTICE/provenance/trademark/SBOM added",
-    "historical/maturity wording audit remediated",
-    "durable technical prepublication receipt added"
-  ],
-  "remote_release_verification": [
-    "PASS: public GitHub repository exists under approved owner",
-    "PASS: remote default branch contains approved tracked tree",
-    "PASS: fresh unauthenticated public clone + install + CLI smoke",
-    "PASS: remote commit/tree evidence recorded internally",
-    "PASS: automated public quality gate runs on every push and pull request"
+    "publish credentials or private runtime bindings",
+    "claim gateway/plugin/Android public-ready before real outsider E2E",
+    "split each existing NS module into a separate acquisition repository",
+    "reintroduce unrestricted remote shell as a default capability"
   ]
 }

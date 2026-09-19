@@ -1,0 +1,48 @@
+{
+  "schema_version": "OPENSYNAPSE_ALPHA_TECHNICAL_PREPUBLICATION_V1",
+  "observed_at_utc": "2026-09-19T04:36:50Z",
+  "status": "CANDIDATE_READY_NOT_PUSHED",
+  "public_repository": "https://github.com/nslabhwan/ns-agent-reliability",
+  "current_public_release_before_this_candidate": "0.1.0rc1",
+  "candidate_version": "0.2.0a1",
+  "product_identity": "OpenSynapse",
+  "technical_evidence": {
+    "python": "3.11.13",
+    "fresh_venv_install": "PASS",
+    "one_install_linux_alpha": "PASS",
+    "regression_suite": "41/41 PASS",
+    "http_mcp_e2e": {
+      "status": "PASS",
+      "product": "OpenSynapse",
+      "component": "Direct Channel",
+      "write_status": "OK",
+      "readback": "OPENSYNAPSE_E2E_OK",
+      "bounded_command_status": "OK",
+      "bounded_command_shell": false
+    },
+    "direct_runtime_dependency": {
+      "name": "fastmcp",
+      "tested_version": "4.0.5",
+      "declared_range": ">=4.0.3,<5",
+      "license_expression": "Apache-2.0"
+    },
+    "public_scan": "PASS_AFTER_TRACKED_SCOPE_UPDATE"
+  },
+  "scope": {
+    "included": [
+      "OpenSynapse Linux CLI and one-install entrypoint",
+      "bounded Direct Channel MCP runtime",
+      "Reliability Doctor",
+      "existing portable reliability/workflow reference components",
+      "user-value and unified-product documentation"
+    ],
+    "not_yet_public_ready": [
+      "managed HTTPS gateway",
+      "public ChatGPT plugin",
+      "portable Android Phone Local package",
+      "multi-device pairing/routing",
+      "desktop packaging"
+    ]
+  },
+  "truth_rule": "Do not claim this candidate is live on the public repository until push and remote clone/install verification succeed."
+}

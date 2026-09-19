@@ -4,15 +4,22 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ns-agent-reliability"
-version = "0.1.0rc1"
-description = "Agent reliability diagnostics and reference reliability/control-plane contracts derived from real operational incidents"
+version = "0.2.0a1"
+description = "OpenSynapse: bounded, verifiable AI work infrastructure for machines you own, with reliability diagnostics"
 requires-python = ">=3.11"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]
+dependencies = ["fastmcp>=4.0.3,<5"]
 authors = [{name = "NS project contributors"}]
+keywords = ["opensynapse", "mcp", "chatgpt", "server", "agent", "self-hosted", "reliability"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.24"]
 
 [project.scripts]
+opensynapse = "opensynapse.cli:main"
 ns-reliability = "ns_agent_reliability.doctor:main"
+ns-direct-channel = "ns_direct_channel.cli:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
@@ -22,3 +29,4 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+asyncio_mode = "auto"

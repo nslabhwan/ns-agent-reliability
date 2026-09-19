@@ -1,35 +1,32 @@
 # Third-party notices and provenance
 
-Audit snapshot: 2026-09-08.
+Audit snapshot: 2026-09-19.
 
 ## Bundled material
 
-No third-party source code, binary libraries, images, logos, fonts, screenshots or copied documentation were identified in the tracked public tree during the prepublication provenance review.
+No third-party source code, binary libraries, logos, fonts, screenshots, or copied third-party documentation are intentionally bundled in the tracked public source tree.
 
-## Runtime dependencies
+## Runtime dependency
 
-The Python package declares no third-party runtime dependencies. The portable source imports only the Python standard library plus modules from this package.
+OpenSynapse 0.2.0a1 declares:
+
+- `fastmcp>=4.0.3,<5` — MCP server/client framework used by the portable Direct Channel component.
+  - tested candidate environment: 4.0.5
+  - observed upstream package metadata: `License-Expression: Apache-2.0`
+  - installed externally by Python packaging; FastMCP source is not copied into this repository.
+
+FastMCP has its own transitive dependencies. Those packages are installed by the Python package resolver and remain governed by their respective upstream licenses; they are not relicensed by this repository.
 
 ## Build and test tooling
 
-These tools are installed externally and are not bundled/relicensed by this repository:
-
-- `setuptools` — build backend; release-audit environment 84.0.0; upstream metadata `License-Expression: MIT`
-- `wheel` — build tooling; release-audit environment 0.48.0; upstream metadata `License-Expression: MIT`
-- `pytest` — test tooling; release-audit environment 9.1.1; upstream metadata `License-Expression: MIT`
-
-Their own upstream licenses govern them.
+External tools used during candidate verification include `setuptools`, `wheel`, `pytest`, and Python virtual environments. They are not copied into the tracked release tree and remain governed by their upstream licenses.
 
 ## External standards and product names
 
-Documentation references MCP/Model Context Protocol and names third-party AI/agent products descriptively. No third-party logos or source implementations are included. See `TRADEMARKS.md`.
-
-If future contributions add third-party code or assets, this file and the release provenance review must be updated before release.
+Documentation references MCP / Model Context Protocol and third-party AI/agent products descriptively. No ownership is claimed over third-party product names. See `TRADEMARKS.md`.
 
 ## NS historical-source provenance
 
-The historical architecture and incident narratives in this repository are original NS project summaries/reconstructions authored for this publication candidate from NS-owned private project records. The private source artifacts named or hashed in `docs/EVIDENCE_INDEX.md` are evidence references only: their text, logs, conversations, credentials and private runtime data are not copied into the public tree. No third-party authorship or reuse right is claimed for external product names mentioned descriptively.
+Historical architecture and incident narratives are original NS project summaries/reconstructions prepared from NS-owned project records. Private source records, logs, conversations, credentials, account identifiers, private endpoints and Trading state are not copied into the public tree.
 
-## Release-audit tooling
-
-- `spdx-tools` — SPDX validation only; release-audit environment 0.8.5; upstream metadata `License-Expression: Apache-2.0`. It is not bundled into the project runtime or release tree.
+If a future release adds another third-party runtime dependency, code asset, binary asset or copied documentation, this notice and the release SBOM must be updated before publication.

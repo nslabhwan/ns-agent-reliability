@@ -2,63 +2,43 @@
   "spdxVersion": "SPDX-2.3",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "name": "ns-agent-reliability-0.1.0rc1-prepublication",
-  "documentNamespace": "https://example.invalid/ns-agent-reliability/spdx/0.1.0rc1-20260908",
+  "name": "opensynapse-0.2.0a1-prepublication",
+  "documentNamespace": "https://example.invalid/opensynapse/spdx/0.2.0a1-20260919",
   "creationInfo": {
-    "created": "2026-09-08T02:40:00Z",
+    "created": "2026-09-19T04:36:50Z",
     "creators": [
-      "Tool: NS prepublication audit"
+      "Tool: NS OpenSynapse prepublication audit"
     ]
   },
   "packages": [
     {
-      "name": "ns-agent-reliability",
+      "name": "ns-agent-reliability / OpenSynapse",
       "SPDXID": "SPDXRef-Software",
-      "versionInfo": "0.1.0rc1",
-      "downloadLocation": "NOASSERTION",
+      "versionInfo": "0.2.0a1",
+      "downloadLocation": "https://github.com/nslabhwan/ns-agent-reliability",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
       "licenseDeclared": "Apache-2.0",
       "copyrightText": "Copyright 2026 NS project contributors"
     },
     {
-      "name": "ns-agent-reliability-narrative-docs",
+      "name": "OpenSynapse narrative documentation",
       "SPDXID": "SPDXRef-Docs",
-      "versionInfo": "0.1.0rc1",
-      "downloadLocation": "NOASSERTION",
+      "versionInfo": "0.2.0a1",
+      "downloadLocation": "https://github.com/nslabhwan/ns-agent-reliability",
       "filesAnalyzed": false,
       "licenseConcluded": "CC-BY-4.0",
       "licenseDeclared": "CC-BY-4.0",
       "copyrightText": "Copyright 2026 NS project contributors"
     },
     {
-      "name": "setuptools",
-      "SPDXID": "SPDXRef-Build-Setuptools",
-      "versionInfo": "84.0.0",
+      "name": "fastmcp",
+      "SPDXID": "SPDXRef-Runtime-FastMCP",
+      "versionInfo": "4.0.5",
       "downloadLocation": "NOASSERTION",
       "filesAnalyzed": false,
-      "licenseConcluded": "MIT",
-      "licenseDeclared": "MIT",
-      "copyrightText": "NOASSERTION"
-    },
-    {
-      "name": "wheel",
-      "SPDXID": "SPDXRef-Build-Wheel",
-      "versionInfo": "0.48.0",
-      "downloadLocation": "NOASSERTION",
-      "filesAnalyzed": false,
-      "licenseConcluded": "MIT",
-      "licenseDeclared": "MIT",
-      "copyrightText": "NOASSERTION"
-    },
-    {
-      "name": "pytest",
-      "SPDXID": "SPDXRef-Test-Pytest",
-      "versionInfo": "9.1.1",
-      "downloadLocation": "NOASSERTION",
-      "filesAnalyzed": false,
-      "licenseConcluded": "MIT",
-      "licenseDeclared": "MIT",
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
       "copyrightText": "NOASSERTION"
     }
   ],
@@ -74,27 +54,17 @@
       "relatedSpdxElement": "SPDXRef-Docs"
     },
     {
-      "spdxElementId": "SPDXRef-Build-Setuptools",
-      "relationshipType": "BUILD_DEPENDENCY_OF",
-      "relatedSpdxElement": "SPDXRef-Software"
-    },
-    {
-      "spdxElementId": "SPDXRef-Build-Wheel",
-      "relationshipType": "BUILD_DEPENDENCY_OF",
-      "relatedSpdxElement": "SPDXRef-Software"
-    },
-    {
-      "spdxElementId": "SPDXRef-Test-Pytest",
-      "relationshipType": "TEST_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Runtime-FastMCP",
+      "relationshipType": "DEPENDENCY_OF",
       "relatedSpdxElement": "SPDXRef-Software"
     }
   ],
   "annotations": [
     {
       "annotationType": "OTHER",
-      "annotator": "Tool: NS prepublication audit",
-      "annotationDate": "2026-09-08T02:40:00Z",
-      "comment": "Build/test tools are external verification dependencies and are not bundled into the release tree. The runtime package declares no third-party runtime dependencies."
+      "annotator": "Tool: NS OpenSynapse prepublication audit",
+      "annotationDate": "2026-09-19T04:36:50Z",
+      "comment": "FastMCP is a declared external runtime dependency and is not copied into the tracked source tree. Transitive dependency licenses remain governed by their upstream packages."
     }
   ]
 }

@@ -13,17 +13,36 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
       - name: Content quality
         run: python tools/content_quality_check.py --strict
-      - name: Existing public prepublish checks
+
+      - name: Public prepublish checks
         run: python tools/prepublish_check.py
-      - name: Install package and test runner
-        run: python -m pip install . pytest
+
+      - name: Install candidate and test dependencies
+        run: python -m pip install '.[dev]'
+
       - name: Full regression suite
         run: pytest -q
-      - name: Installed CLI smoke
+
+      - name: Reliability Doctor smoke
         run: ns-reliability examples/doctor_broken_system.json --json
+
+      - name: OpenSynapse Linux CLI smoke
+        run: |
+          mkdir -p "$RUNNER_TEMP/opensynapse-work"
+          opensynapse install \
+            --root "$RUNNER_TEMP/opensynapse-work" \
+            --write-root "$RUNNER_TEMP/opensynapse-work" \
+            --enable-safe-commands \
+            --config "$RUNNER_TEMP/opensynapse-config.json"
+          opensynapse doctor --config "$RUNNER_TEMP/opensynapse-config.json"
+
+      - name: OpenSynapse real HTTP MCP E2E
+        run: python tests/opensynapse_http_e2e_probe.py

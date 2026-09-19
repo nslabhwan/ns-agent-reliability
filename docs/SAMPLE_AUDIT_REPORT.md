@@ -19,21 +19,11 @@ No credentials, private customer data or unrestricted production access are requ
 
 ## Top findings
 
-1. **CRITICAL — `DUPLICATE_AUTHORITY`**
-   - Truth state: OBSERVED
-   - Risk: A stale/concurrent writer can overwrite newer canonical state.
-2. **HIGH — `EVIDENCE_GAP`**
-   - Truth state: SUPPORTED
-   - Risk: “Done” can be accepted without observing the requested result.
-3. **CRITICAL — `ROLLBACK_RESURRECTS_DEPRECATED_SURFACE`**
-   - Truth state: OBSERVED
-   - Risk: A rollback can re-expose an obsolete tool/contract.
-4. **HIGH — `UNBOUNDED_RETRY`**
-   - Truth state: OBSERVED
-   - Risk: Failure can create uncontrolled repeated execution/cost.
-5. **HIGH — `STALE_CLIENT_SERVER_SCHEMA`**
-   - Truth state: SUPPORTED
-   - Risk: A stale client can regain authority over the current contract.
+1. `DUPLICATE_AUTHORITY` — **CRITICAL / OBSERVED** — stale or concurrent writers can overwrite newer state.
+2. `EVIDENCE_GAP` — **HIGH / SUPPORTED** — “Done” may be accepted without observing the requested result.
+3. `ROLLBACK_RESURRECTS_DEPRECATED_SURFACE` — **CRITICAL / OBSERVED** — rollback can restore an obsolete contract.
+4. `UNBOUNDED_RETRY` — **HIGH / OBSERVED** — failure can create uncontrolled repeated execution or cost.
+5. `STALE_CLIENT_SERVER_SCHEMA` — **HIGH / SUPPORTED** — stale clients can regain authority over the current contract.
 
 ## Finding detail — DUPLICATE_AUTHORITY
 

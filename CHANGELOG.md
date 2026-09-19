@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.2.0a1 OpenSynapse Alpha candidate — 2026-09-19
+
+- Shifted the public product identity from a Doctor-first wedge to the **OpenSynapse** umbrella while preserving Reliability Doctor as a module.
+- Consolidated the portable Direct Channel MCP core into the existing publication candidate instead of creating a competing repository.
+- Added `opensynapse install`, `doctor`, `status`, and `serve`.
+- Added a Linux one-install bootstrap with read-only-by-default configuration.
+- Added product-facing HTTP MCP E2E covering real write, readback, bounded command execution, and `shell=false`.
+- Full collected regression suite: **41/41 PASS**.
+- Declared `fastmcp>=4.0.3,<5` and updated provenance/SBOM.
+- Added `UNIFIED_BASE.md`, `USER_VALUE.md`, `QUICKSTART.md`, and preserved the former Doctor README under `docs/RELIABILITY_DOCTOR.md`.
+- Tracked public scope expanded for the OpenSynapse candidate.
+- This candidate is **not yet claimed as live** until public push and remote fresh-clone/install verification complete.
+
 ## Main — distribution/social preview asset — 2026-09-09
 
 - Added a 1280×640 PNG social-preview asset built around the real Doctor terminal findings.

@@ -1,0 +1,47 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from opensynapse.cli import main
+
+
+def test_install_then_status(tmp_path: Path, capsys) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    config = tmp_path / "config.json"
+
+    rc = main([
+        "install",
+        "--root",
+        str(root),
+        "--write-root",
+        str(root),
+        "--enable-safe-commands",
+        "--config",
+        str(config),
+    ])
+    assert rc == 0
+    install_out = json.loads(capsys.readouterr().out)
+    assert install_out["status"] == "INSTALLED"
+    assert install_out["product"] == "OpenSynapse"
+    assert config.exists()
+    assert oct(config.stat().st_mode & 0o777) == "0o600"
+
+    rc = main(["status", "--config", str(config)])
+    assert rc == 0
+    status_out = json.loads(capsys.readouterr().out)
+    assert status_out["product"] == "OpenSynapse"
+    assert status_out["node_type"] == "linux"
+
+
+def test_install_rejects_missing_root(tmp_path: Path) -> None:
+    missing = tmp_path / "missing"
+    config = tmp_path / "config.json"
+
+    try:
+        main(["install", "--root", str(missing), "--config", str(config)])
+    except SystemExit as exc:
+        assert "root does not exist" in str(exc)
+    else:
+        raise AssertionError("missing root must be rejected")
