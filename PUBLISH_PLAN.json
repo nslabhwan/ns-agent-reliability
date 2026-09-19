@@ -1,10 +1,10 @@
 {
   "schema_version": "OPENSYNAPSE_PUBLISH_PLAN_V1",
-  "status": "0.2.0A3_ANDROID_CANDIDATE_NOT_PUSHED",
+  "status": "PUBLIC_LIVE_0.2.0A3_ANDROID_VERIFIED",
   "public_repository": "https://github.com/nslabhwan/ns-agent-reliability",
   "publication_lineage": "reuse existing public repository; do not create a competing repo",
   "product_identity": "OpenSynapse",
-  "current_public_version": "0.2.0a2",
+  "current_public_version": "0.2.0a3",
   "candidate_version": "0.2.0a3",
   "first_value_path": [
     "install Linux node",
@@ -28,18 +28,10 @@
     "actual Android platform regression test added",
     "49/49 regression suite PASS"
   ],
-  "required_before_publication_complete": [
-    "push portability fix to public main",
-    "fresh public clone on actual Android/Termux",
-    "actual Android base install PASS without FastMCP",
-    "node_type android-termux and SELF_HOSTED_ANDROID PASS",
-    "actual stdlib MCP write/readback PASS on phone",
-    "record remote SHA and Android evidence"
-  ],
+  "required_before_publication_complete": [],
   "next_product_milestones": [
+    "portable Android media/device modules",
     "real-account OpenAI Secure MCP Tunnel E2E",
-    "ChatGPT connector/plugin onboarding",
-    "portable Android Phone Local",
     "multi-device pairing/routing",
     "desktop packages"
   ],
@@ -51,17 +43,21 @@
   ],
   "remote_commit_sha": "c1dc2e675143b1113e5ffb0caff09fe576262169",
   "publication_completed": [
-    "tracked-tree content/public scrub PASS",
-    "fresh package install PASS",
-    "45/45 tests PASS",
-    "HTTP MCP E2E PASS",
-    "official tunnel-client prepare-only path PASS",
-    "candidate pushed to public repository",
-    "remote HEAD verified",
-    "GitHub public quality gate PASS",
+    "dependency-free Android base implemented",
+    "49/49 regression suite PASS",
+    "tracked public scrub PASS",
+    "public code push PASS",
+    "GitHub quality gate PASS",
     "GitHub Pages deployment PASS",
-    "fresh unauthenticated public clone PASS",
-    "fresh public install.sh PASS",
-    "fresh public OpenAI tunnel prepare-only PASS"
-  ]
+    "fresh public clone on actual Android/Termux PASS",
+    "public install.sh on actual Android/Termux PASS",
+    "FastMCP absent from Android base PASS",
+    "node_type android-termux PASS",
+    "authority SELF_HOSTED_ANDROID PASS",
+    "seven-tool stdlib MCP surface PASS",
+    "actual MCP write/readback PASS",
+    "private Phone Local runtime dependency zero",
+    "server runtime dependency zero"
+  ],
+  "tested_public_commit_sha": "4a27f49b564f93911850d1f30560b42302cfae59"
 }

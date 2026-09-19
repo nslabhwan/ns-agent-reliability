@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0a3 Android / Termux candidate — 2026-09-19
+## 0.2.0a3 Android / Termux verified — 2026-09-19
 
 - Extended the existing one-install bootstrap to detect Android/Termux.
 - Added generic Python 3.11+ discovery instead of requiring version-suffixed executables.
@@ -8,7 +8,13 @@
 - Added a safe default Android workspace at ~/OpenSynapseWorkspace.
 - Android defaults to read/write only inside that dedicated workspace.
 - Reuses the same OpenSynapse bounded core; no private Phone Local or server runtime dependency is introduced.
-- Real-device Android fresh-install and read/write E2E remain the publication gate.
+- First real-device run found and drove fixes for Android dependency portability and actual platform detection.
+- Final fresh public clone and install.sh PASS on actual Android/Termux.
+- Final identity: node_type=android-termux / authority=SELF_HOSTED_ANDROID.
+- Android base confirmed to install without FastMCP.
+- Dependency-free stdlib MCP exposed the same seven dc_* tools.
+- Real stdio MCP write/readback PASS with readback ANDROID_REAL_PHONE_OK.
+- Private Phone Local runtime dependency and server runtime dependency both verified zero.
 
 ## 0.2.0a2 OpenAI Secure MCP Tunnel prepare path — 2026-09-19
 

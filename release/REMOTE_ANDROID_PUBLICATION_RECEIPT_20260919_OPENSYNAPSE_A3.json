@@ -1,0 +1,43 @@
+{
+  "schema_version": "OPENSYNAPSE_ANDROID_REMOTE_PUBLICATION_RECEIPT_V1",
+  "observed_at_utc": "2026-09-19T15:18:13Z",
+  "status": "PUBLIC_ANDROID_REAL_DEVICE_VERIFIED",
+  "public_repository": "https://github.com/nslabhwan/ns-agent-reliability",
+  "tested_public_commit_sha": "4a27f49b564f93911850d1f30560b42302cfae59",
+  "release": "0.2.0a3",
+  "product": "OpenSynapse",
+  "verification": {
+    "github_public_quality_gate": "PASS",
+    "github_pages_deployment": "PASS",
+    "fresh_public_clone_on_android": "PASS",
+    "public_install_sh_on_android": "PASS",
+    "python": "3.13.13",
+    "platform": "Android",
+    "node_type": "android-termux",
+    "authority": "SELF_HOSTED_ANDROID",
+    "fastmcp_installed": false,
+    "default_workspace_scope": "dedicated OpenSynapse workspace only",
+    "stdlib_mcp_tool_count": 7,
+    "stdlib_mcp_tools": [
+      "dc_list_directory",
+      "dc_process_status",
+      "dc_read_text",
+      "dc_run_bounded",
+      "dc_status",
+      "dc_tail_log",
+      "dc_write_text"
+    ],
+    "stdio_mcp_write": "PASS",
+    "stdio_mcp_readback": "ANDROID_REAL_PHONE_OK",
+    "private_phone_local_runtime_dependency": 0,
+    "server_runtime_dependency": 0
+  },
+  "not_yet_verified": [
+    "portable public Android media/device modules",
+    "real OpenAI account tunnel to ChatGPT to OpenSynapse E2E",
+    "multi-device pairing/routing",
+    "desktop packaging",
+    "resumable long-running jobs"
+  ],
+  "privacy_note": "No private phone path, device identifier, credential, tunnel token, or private NS runtime detail is included."
+}

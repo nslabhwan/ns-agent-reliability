@@ -78,4 +78,19 @@ Do not treat:
 
 as dependencies of this public Android node.
 
-The first publication gate is a fresh install and real read/write verification on an actual Android/Termux device.
+The public 0.2.0a3 path has now passed a fresh GitHub clone, install.sh, android-termux identity check, and real stdio MCP write/readback on an actual Android/Termux device.
+
+## Verified real-device evidence
+
+OpenSynapse 0.2.0a3 was verified from a fresh public clone on an actual Android/Termux device.
+
+- install.sh: PASS
+- node_type: android-termux
+- authority: SELF_HOSTED_ANDROID
+- FastMCP installed: no
+- stdlib MCP tools: 7
+- real MCP write/readback: PASS
+- private Phone Local runtime dependency: 0
+- server runtime dependency: 0
+
+The tested public code commit is 4a27f49b564f93911850d1f30560b42302cfae59.

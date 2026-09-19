@@ -1,44 +1,45 @@
 # Publication Checklist
 
-Status: OpenSynapse 0.2.0a2 PUBLIC LIVE / 0.2.0a3 ANDROID TERMUX CANDIDATE
+Status: OpenSynapse 0.2.0a3 PUBLIC LIVE / REAL ANDROID VERIFIED
 
 Public repository: nslabhwan/ns-agent-reliability
 
-## Existing public evidence
+## Linux and shared core
 
 - [x] Linux one-install PASS.
+- [x] optional FastMCP HTTP transport PASS.
 - [x] HTTP MCP write/readback/bounded-command E2E PASS.
 - [x] OpenAI Secure MCP Tunnel prepare path PASS.
-- [x] 0.2.0a2 remote verification PASS.
-
-## 0.2.0a3 Android / Termux candidate
-
-- [x] same OpenSynapse core reused; no separate Android control plane.
-- [x] Termux environment detection implemented.
-- [x] default Android workspace is ~/OpenSynapseWorkspace.
-- [x] default Android write access is limited to that workspace.
-- [x] private NS Phone Local runtime is not a dependency.
-- [x] FastMCP removed from mandatory base dependencies.
-- [x] dependency-free stdlib MCP stdio transport added.
-- [x] same 7 dc_* MCP tool names preserved.
-- [x] Linux HTTP transport retained as optional http extra.
-- [x] Android simulation installs without FastMCP/Rust/watchfiles.
-- [x] Linux http simulation installs FastMCP 4.0.5.
 - [x] full regression suite: 49/49 PASS.
-- [x] HTTP MCP E2E PASS.
 - [x] tracked-tree public scrub PASS.
-- [x] first real phone base wheel build/install PASS without FastMCP.
-- [x] actual Android platform guard regression found and fixed.
-- [x] Android platform regression test added.
-- [ ] portability fix pushed to public main.
-- [ ] fresh public clone on actual Android/Termux after fix.
-- [ ] actual Android install PASS.
-- [ ] node_type=android-termux and authority=SELF_HOSTED_ANDROID verified.
-- [ ] actual stdlib MCP write/readback PASS on phone.
-- [ ] final Android remote-verification receipt recorded.
 
-## Truth boundary
+## Android / Termux
 
-The first real-phone attempt found the Linux FastMCP/watchfiles dependency chain was not portable to Android. The candidate was refactored rather than bypassed: Android now uses the dependency-free stdlib MCP stdio transport.
+- [x] same bounded core reused; no separate Android control plane.
+- [x] base package has no mandatory FastMCP/Rust/watchfiles dependency.
+- [x] dependency-free stdlib MCP stdio transport.
+- [x] same seven dc_* tool names.
+- [x] dedicated default workspace.
+- [x] actual public GitHub fresh clone on Android PASS.
+- [x] actual public install.sh on Android PASS.
+- [x] FastMCP absent from Android base.
+- [x] platform=Android and Python 3.13.13 observed.
+- [x] node_type=android-termux.
+- [x] authority=SELF_HOSTED_ANDROID.
+- [x] actual stdio MCP write PASS.
+- [x] actual stdio MCP readback PASS: ANDROID_REAL_PHONE_OK.
+- [x] private Phone Local runtime dependency = 0.
+- [x] server runtime dependency = 0.
 
-Do not claim broader private Phone Local capabilities such as media extraction, app control, helper recovery, or Wi-Fi/LTE parity until they are separately reimplemented and proven in the public node.
+Tested public code commit:
+4a27f49b564f93911850d1f30560b42302cfae59
+
+## Still not claimed
+
+- portable public Android media/device modules;
+- real OpenAI account tunnel -> ChatGPT -> OpenSynapse E2E;
+- multi-device pairing/routing;
+- desktop packaging;
+- resumable long-running jobs.
+
+Private NS Phone Local remains reference knowledge only and is not a runtime dependency of the public Android node.

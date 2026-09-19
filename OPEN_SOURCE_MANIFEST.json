@@ -1,23 +1,25 @@
 {
   "schema_version": "OPENSYNAPSE_OPEN_SOURCE_MANIFEST_V1",
   "authority": "GPT_SANDBOX_NON_SSOT",
-  "publication_status": "PUBLIC_LIVE_0.2.0A2__0.2.0A3_ANDROID_CANDIDATE",
+  "publication_status": "PUBLIC_LIVE_0.2.0A3_ANDROID_VERIFIED",
   "updated_kst": "2026-09-19",
   "public_repository": "https://github.com/nslabhwan/ns-agent-reliability",
   "product_identity": "OpenSynapse",
   "public_user_promise": "Install once. Let AI work on machines you own through explicit bounded access, and verify the result.",
   "current_public_release": {
-    "version": "0.2.0a2",
-    "wedge": "OpenSynapse Linux Alpha + OpenAI Secure MCP Tunnel prepare path",
+    "version": "0.2.0a3",
+    "wedge": "OpenSynapse Linux + Android/Termux Alpha with OpenAI Secure MCP Tunnel prepare path",
     "remotely_verified": true,
-    "remote_commit_sha": "c1dc2e675143b1113e5ffb0caff09fe576262169",
-    "fresh_public_install": "PASS",
-    "http_mcp_e2e": "PASS",
-    "openai_tunnel_prepare_path": "PASS"
+    "tested_public_commit_sha": "4a27f49b564f93911850d1f30560b42302cfae59",
+    "github_quality_gate": "PASS",
+    "github_pages": "PASS",
+    "linux_http_mcp_e2e": "PASS",
+    "android_fresh_public_install": "PASS",
+    "android_stdio_mcp_e2e": "PASS"
   },
   "candidate": {
     "version": "0.2.0a3",
-    "status": "ANDROID_TERMUX_CANDIDATE_NOT_YET_REAL_DEVICE_VERIFIED",
+    "status": "PUBLIC_LIVE_REAL_ANDROID_VERIFIED",
     "tests": "49/49 PASS",
     "linux_regression": "PASS",
     "android_termux_install_path": "IMPLEMENTED",
@@ -25,15 +27,18 @@
     "android_default_write_scope": "dedicated workspace only",
     "private_phone_local_runtime_dependency": 0,
     "server_runtime_dependency_for_android_node": 0,
-    "real_android_fresh_install": "PENDING_AFTER_PLATFORM_GUARD_FIX",
-    "real_android_read_write_e2e": "PENDING_AFTER_PLATFORM_GUARD_FIX",
+    "real_android_fresh_install": "PASS",
+    "real_android_read_write_e2e": "PASS",
     "openai_secure_mcp_tunnel_prepare_path": "PASS",
     "android_dependency_free_base": "PASS",
     "android_fastmcp_required": false,
     "android_mcp_transport": "stdlib stdio",
     "linux_http_extra": "fastmcp>=4.0.3,<5",
     "real_android_base_wheel_install": "PASS",
-    "real_android_platform_guard_regression": "FOUND_AND_FIXED"
+    "real_android_platform_guard_regression": "FOUND_AND_FIXED",
+    "real_android_node_type": "android-termux",
+    "real_android_authority": "SELF_HOSTED_ANDROID",
+    "tested_public_commit_sha": "4a27f49b564f93911850d1f30560b42302cfae59"
   },
   "current_proven_components": [
     "OpenSynapse dependency-free bounded core",
@@ -43,8 +48,7 @@
     "Agent Reliability Doctor normalized-evidence diagnostics"
   ],
   "next_not_yet_public_ready": [
-    "real Android/Termux fresh-install E2E for 0.2.0a3",
-    "portable Android media tools",
+    "portable Android media/device modules",
     "real-account OpenAI tunnel -> ChatGPT -> OpenSynapse E2E",
     "multi-device pairing/routing",
     "desktop packaging",
@@ -64,5 +68,6 @@
     "brand_assets": "reserved as described in TRADEMARKS.md"
   },
   "truth_rule": "Historical evidence remains historical. Candidate readiness is not public-release completion; remote push and fresh public clone/install verification are required.",
-  "remote_publication_receipt": "release/REMOTE_PUBLICATION_RECEIPT_20260919_OPENSYNAPSE_A2.json"
+  "remote_publication_receipt": "release/REMOTE_PUBLICATION_RECEIPT_20260919_OPENSYNAPSE_A2.json",
+  "android_remote_publication_receipt": "release/REMOTE_ANDROID_PUBLICATION_RECEIPT_20260919_OPENSYNAPSE_A3.json"
 }
