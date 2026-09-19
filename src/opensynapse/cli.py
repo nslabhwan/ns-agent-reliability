@@ -54,7 +54,8 @@ def _load_runtime(config_path: str) -> DirectChannelRuntime:
 
 
 def cmd_install(args: argparse.Namespace) -> int:
-    if platform.system() != "Linux":
+    node_type = detect_node_type()
+    if node_type not in {"linux", "android-termux"}:
         raise SystemExit("OpenSynapse alpha currently supports Linux and Android/Termux")
 
     root = Path(args.root).expanduser().resolve()
@@ -88,7 +89,6 @@ def cmd_install(args: argparse.Namespace) -> int:
     target.chmod(0o600)
 
     runtime = DirectChannelRuntime(DirectChannelConfig.from_dict(config))
-    node_type = detect_node_type()
     result = {
         "status": "INSTALLED",
         "product": "OpenSynapse",

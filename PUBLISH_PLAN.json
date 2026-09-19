@@ -22,7 +22,11 @@
     "Linux http install PASS with FastMCP 4.0.5",
     "48/48 regression suite PASS",
     "HTTP MCP E2E PASS",
-    "tracked public scrub PASS"
+    "tracked public scrub PASS",
+    "first real Android run built and installed base wheel without FastMCP",
+    "actual Termux Python platform=Android guard regression found and fixed",
+    "actual Android platform regression test added",
+    "49/49 regression suite PASS"
   ],
   "required_before_publication_complete": [
     "push portability fix to public main",

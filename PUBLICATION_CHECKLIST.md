@@ -24,9 +24,12 @@ Public repository: nslabhwan/ns-agent-reliability
 - [x] Linux HTTP transport retained as optional http extra.
 - [x] Android simulation installs without FastMCP/Rust/watchfiles.
 - [x] Linux http simulation installs FastMCP 4.0.5.
-- [x] full regression suite: 48/48 PASS.
+- [x] full regression suite: 49/49 PASS.
 - [x] HTTP MCP E2E PASS.
 - [x] tracked-tree public scrub PASS.
+- [x] first real phone base wheel build/install PASS without FastMCP.
+- [x] actual Android platform guard regression found and fixed.
+- [x] Android platform regression test added.
 - [ ] portability fix pushed to public main.
 - [ ] fresh public clone on actual Android/Termux after fix.
 - [ ] actual Android install PASS.

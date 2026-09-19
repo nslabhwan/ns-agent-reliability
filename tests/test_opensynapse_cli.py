@@ -70,3 +70,26 @@ def test_detects_termux_node_type(tmp_path: Path, monkeypatch, capsys) -> None:
     status = json.loads(capsys.readouterr().out)
     assert status["node_type"] == "android-termux"
     assert status["authority"] == "SELF_HOSTED_ANDROID"
+
+
+def test_actual_android_platform_with_termux_is_allowed(tmp_path: Path, monkeypatch, capsys) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    config = tmp_path / "config.json"
+    monkeypatch.setenv("TERMUX_VERSION", "0.118")
+    monkeypatch.setenv("PREFIX", "/data/data/com.termux/files/usr")
+    monkeypatch.setattr("opensynapse.cli.platform.system", lambda: "Android")
+
+    rc = main([
+        "install",
+        "--root",
+        str(root),
+        "--write-root",
+        str(root),
+        "--config",
+        str(config),
+    ])
+    assert rc == 0
+    output = json.loads(capsys.readouterr().out)
+    assert output["node_type"] == "android-termux"
+    assert output["doctor"]["authority"] == "SELF_HOSTED_ANDROID"
