@@ -10,7 +10,7 @@ from pathlib import Path
 
 from ns_direct_channel.config import DirectChannelConfig
 from ns_direct_channel.runtime import DirectChannelRuntime
-from ns_direct_channel.server import create_server
+from ns_direct_channel.stdio_server import run_stdio_server
 from opensynapse.tunnel import (
     TunnelClientError,
     default_profile_dir,
@@ -27,7 +27,12 @@ def default_config_path() -> Path:
 
 def detect_node_type() -> str:
     prefix = os.environ.get("PREFIX", "")
-    if os.environ.get("TERMUX_VERSION") or "com.termux" in prefix:
+    executable = sys.executable
+    if (
+        os.environ.get("TERMUX_VERSION")
+        or "com.termux" in prefix
+        or "/data/data/com.termux/" in executable
+    ):
         return "android-termux"
     if platform.system() == "Linux":
         return "linux"
@@ -50,7 +55,7 @@ def _load_runtime(config_path: str) -> DirectChannelRuntime:
 
 def cmd_install(args: argparse.Namespace) -> int:
     if platform.system() != "Linux":
-        raise SystemExit("OpenSynapse alpha installer currently supports Linux only")
+        raise SystemExit("OpenSynapse alpha currently supports Linux and Android/Termux")
 
     root = Path(args.root).expanduser().resolve()
     if not root.is_dir():
@@ -83,10 +88,11 @@ def cmd_install(args: argparse.Namespace) -> int:
     target.chmod(0o600)
 
     runtime = DirectChannelRuntime(DirectChannelConfig.from_dict(config))
+    node_type = detect_node_type()
     result = {
         "status": "INSTALLED",
         "product": "OpenSynapse",
-        "node_type": detect_node_type(),
+        "node_type": node_type,
         "config": str(target),
         "read_roots": config["read_roots"],
         "write_roots": config["write_roots"],
@@ -94,9 +100,11 @@ def cmd_install(args: argparse.Namespace) -> int:
         "doctor": runtime.status(),
         "next": [
             "opensynapse connect openai --tunnel-id tunnel_...",
-            "or run opensynapse serve --transport http for another reviewed MCP ingress",
+            "opensynapse serve --transport stdio",
         ],
     }
+    if node_type == "linux":
+        result["next"].append("opensynapse serve --transport http")
     print(json.dumps(result, indent=2))
     return 0
 
@@ -119,17 +127,23 @@ def cmd_status(args: argparse.Namespace) -> int:
 
 def cmd_serve(args: argparse.Namespace) -> int:
     config = DirectChannelConfig.load(Path(args.config).expanduser())
-    server = create_server(config)
     if args.transport == "stdio":
-        server.run()
+        run_stdio_server(config)
         return 0
+
     if args.host not in {"127.0.0.1", "localhost", "::1"} and not args.allow_nonloopback:
         raise SystemExit(
             "refusing non-loopback HTTP bind; keep the local node private and use a reviewed authenticated HTTPS ingress"
         )
+    try:
+        from ns_direct_channel.server import create_server
+    except ImportError as exc:
+        raise SystemExit(
+            "HTTP transport requires the optional OpenSynapse http extra; reinstall with [http]"
+        ) from exc
+    server = create_server(config)
     server.run(transport="http", host=args.host, port=args.port)
     return 0
-
 
 
 def cmd_connect_openai(args: argparse.Namespace) -> int:
@@ -192,6 +206,7 @@ def cmd_connect_openai(args: argparse.Namespace) -> int:
         return 0
     return run_profile(tunnel_binary, args.profile, profile_dir)
 
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="opensynapse",
@@ -199,7 +214,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
-    install = sub.add_parser("install", help="configure this Linux machine as an OpenSynapse node")
+    install = sub.add_parser("install", help="configure this machine as an OpenSynapse node")
     install.add_argument("--root", required=True, help="directory AI may read")
     install.add_argument("--write-root", action="append", default=[], help="directory AI may write; repeatable")
     install.add_argument(
@@ -241,7 +256,7 @@ def build_parser() -> argparse.ArgumentParser:
     openai.add_argument(
         "--no-install-client",
         action="store_true",
-        help="fail instead of downloading the latest official openai/tunnel-client release",
+        help="fail instead of downloading the pinned official openai/tunnel-client release",
     )
     openai.add_argument(
         "--prepare-only",

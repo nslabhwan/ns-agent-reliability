@@ -18,24 +18,27 @@
   "candidate": {
     "version": "0.2.0a3",
     "status": "ANDROID_TERMUX_CANDIDATE_NOT_YET_REAL_DEVICE_VERIFIED",
-    "tests": "PENDING",
-    "linux_regression": "PENDING",
+    "tests": "48/48 PASS",
+    "linux_regression": "PASS",
     "android_termux_install_path": "IMPLEMENTED",
     "android_default_workspace": "~/OpenSynapseWorkspace",
     "android_default_write_scope": "dedicated workspace only",
     "private_phone_local_runtime_dependency": 0,
     "server_runtime_dependency_for_android_node": 0,
-    "real_android_fresh_install": "PENDING",
-    "real_android_read_write_e2e": "PENDING",
-    "openai_secure_mcp_tunnel_prepare_path": "PASS"
+    "real_android_fresh_install": "PENDING_AFTER_PORTABILITY_FIX",
+    "real_android_read_write_e2e": "PENDING_AFTER_PORTABILITY_FIX",
+    "openai_secure_mcp_tunnel_prepare_path": "PASS",
+    "android_dependency_free_base": "PASS",
+    "android_fastmcp_required": false,
+    "android_mcp_transport": "stdlib stdio",
+    "linux_http_extra": "fastmcp>=4.0.3,<5"
   },
   "current_proven_components": [
-    "OpenSynapse Linux node CLI and one-install bootstrap",
-    "bounded Direct Channel MCP read/write/command execution",
+    "OpenSynapse dependency-free bounded core",
+    "stdlib MCP stdio transport with same 7 dc tools",
+    "optional Linux FastMCP HTTP transport",
     "OpenAI Secure MCP Tunnel prepare path using pinned official tunnel-client",
-    "Agent Reliability Doctor normalized-evidence diagnostics",
-    "lease/session independence reference behavior",
-    "one-live-commit deployment reference primitive"
+    "Agent Reliability Doctor normalized-evidence diagnostics"
   ],
   "next_not_yet_public_ready": [
     "real Android/Termux fresh-install E2E for 0.2.0a3",

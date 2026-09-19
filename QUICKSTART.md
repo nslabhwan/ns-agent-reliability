@@ -139,6 +139,6 @@ Fast path:
 curl -fsSL https://raw.githubusercontent.com/nslabhwan/ns-agent-reliability/main/install.sh | bash
 ```
 
-The default Android workspace is `~/OpenSynapseWorkspace` and is read/write enabled. Other phone paths are not automatically exposed.
+The default Android workspace is `~/OpenSynapseWorkspace` and is read/write enabled. Other phone paths are not automatically exposed. Android installs the dependency-free core and uses `opensynapse serve --transport stdio`; FastMCP HTTP is a Linux optional extra.
 
 See [ANDROID_TERMUX.md](ANDROID_TERMUX.md).

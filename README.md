@@ -38,7 +38,7 @@ you ask
 
 ### Available now
 
-- Linux OpenSynapse node CLI:
+- OpenSynapse node CLI:
   - `opensynapse install`
   - `opensynapse doctor`
   - `opensynapse status`
@@ -60,13 +60,15 @@ The OpenAI tunnel **prepare path is verified**. A real OpenAI account tunnel →
 
 ### Android / Termux candidate
 
-The same OpenSynapse core now has a one-install Termux path with a dedicated default workspace. See [ANDROID_TERMUX.md](ANDROID_TERMUX.md). Real-device publication verification is the release gate for 0.2.0a3.
+The same OpenSynapse bounded core now runs on Termux **without FastMCP, Rust, or watchfiles**. Android uses a dependency-free stdlib MCP stdio server, while Linux can install the optional `[http]` extra for FastMCP HTTP transport.
+
+The Android installer creates one writable workspace at `~/OpenSynapseWorkspace`. See [ANDROID_TERMUX.md](ANDROID_TERMUX.md). Real-device fresh-install and MCP write/readback verification remain the final 0.2.0a3 publication gate.
 
 ### Next integration milestones
 
 - real-account OpenAI Secure MCP Tunnel E2E
 - one-time ChatGPT connector/plugin onboarding
-- portable Android Phone Local node
+- portable Android media/device modules
 - multi-device pairing / routing
 - desktop packaging
 - resumable long-running jobs
@@ -163,7 +165,8 @@ Current local/public-candidate verification includes:
 - Linux one-install bootstrap
 - bounded HTTP MCP write → readback → command E2E with `shell=false`
 - OpenAI official tunnel-client prepare-path integration
-- full regression suite: **45/45 PASS**
+- stdlib MCP tool-contract and write/readback tests
+- full regression suite: **48/48 PASS**
 
 Development rule:
 

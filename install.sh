@@ -77,7 +77,15 @@ if [[ ! -d "$VENV" ]]; then
 fi
 
 "$VENV/bin/python" -m pip install --upgrade pip >/dev/null
-"$VENV/bin/python" -m pip install --upgrade "$SOURCE"
+if is_termux; then
+  "$VENV/bin/python" -m pip install --upgrade "$SOURCE"
+else
+  if [[ "$SOURCE" == git+* ]]; then
+    "$VENV/bin/python" -m pip install --upgrade "ns-agent-reliability[http] @ $SOURCE"
+  else
+    "$VENV/bin/python" -m pip install --upgrade "${SOURCE}[http]"
+  fi
+fi
 
 ln -sfn "$VENV/bin/opensynapse" "$BIN_DIR/opensynapse"
 
@@ -96,7 +104,10 @@ echo "$PRODUCT installed."
 echo "Binary: $BIN_DIR/opensynapse"
 echo "Config: $CONFIG"
 echo "Run: opensynapse doctor"
-echo "Local MCP: opensynapse serve --transport http"
+echo "Local MCP stdio: opensynapse serve --transport stdio"
+if ! is_termux; then
+  echo "Local MCP HTTP: opensynapse serve --transport http"
+fi
 if is_termux; then
   echo "Node: Android / Termux"
   echo "Workspace: $ROOT"

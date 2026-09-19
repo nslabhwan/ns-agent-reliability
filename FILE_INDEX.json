@@ -115,7 +115,9 @@
     "tests/test_opensynapse_tunnel.py",
     "release/OPENSYNAPSE_OPENAI_TUNNEL_PREP_RECEIPT_20260919.json",
     "release/REMOTE_PUBLICATION_RECEIPT_20260919_OPENSYNAPSE_A2.json",
-    "ANDROID_TERMUX.md"
+    "ANDROID_TERMUX.md",
+    "src/ns_direct_channel/stdio_server.py",
+    "tests/test_stdio_mcp.py"
   ],
   "excluded_runtime_artifacts": [
     ".ns-direct-channel.lock",

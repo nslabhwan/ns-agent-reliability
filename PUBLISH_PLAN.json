@@ -15,21 +15,21 @@
   ],
   "candidate_checks_completed": [
     "shared OpenSynapse core reused for Android/Termux",
-    "Termux node detection implemented",
-    "generic Python 3.11+ detection implemented",
-    "Termux Python/Git prerequisite bootstrap implemented",
-    "dedicated ~/OpenSynapseWorkspace default created",
-    "Android default write scope limited to dedicated workspace",
-    "private NS Phone Local runtime dependency remains zero by design"
+    "FastMCP removed from mandatory dependencies",
+    "dependency-free stdlib MCP stdio transport added",
+    "same seven dc tools preserved",
+    "Android simulated install PASS without FastMCP",
+    "Linux http install PASS with FastMCP 4.0.5",
+    "48/48 regression suite PASS",
+    "HTTP MCP E2E PASS",
+    "tracked public scrub PASS"
   ],
   "required_before_publication_complete": [
-    "server regression suite PASS",
-    "tracked-tree content/public scrub PASS",
-    "push candidate",
+    "push portability fix to public main",
     "fresh public clone on actual Android/Termux",
-    "fresh install.sh PASS on actual phone",
-    "node_type android-termux PASS",
-    "actual file write/readback PASS on phone",
+    "actual Android base install PASS without FastMCP",
+    "node_type android-termux and SELF_HOSTED_ANDROID PASS",
+    "actual stdlib MCP write/readback PASS on phone",
     "record remote SHA and Android evidence"
   ],
   "next_product_milestones": [

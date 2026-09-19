@@ -16,7 +16,7 @@ The installer:
 - detects Termux;
 - installs Python/Git with `pkg` only if missing;
 - creates an isolated Python environment;
-- installs OpenSynapse;
+- installs the dependency-free OpenSynapse core (no FastMCP/Rust required);
 - creates `~/OpenSynapseWorkspace`;
 - grants OpenSynapse read/write only inside that workspace by default.
 
@@ -25,7 +25,10 @@ Then:
 ```bash
 opensynapse doctor
 opensynapse status
+opensynapse serve --transport stdio
 ```
+
+The stdio MCP server exposes the same bounded `dc_*` tool contract as Linux.
 
 If `~/.local/bin` is not yet on your PATH:
 
@@ -35,7 +38,7 @@ $HOME/.local/bin/opensynapse doctor
 
 ## What the first Android Alpha proves
 
-The first portable Android node is intentionally small:
+The first portable Android node is intentionally small. It uses Python stdlib for MCP stdio so Android does not need the Linux FastMCP/watchfiles dependency chain:
 
 - status / Doctor;
 - bounded directory and file reads;

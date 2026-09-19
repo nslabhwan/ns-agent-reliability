@@ -9,12 +9,13 @@ description = "OpenSynapse: bounded, verifiable AI work infrastructure for machi
 requires-python = ">=3.11"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]
-dependencies = ["fastmcp>=4.0.3,<5"]
+dependencies = []
 authors = [{name = "NS project contributors"}]
-keywords = ["opensynapse", "mcp", "chatgpt", "server", "agent", "self-hosted", "reliability"]
+keywords = ["opensynapse", "mcp", "chatgpt", "server", "android", "termux", "agent", "self-hosted", "reliability"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "pytest-asyncio>=0.24"]
+http = ["fastmcp>=4.0.3,<5"]
+dev = ["pytest>=8", "pytest-asyncio>=0.24", "fastmcp>=4.0.3,<5"]
 
 [project.scripts]
 opensynapse = "opensynapse.cli:main"
