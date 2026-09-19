@@ -1,11 +1,11 @@
 {
   "schema_version": "OPENSYNAPSE_PUBLISH_PLAN_V1",
-  "status": "PUBLIC_LIVE_0.2.0A2_REMOTE_VERIFIED",
+  "status": "0.2.0A3_ANDROID_CANDIDATE_NOT_PUSHED",
   "public_repository": "https://github.com/nslabhwan/ns-agent-reliability",
   "publication_lineage": "reuse existing public repository; do not create a competing repo",
   "product_identity": "OpenSynapse",
   "current_public_version": "0.2.0a2",
-  "candidate_version": "0.2.0a2",
+  "candidate_version": "0.2.0a3",
   "first_value_path": [
     "install Linux node",
     "run Doctor/status",
@@ -14,18 +14,24 @@
     "verify observable result"
   ],
   "candidate_checks_completed": [
-    "OpenSynapse Linux one-install PASS",
-    "45/45 regressions PASS",
-    "installed HTTP MCP write/readback/bounded-command E2E PASS",
-    "OpenAI official tunnel-client v0.0.14 download PASS",
-    "official SHA256SUMS verification PASS",
-    "bundled tunnel-client + cloudflared installation PASS",
-    "official tunnel-client profile generation PASS",
-    "CONTROL_PLANE_API_KEY stored as env reference only",
-    "ephemeral loopback health listener configured",
-    "live OpenAI account/control-plane E2E intentionally not claimed"
+    "shared OpenSynapse core reused for Android/Termux",
+    "Termux node detection implemented",
+    "generic Python 3.11+ detection implemented",
+    "Termux Python/Git prerequisite bootstrap implemented",
+    "dedicated ~/OpenSynapseWorkspace default created",
+    "Android default write scope limited to dedicated workspace",
+    "private NS Phone Local runtime dependency remains zero by design"
   ],
-  "required_before_publication_complete": [],
+  "required_before_publication_complete": [
+    "server regression suite PASS",
+    "tracked-tree content/public scrub PASS",
+    "push candidate",
+    "fresh public clone on actual Android/Termux",
+    "fresh install.sh PASS on actual phone",
+    "node_type android-termux PASS",
+    "actual file write/readback PASS on phone",
+    "record remote SHA and Android evidence"
+  ],
   "next_product_milestones": [
     "real-account OpenAI Secure MCP Tunnel E2E",
     "ChatGPT connector/plugin onboarding",

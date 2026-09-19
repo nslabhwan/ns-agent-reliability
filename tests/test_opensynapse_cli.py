@@ -45,3 +45,28 @@ def test_install_rejects_missing_root(tmp_path: Path) -> None:
         assert "root does not exist" in str(exc)
     else:
         raise AssertionError("missing root must be rejected")
+
+
+def test_detects_termux_node_type(tmp_path: Path, monkeypatch, capsys) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    config = tmp_path / "config.json"
+    monkeypatch.setenv("TERMUX_VERSION", "0.118")
+    monkeypatch.setenv("PREFIX", "/data/data/com.termux/files/usr")
+
+    rc = main([
+        "install",
+        "--root",
+        str(root),
+        "--config",
+        str(config),
+    ])
+    assert rc == 0
+    output = json.loads(capsys.readouterr().out)
+    assert output["node_type"] == "android-termux"
+
+    rc = main(["status", "--config", str(config)])
+    assert rc == 0
+    status = json.loads(capsys.readouterr().out)
+    assert status["node_type"] == "android-termux"
+    assert status["authority"] == "SELF_HOSTED_ANDROID"

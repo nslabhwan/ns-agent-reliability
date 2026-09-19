@@ -130,3 +130,15 @@ A new user should be able to:
 6. verify the observable result.
 
 If this path needs NS-specific knowledge or manual command relay, it is a product bug.
+
+## Android / Termux
+
+Fast path:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/nslabhwan/ns-agent-reliability/main/install.sh | bash
+```
+
+The default Android workspace is `~/OpenSynapseWorkspace` and is read/write enabled. Other phone paths are not automatically exposed.
+
+See [ANDROID_TERMUX.md](ANDROID_TERMUX.md).

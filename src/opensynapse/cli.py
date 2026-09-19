@@ -25,6 +25,15 @@ def default_config_path() -> Path:
     return Path.home() / ".config" / "opensynapse" / "config.json"
 
 
+def detect_node_type() -> str:
+    prefix = os.environ.get("PREFIX", "")
+    if os.environ.get("TERMUX_VERSION") or "com.termux" in prefix:
+        return "android-termux"
+    if platform.system() == "Linux":
+        return "linux"
+    return platform.system().lower()
+
+
 def _safe_commands() -> dict[str, str]:
     result: dict[str, str] = {}
     for name in ("uptime", "df", "free"):
@@ -77,7 +86,7 @@ def cmd_install(args: argparse.Namespace) -> int:
     result = {
         "status": "INSTALLED",
         "product": "OpenSynapse",
-        "node_type": "linux",
+        "node_type": detect_node_type(),
         "config": str(target),
         "read_roots": config["read_roots"],
         "write_roots": config["write_roots"],
@@ -102,7 +111,7 @@ def cmd_status(args: argparse.Namespace) -> int:
     runtime = _load_runtime(args.config)
     data = runtime.status()
     data["product"] = "OpenSynapse"
-    data["node_type"] = "linux"
+    data["node_type"] = detect_node_type()
     data["config"] = str(Path(args.config).expanduser())
     print(json.dumps(data, indent=2))
     return 0

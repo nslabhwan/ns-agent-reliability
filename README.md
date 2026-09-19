@@ -28,7 +28,7 @@ you ask
 ## What you get
 
 - **Real work, not only advice** — bounded file reads, writes, commands, tests, logs and device workflows.
-- **One interaction model across machines** — Linux server first; desktop and Android nodes follow the same public contract.
+- **One interaction model across machines** — Linux and Android/Termux use the same public contract while remaining independent nodes.
 - **Verified completion** — "done" means an observable result was checked when possible.
 - **Less human relay** — fewer command, log and file copy-paste loops.
 - **Safe defaults** — explicit roots, bounded actions, no arbitrary public shell by default.
@@ -57,6 +57,10 @@ you ask
 ### Important connection boundary
 
 The OpenAI tunnel **prepare path is verified**. A real OpenAI account tunnel → ChatGPT → OpenSynapse node E2E is **not yet claimed** until it is tested with a real authorized tunnel ID and runtime API key.
+
+### Android / Termux candidate
+
+The same OpenSynapse core now has a one-install Termux path with a dedicated default workspace. See [ANDROID_TERMUX.md](ANDROID_TERMUX.md). Real-device publication verification is the release gate for 0.2.0a3.
 
 ### Next integration milestones
 

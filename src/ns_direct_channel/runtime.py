@@ -21,22 +21,37 @@ from .policy import (
 )
 
 
+def _node_identity() -> tuple[str, str]:
+    prefix = os.environ.get("PREFIX", "")
+    executable = sys.executable
+    is_termux = (
+        bool(os.environ.get("TERMUX_VERSION"))
+        or "com.termux" in prefix
+        or "/data/data/com.termux/" in executable
+    )
+    if is_termux:
+        return "android-termux", "SELF_HOSTED_ANDROID"
+    return "linux", "SELF_HOSTED_SERVER"
+
+
 class DirectChannelRuntime:
     def __init__(self, config: DirectChannelConfig):
         self.config = config
 
     def status(self) -> dict[str, Any]:
+        node_type, authority = _node_identity()
         return {
             "status": "OK",
             "product": "OpenSynapse",
             "component": "Direct Channel",
-            "version": "0.2.0a2",
+            "version": "0.2.0a3",
             "observed_at": datetime.now(timezone.utc).isoformat(),
             "host": platform.node(),
             "platform": platform.system(),
             "python": platform.python_version(),
+            "node_type": node_type,
             "policy": self.config.public_view(),
-            "authority": "SELF_HOSTED_SERVER",
+            "authority": authority,
         }
 
     def read_text(self, path: str, offset: int = 0, limit: int | None = None) -> dict[str, Any]:

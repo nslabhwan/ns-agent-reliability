@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0a3 Android / Termux candidate — 2026-09-19
+
+- Extended the existing one-install bootstrap to detect Android/Termux.
+- Added generic Python 3.11+ discovery instead of requiring version-suffixed executables.
+- Added Termux prerequisite bootstrap for Python/Git when missing.
+- Added a safe default Android workspace at ~/OpenSynapseWorkspace.
+- Android defaults to read/write only inside that dedicated workspace.
+- Reuses the same OpenSynapse bounded core; no private Phone Local or server runtime dependency is introduced.
+- Real-device Android fresh-install and read/write E2E remain the publication gate.
+
 ## 0.2.0a2 OpenAI Secure MCP Tunnel prepare path — 2026-09-19
 
 - Added `opensynapse connect openai`.
