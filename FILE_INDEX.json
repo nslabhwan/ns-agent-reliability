@@ -110,7 +110,10 @@
     ".github/workflows/public-quality-gate.yml",
     "tools/content_quality_check.py",
     "release/REMOTE_PUBLICATION_RECEIPT_20260919_OPENSYNAPSE_ALPHA.json",
-    ".github/ISSUE_TEMPLATE/opensynapse-feedback.yml"
+    ".github/ISSUE_TEMPLATE/opensynapse-feedback.yml",
+    "src/opensynapse/tunnel.py",
+    "tests/test_opensynapse_tunnel.py",
+    "release/OPENSYNAPSE_OPENAI_TUNNEL_PREP_RECEIPT_20260919.json"
   ],
   "excluded_runtime_artifacts": [
     ".ns-direct-channel.lock",

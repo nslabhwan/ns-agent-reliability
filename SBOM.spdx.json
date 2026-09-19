@@ -2,8 +2,8 @@
   "spdxVersion": "SPDX-2.3",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "name": "opensynapse-0.2.0a1-prepublication",
-  "documentNamespace": "https://example.invalid/opensynapse/spdx/0.2.0a1-20260919",
+  "name": "opensynapse-0.2.0a2-prepublication",
+  "documentNamespace": "https://example.invalid/opensynapse/spdx/0.2.0a2-20260919",
   "creationInfo": {
     "created": "2026-09-19T04:36:50Z",
     "creators": [
@@ -14,7 +14,7 @@
     {
       "name": "ns-agent-reliability / OpenSynapse",
       "SPDXID": "SPDXRef-Software",
-      "versionInfo": "0.2.0a1",
+      "versionInfo": "0.2.0a2",
       "downloadLocation": "https://github.com/nslabhwan/ns-agent-reliability",
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
@@ -24,7 +24,7 @@
     {
       "name": "OpenSynapse narrative documentation",
       "SPDXID": "SPDXRef-Docs",
-      "versionInfo": "0.2.0a1",
+      "versionInfo": "0.2.0a2",
       "downloadLocation": "https://github.com/nslabhwan/ns-agent-reliability",
       "filesAnalyzed": false,
       "licenseConcluded": "CC-BY-4.0",
@@ -39,6 +39,26 @@
       "filesAnalyzed": false,
       "licenseConcluded": "Apache-2.0",
       "licenseDeclared": "Apache-2.0",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "openai/tunnel-client",
+      "SPDXID": "SPDXRef-Optional-OpenAITunnelClient",
+      "versionInfo": "0.0.14",
+      "downloadLocation": "https://github.com/openai/tunnel-client",
+      "filesAnalyzed": false,
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "copyrightText": "Copyright 2026 OpenAI"
+    },
+    {
+      "name": "cloudflared (bundled companion in official tunnel-client runtime archive)",
+      "SPDXID": "SPDXRef-Optional-Cloudflared",
+      "versionInfo": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
       "copyrightText": "NOASSERTION"
     }
   ],
@@ -57,6 +77,16 @@
       "spdxElementId": "SPDXRef-Runtime-FastMCP",
       "relationshipType": "DEPENDENCY_OF",
       "relatedSpdxElement": "SPDXRef-Software"
+    },
+    {
+      "spdxElementId": "SPDXRef-Optional-OpenAITunnelClient",
+      "relationshipType": "OPTIONAL_DEPENDENCY_OF",
+      "relatedSpdxElement": "SPDXRef-Software"
+    },
+    {
+      "spdxElementId": "SPDXRef-Optional-Cloudflared",
+      "relationshipType": "OPTIONAL_DEPENDENCY_OF",
+      "relatedSpdxElement": "SPDXRef-Software"
     }
   ],
   "annotations": [
@@ -65,6 +95,12 @@
       "annotator": "Tool: NS OpenSynapse prepublication audit",
       "annotationDate": "2026-09-19T04:36:50Z",
       "comment": "FastMCP is a declared external runtime dependency and is not copied into the tracked source tree. Transitive dependency licenses remain governed by their upstream packages."
+    },
+    {
+      "annotationType": "OTHER",
+      "annotator": "Tool: NS OpenSynapse prepublication audit",
+      "annotationDate": "2026-09-19T10:43:00Z",
+      "comment": "OpenSynapse can download the pinned official tunnel-client v0.0.14 runtime archive after verifying the official SHA256SUMS entry. The archive is not committed into this repository. Cloudflared is treated as an upstream-governed bundled companion and is not relicensed here."
     }
   ]
 }

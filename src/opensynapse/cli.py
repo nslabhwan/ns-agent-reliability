@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import platform
 import shutil
 import sys
@@ -10,6 +11,14 @@ from pathlib import Path
 from ns_direct_channel.config import DirectChannelConfig
 from ns_direct_channel.runtime import DirectChannelRuntime
 from ns_direct_channel.server import create_server
+from opensynapse.tunnel import (
+    TunnelClientError,
+    default_profile_dir,
+    doctor_profile,
+    prepare_profile,
+    resolve_tunnel_client,
+    run_profile,
+)
 
 
 def default_config_path() -> Path:
@@ -75,8 +84,8 @@ def cmd_install(args: argparse.Namespace) -> int:
         "safe_commands": sorted(config["commands"]),
         "doctor": runtime.status(),
         "next": [
-            "opensynapse serve --transport http",
-            "connect the HTTPS MCP endpoint through the supported OpenSynapse/ChatGPT connection flow",
+            "opensynapse connect openai --tunnel-id tunnel_...",
+            "or run opensynapse serve --transport http for another reviewed MCP ingress",
         ],
     }
     print(json.dumps(result, indent=2))
@@ -113,6 +122,67 @@ def cmd_serve(args: argparse.Namespace) -> int:
     return 0
 
 
+
+def cmd_connect_openai(args: argparse.Namespace) -> int:
+    config_path = Path(args.config).expanduser().resolve()
+    DirectChannelConfig.load(config_path)
+
+    tunnel_binary, installed = resolve_tunnel_client(
+        args.tunnel_client,
+        install_missing=not args.no_install_client,
+    )
+    profile_dir = Path(args.profile_dir).expanduser().resolve()
+    prepared = prepare_profile(
+        tunnel_binary=tunnel_binary,
+        tunnel_id=args.tunnel_id,
+        config_path=config_path,
+        profile=args.profile,
+        profile_dir=profile_dir,
+    )
+    if prepared.returncode != 0:
+        detail = (prepared.stderr or prepared.stdout).strip()
+        raise TunnelClientError(f"tunnel-client profile preparation failed: {detail}")
+
+    result = {
+        "status": "PREPARED" if args.prepare_only else "PREPARED_FOR_DOCTOR",
+        "product": "OpenSynapse",
+        "connection": "openai-secure-mcp-tunnel",
+        "tunnel_client": str(tunnel_binary),
+        "installed_official_client": installed,
+        "profile": args.profile,
+        "profile_dir": str(profile_dir),
+        "config": str(config_path),
+        "tunnel_id": args.tunnel_id,
+        "secret_storage": "CONTROL_PLANE_API_KEY environment reference; value is not written by OpenSynapse",
+    }
+
+    if args.prepare_only:
+        print(json.dumps(result, indent=2))
+        return 0
+
+    if not os.environ.get("CONTROL_PLANE_API_KEY"):
+        raise TunnelClientError(
+            "CONTROL_PLANE_API_KEY is required for OpenAI Secure MCP Tunnel; create a runtime API key with Tunnels Read + Use and export it in the environment"
+        )
+
+    doctor = doctor_profile(tunnel_binary, args.profile, profile_dir)
+    if doctor.returncode != 0:
+        detail = (doctor.stderr or doctor.stdout).strip()
+        raise TunnelClientError(f"official tunnel-client doctor failed: {detail}")
+
+    try:
+        doctor_data = json.loads(doctor.stdout)
+    except json.JSONDecodeError:
+        doctor_data = {"raw": doctor.stdout.strip()}
+
+    result["status"] = "READY"
+    result["doctor"] = doctor_data
+    print(json.dumps(result, indent=2))
+
+    if args.no_run:
+        return 0
+    return run_profile(tunnel_binary, args.profile, profile_dir)
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="opensynapse",
@@ -148,6 +218,34 @@ def build_parser() -> argparse.ArgumentParser:
     serve.add_argument("--allow-nonloopback", action="store_true")
     serve.set_defaults(func=cmd_serve)
 
+    connect = sub.add_parser("connect", help="connect this OpenSynapse node to a supported AI host")
+    connect_sub = connect.add_subparsers(dest="provider", required=True)
+    openai = connect_sub.add_parser(
+        "openai",
+        help="connect through the official OpenAI Secure MCP Tunnel",
+    )
+    openai.add_argument("--tunnel-id", required=True, help="OpenAI tunnel id (tunnel_...)")
+    openai.add_argument("--config", default=str(default_config_path()))
+    openai.add_argument("--profile", default="opensynapse")
+    openai.add_argument("--profile-dir", default=str(default_profile_dir()))
+    openai.add_argument("--tunnel-client", help="explicit path to an official tunnel-client binary")
+    openai.add_argument(
+        "--no-install-client",
+        action="store_true",
+        help="fail instead of downloading the latest official openai/tunnel-client release",
+    )
+    openai.add_argument(
+        "--prepare-only",
+        action="store_true",
+        help="install/find tunnel-client and create the profile without contacting the control plane",
+    )
+    openai.add_argument(
+        "--no-run",
+        action="store_true",
+        help="run the official Doctor but do not start the foreground tunnel daemon",
+    )
+    openai.set_defaults(func=cmd_connect_openai)
+
     return parser
 
 
@@ -156,7 +254,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         return int(args.func(args))
-    except (ValueError, OSError, json.JSONDecodeError) as exc:
+    except (ValueError, OSError, json.JSONDecodeError, TunnelClientError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
 

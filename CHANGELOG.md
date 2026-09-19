@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.0a2 OpenAI Secure MCP Tunnel prepare path — 2026-09-19
+
+- Added `opensynapse connect openai`.
+- Reuses the official `openai/tunnel-client` rather than implementing a competing tunnel protocol.
+- Pins verified tunnel-client `v0.0.14` for reproducible Alpha behavior.
+- Downloads the official release archive and `SHA256SUMS.txt`, then verifies SHA256 before extraction.
+- Installs both `tunnel-client` and the bundled `cloudflared` companion.
+- Generates an official stdio MCP profile targeting the OpenSynapse node.
+- Stores `CONTROL_PLANE_API_KEY` only as an environment reference in the generated profile.
+- Uses an ephemeral loopback health listener to avoid fixed-port collisions.
+- Full local regression suite: **45/45 PASS**.
+- Official tunnel-client prepare-path E2E PASS.
+- Real OpenAI account tunnel / ChatGPT invocation remains **PENDING** and is not claimed as complete.
+
 ## 0.2.0a1 OpenSynapse Alpha — 2026-09-19
 
 - Shifted the public product identity from a Doctor-first wedge to the **OpenSynapse** umbrella while preserving Reliability Doctor as a module.
@@ -11,7 +25,8 @@
 - Declared `fastmcp>=4.0.3,<5` and updated provenance/SBOM.
 - Added `UNIFIED_BASE.md`, `USER_VALUE.md`, `QUICKSTART.md`, and preserved the former Doctor README under `docs/RELIABILITY_DOCTOR.md`.
 - Tracked public scope expanded for the OpenSynapse candidate.
-- Published to the public repository and verified by remote SHA match, fresh unauthenticated clone, fresh `install.sh`, installed Doctor, and real HTTP MCP write/readback/bounded-command E2E.\n- Repositioned the GitHub Pages landing surface around OpenSynapse user value, Linux Alpha installation, current evidence, safety boundaries, and an explicit early-user feedback path.
+- Published to the public repository and verified by remote SHA match, fresh unauthenticated clone, fresh `install.sh`, installed Doctor, and real HTTP MCP write/readback/bounded-command E2E.
+- Repositioned the GitHub Pages landing surface around OpenSynapse user value, Linux Alpha installation, current evidence, safety boundaries, and an explicit early-user feedback path.
 
 ## Main — distribution/social preview asset — 2026-09-09
 

@@ -36,7 +36,7 @@ pre{overflow:auto;background:#07090c;border:1px solid var(--line);border-radius:
 <a class="btn secondary" href="https://github.com/nslabhwan/ns-agent-reliability">View source on GitHub</a>
 <a class="btn secondary" href="https://github.com/nslabhwan/ns-agent-reliability/issues/new?template=opensynapse-feedback.yml">I tried it — send feedback</a>
 </div>
-<div class="proof"><strong>Public Alpha evidence:</strong> fresh public install passed, 41/41 regressions passed, and a real HTTP MCP write → readback → bounded-command E2E passed with shell disabled.</div>
+<div class="proof"><strong>Public Alpha evidence:</strong> fresh public install passed, 45/45 regressions passed, a real HTTP MCP write → readback → bounded-command E2E passed with shell disabled, and the official OpenAI tunnel prepare path passed.</div>
 </header>
 
 <section id="why">
@@ -54,7 +54,7 @@ pre{overflow:auto;background:#07090c;border:1px solid var(--line);border-radius:
 <div class="flow">
 <div class="step"><div class="num">1</div><div><strong>Install on a machine you own</strong><span>The Linux Alpha creates an isolated environment and explicit access policy.</span></div></div>
 <div class="step"><div class="num">2</div><div><strong>Choose what AI may access</strong><span>Read roots, write roots, and allowed commands are explicit. Arbitrary shell is not enabled by default.</span></div></div>
-<div class="step"><div class="num">3</div><div><strong>Connect an AI client through MCP</strong><span>The local node exposes bounded tools. A zero-config authenticated gateway and ChatGPT plugin flow are the next integration milestone.</span></div></div>
+<div class="step"><div class="num">3</div><div><strong>Connect an AI client through MCP</strong><span>The local node exposes bounded tools. OpenSynapse can now prepare the official OpenAI Secure MCP Tunnel path. Real-account ChatGPT invocation is the next connection gate.</span></div></div>
 <div class="step"><div class="num">4</div><div><strong>Verify the requested outcome</strong><span>OpenSynapse is designed around observable results rather than worker self-report alone.</span></div></div>
 </div>
 </section>
@@ -66,10 +66,14 @@ pre{overflow:auto;background:#07090c;border:1px solid var(--line);border-radius:
 cd ns-agent-reliability
 OPENSYNAPSE_ROOT=/srv/my-app bash install.sh
 opensynapse doctor
-opensynapse serve --transport http</code></pre>
+
+# Optional OpenAI Secure MCP Tunnel prepare path
+opensynapse connect openai \
+  --tunnel-id tunnel_REPLACE_ME \
+  --prepare-only</code></pre>
 <div class="status">
-<div class="ok"><h3 class="check">Verified now</h3><p>Linux one-install bootstrap<br>Bounded MCP read / write / commands<br>Doctor and effective policy status<br>Real write + readback E2E<br>Reliability Doctor regressions</p></div>
-<div class="next"><h3>Next</h3><p class="muted">Authenticated HTTPS gateway<br>One-time ChatGPT plugin connection<br>Portable Android Phone Local node<br>Multi-device pairing and routing<br>Desktop packaging and resumable jobs</p></div>
+<div class="ok"><h3 class="check">Verified now</h3><p>Linux one-install bootstrap<br>Bounded MCP read / write / commands<br>Doctor and effective policy status<br>Real write + readback E2E<br>Official OpenAI tunnel prepare path<br>45/45 regressions</p></div>
+<div class="next"><h3>Next</h3><p class="muted">Real-account OpenAI tunnel → ChatGPT E2E<br>One-time ChatGPT connector/plugin onboarding<br>Portable Android Phone Local node<br>Multi-device pairing and routing<br>Desktop packaging and resumable jobs</p></div>
 </div>
 </section>
 
@@ -93,7 +97,7 @@ opensynapse serve --transport http</code></pre>
 <span class="tag">Secret-path denial</span>
 <span class="tag">Atomic writes</span>
 <span class="tag">Open source</span>
-<span class="tag">Self-hostable core</span>
+<span class="tag">Self-hostable core</span>\n<span class="tag">Official tunnel-client SHA256 verified</span>
 </div>
 <p class="muted">The current local HTTP endpoint binds to loopback by default. Do not expose an unauthenticated local endpoint directly to the public Internet.</p>
 </section>
@@ -110,7 +114,7 @@ opensynapse serve --transport http</code></pre>
 </div>
 </section>
 
-<footer class="footer">OpenSynapse is an early open-source project from the NS project lineage. Software is Apache-2.0 licensed. Public Alpha status is evidence-bounded and does not imply unfinished gateway, phone, desktop, or multi-device features are ready.</footer>
+<footer class="footer">OpenSynapse is an early open-source project from the NS project lineage. Software is Apache-2.0 licensed. Public Alpha status is evidence-bounded. The OpenAI tunnel prepare path is verified, but real-account ChatGPT invocation, phone, desktop, and multi-device milestones are not claimed ready.</footer>
 </div>
 </body>
 </html>

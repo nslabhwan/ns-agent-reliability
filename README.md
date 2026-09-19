@@ -4,7 +4,7 @@
 
 **Install once. Ask naturally. Let it work. Verify the result.**
 
-OpenSynapse is an open-source AI work infrastructure built from a real long-running system. Its goal is simple: remove the human copy-paste loop between AI chat and your machines.
+OpenSynapse is open-source AI work infrastructure built from a real long-running system. Its goal is simple: remove the human copy-paste loop between AI chat and your machines.
 
 Instead of:
 
@@ -36,28 +36,36 @@ you ask
 
 ## Current Alpha
 
-### Available in this candidate
+### Available now
 
 - Linux OpenSynapse node CLI:
   - `opensynapse install`
   - `opensynapse doctor`
   - `opensynapse status`
   - `opensynapse serve`
+  - `opensynapse connect openai`
 - portable bounded Direct Channel MCP core
+- OpenAI Secure MCP Tunnel **prepare path**
+  - pinned official `openai/tunnel-client v0.0.14`
+  - official SHA256 verification before install
+  - companion `cloudflared` extracted from the same official release bundle
+  - API key stored as `env:CONTROL_PLANE_API_KEY` reference, not written by OpenSynapse
 - Reliability Doctor and incident-derived reliability regressions
 - verified workflow / deployment reference components
 - Apache-2.0 software licensing
 
+### Important connection boundary
+
+The OpenAI tunnel **prepare path is verified**. A real OpenAI account tunnel → ChatGPT → OpenSynapse node E2E is **not yet claimed** until it is tested with a real authorized tunnel ID and runtime API key.
+
 ### Next integration milestones
 
-- stable authenticated HTTPS gateway
-- one-time ChatGPT plugin connection flow
+- real-account OpenAI Secure MCP Tunnel E2E
+- one-time ChatGPT connector/plugin onboarding
 - portable Android Phone Local node
 - multi-device pairing / routing
 - desktop packaging
 - resumable long-running jobs
-
-We do not claim those milestones are public-ready before a real outsider E2E proves them.
 
 ## Linux quickstart
 
@@ -83,16 +91,15 @@ Then:
 
 ```bash
 opensynapse doctor
-opensynapse serve --transport http
 ```
 
-See [QUICKSTART.md](QUICKSTART.md).
+For the OpenAI Secure MCP Tunnel path, see [QUICKSTART.md](QUICKSTART.md).
 
 ## Why this exists
 
 ChatGPT and other AI clients are increasingly able to call tools, but users still have to assemble MCP servers, tunnels, permissions, scripts, terminals, device control and verification themselves.
 
-OpenSynapse is focused on the **last mile between conversation and verified real-world work**.
+OpenSynapse focuses on the **last mile between conversation and verified real-world work**.
 
 The project came from repeatedly solving real failures in a private multi-agent / device system: stale ownership, tool-surface drift, retry loops, context loss, execution boundaries, failed deployments, mobile reconnection and AI claiming completion before the external state actually changed.
 
@@ -104,12 +111,12 @@ Those lessons are being extracted into a portable public system without publishi
 > Your authorized machines become work nodes.
 > OpenSynapse executes within explicit boundaries and checks the result.
 
-## Architecture in one picture
+## Architecture
 
 ```text
 ChatGPT / compatible AI client
             |
-     OpenSynapse connection
+  supported authenticated connection
             |
    +--------+---------+
    |        |         |
@@ -128,7 +135,7 @@ Unified UX does **not** mean coupled runtimes. Server, desktop and phone nodes r
 - **Verified Workflow** — completion and evidence semantics
 - **Phone Local knowledge** — real Android execution experience being ported without legacy runtime dependency
 
-The older Reliability Doctor product page is preserved at [docs/RELIABILITY_DOCTOR.md](docs/RELIABILITY_DOCTOR.md).
+The older Reliability Doctor page is preserved at [docs/RELIABILITY_DOCTOR.md](docs/RELIABILITY_DOCTOR.md).
 
 ## Security boundary
 
@@ -141,11 +148,18 @@ OpenSynapse does not intentionally publish or require:
 
 Local node defaults remain narrow. Public unauthenticated shell access is not a product feature.
 
+For the OpenAI tunnel helper, OpenSynapse writes only the environment-variable reference `CONTROL_PLANE_API_KEY`, not the secret value.
+
 See [SECURITY.md](SECURITY.md).
 
 ## Current verification
 
-The unified candidate currently carries the existing reliability regressions plus the imported bounded Direct Channel core and OpenSynapse CLI tests.
+Current local/public-candidate verification includes:
+
+- Linux one-install bootstrap
+- bounded HTTP MCP write → readback → command E2E with `shell=false`
+- OpenAI official tunnel-client prepare-path integration
+- full regression suite: **45/45 PASS**
 
 Development rule:
 

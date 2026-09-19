@@ -1,0 +1,36 @@
+{
+  "schema_version": "OPENSYNAPSE_OPENAI_TUNNEL_PREP_RECEIPT_V1",
+  "observed_at_utc": "2026-09-19T10:43:00Z",
+  "status": "PREPARE_PATH_VERIFIED_LIVE_ACCOUNT_E2E_PENDING",
+  "product": "OpenSynapse",
+  "candidate_version": "0.2.0a2",
+  "integration": "OpenAI Secure MCP Tunnel",
+  "official_runtime": {
+    "repository": "openai/tunnel-client",
+    "pinned_tag": "v0.0.14",
+    "linux_amd64_asset": "tunnel-client-v0.0.14-linux-amd64.zip",
+    "sha256": "15bd17e805cad39d412199115bb9e10a978dd35258a114cdf25dd2ae6681c7d3",
+    "license": "Apache-2.0",
+    "bundled_runtime_companion": "cloudflared"
+  },
+  "verified": [
+    "OpenSynapse connect openai CLI path",
+    "official release download from GitHub",
+    "SHA256SUMS verification before extraction",
+    "tunnel-client executable installation",
+    "cloudflared companion installation",
+    "official tunnel-client init profile generation",
+    "CONTROL_PLANE_API_KEY stored as env reference rather than literal value",
+    "health listener configured to 127.0.0.1:0",
+    "OpenSynapse stdio MCP command generated in the profile",
+    "full local regression suite 45/45 PASS"
+  ],
+  "not_yet_verified": [
+    "real OpenAI runtime API key against control plane",
+    "real tunnel id authorization",
+    "long-lived tunnel-client run health",
+    "ChatGPT connector discovery",
+    "ChatGPT invoking a real OpenSynapse node through the tunnel"
+  ],
+  "truth_rule": "Do not describe OpenAI Secure MCP Tunnel integration as end-to-end connected until the real-account checks above pass."
+}

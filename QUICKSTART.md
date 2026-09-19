@@ -4,7 +4,7 @@ OpenSynapse turns a Linux machine you own into a bounded MCP work node for AI cl
 
 ## 1. Install
 
-The safest current path is to clone / inspect the repository, then run:
+Clone and inspect the repository, then run:
 
 ```bash
 OPENSYNAPSE_ROOT=/srv/my-app bash install.sh
@@ -37,7 +37,7 @@ opensynapse doctor
 opensynapse status
 ```
 
-## 3. Start the local MCP node
+## 3A. Local MCP only
 
 ```bash
 opensynapse serve --transport http
@@ -51,11 +51,73 @@ http://127.0.0.1:8767/mcp
 
 Do not expose that unauthenticated loopback endpoint directly to the public Internet.
 
-## 4. ChatGPT connection status
+## 3B. OpenAI Secure MCP Tunnel
 
-Current Alpha proves the Linux node and bounded MCP execution layer.
+OpenSynapse can prepare an OpenAI Secure MCP Tunnel profile using the official `openai/tunnel-client`.
 
-The zero-config OpenSynapse HTTPS gateway / public ChatGPT plugin flow is the next integration milestone. Until that is published, advanced users may place the loopback MCP endpoint behind a reviewed authenticated HTTPS ingress supported by their AI client.
+You need:
+- an authorized OpenAI tunnel ID such as `tunnel_...`;
+- a runtime API key with the permissions required by your OpenAI tunnel setup.
+
+OpenSynapse currently pins the verified official tunnel-client release `v0.0.14`. If `tunnel-client` is not already installed, OpenSynapse downloads the official Linux release, verifies it against the release `SHA256SUMS.txt`, and installs both `tunnel-client` and its bundled `cloudflared` companion.
+
+Prepare the profile without contacting the control plane:
+
+```bash
+opensynapse connect openai \
+  --tunnel-id tunnel_REPLACE_ME \
+  --prepare-only
+```
+
+The generated profile stores:
+
+```text
+env:CONTROL_PLANE_API_KEY
+```
+
+not the API key value.
+
+For a real connection, load the runtime key into your environment without putting the literal value in the OpenSynapse config:
+
+```bash
+read -rsp "OpenAI runtime API key: " CONTROL_PLANE_API_KEY
+echo
+export CONTROL_PLANE_API_KEY
+```
+
+Run the official Doctor without starting the long-lived daemon:
+
+```bash
+opensynapse connect openai \
+  --tunnel-id tunnel_REPLACE_ME \
+  --no-run
+```
+
+Then start the foreground tunnel:
+
+```bash
+opensynapse connect openai \
+  --tunnel-id tunnel_REPLACE_ME
+```
+
+Keep the tunnel process running while the AI client is discovering or calling the MCP tools.
+
+### Current truth boundary
+
+Verified:
+- official tunnel-client release download;
+- SHA256 verification;
+- `tunnel-client` and bundled `cloudflared` installation;
+- profile generation;
+- OpenSynapse stdio MCP command generation;
+- secret environment reference;
+- local test suite.
+
+Not yet claimed:
+- a real OpenAI account tunnel reaching ChatGPT;
+- ChatGPT invoking a real OpenSynapse node through that tunnel.
+
+That claim will be added only after a real authorized E2E passes.
 
 ## First-value test
 

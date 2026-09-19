@@ -1,11 +1,11 @@
 {
   "schema_version": "OPENSYNAPSE_PUBLISH_PLAN_V1",
-  "status": "PUBLIC_LIVE_0.2.0A1_REMOTE_VERIFIED",
+  "status": "0.2.0A2_TUNNEL_CANDIDATE_READY_NOT_PUSHED",
   "public_repository": "https://github.com/nslabhwan/ns-agent-reliability",
   "publication_lineage": "reuse existing public repository; do not create a competing repo",
   "product_identity": "OpenSynapse",
   "current_public_version": "0.2.0a1",
-  "candidate_version": "0.2.0a1",
+  "candidate_version": "0.2.0a2",
   "first_value_path": [
     "install Linux node",
     "run Doctor/status",
@@ -14,19 +14,29 @@
     "verify observable result"
   ],
   "candidate_checks_completed": [
-    "OpenSynapse README/user-value pivot",
-    "Direct Channel portable core consolidated into publication candidate",
-    "OpenSynapse CLI added",
-    "Linux one-install bootstrap PASS in isolated temp home",
-    "41/41 regressions PASS",
+    "OpenSynapse Linux one-install PASS",
+    "45/45 regressions PASS",
     "installed HTTP MCP write/readback/bounded-command E2E PASS",
-    "fastmcp 4.0.5 license metadata observed as Apache-2.0",
-    "tracked-tree public scrub PASS"
+    "OpenAI official tunnel-client v0.0.14 download PASS",
+    "official SHA256SUMS verification PASS",
+    "bundled tunnel-client + cloudflared installation PASS",
+    "official tunnel-client profile generation PASS",
+    "CONTROL_PLANE_API_KEY stored as env reference only",
+    "ephemeral loopback health listener configured",
+    "live OpenAI account/control-plane E2E intentionally not claimed"
   ],
-  "required_before_publication_complete": [],
+  "required_before_publication_complete": [
+    "tracked-tree content/public scrub PASS",
+    "fresh package install and 45/45 tests PASS",
+    "sync candidate to public repository",
+    "commit and push",
+    "verify remote HEAD",
+    "fresh public clone/install smoke",
+    "record remote commit SHA"
+  ],
   "next_product_milestones": [
-    "authenticated HTTPS gateway",
-    "public ChatGPT plugin flow",
+    "real-account OpenAI Secure MCP Tunnel E2E",
+    "ChatGPT connector/plugin onboarding",
     "portable Android Phone Local",
     "multi-device pairing/routing",
     "desktop packages"
