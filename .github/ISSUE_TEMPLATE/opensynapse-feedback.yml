@@ -21,6 +21,25 @@ body:
         - Task execution blocked
     validations:
       required: true
+  - type: dropdown
+    id: source
+    attributes:
+      label: Where did you hear about OpenSynapse?
+      description: This helps us understand which channel led to a real install or task attempt.
+      options:
+        - GitHub
+        - LinkedIn
+        - X
+        - Reddit
+        - Hacker News
+        - GeekNews
+        - YouTube / Shorts
+        - n8n community / template
+        - Freelancer.com
+        - Blog / search
+        - Direct / other
+    validations:
+      required: true
   - type: input
     id: environment
     attributes:
