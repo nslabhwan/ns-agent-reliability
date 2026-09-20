@@ -13,6 +13,16 @@
 
 **New here? Start with [GETTING_STARTED.md](GETTING_STARTED.md).** It separates the verified Linux/Android paths from the still-pending ChatGPT account E2E so you can follow the current alpha without guessing.
 
+### Secure OpenAI Tunnel onboarding
+
+After creating an OpenAI Tunnel and a restricted runtime key with Tunnels Read + Use, connect without pasting the key into chat or a command line:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/nslabhwan/ns-agent-reliability/main/connect-openai.sh | bash -s -- tunnel_...
+```
+
+The script prompts on the local TTY, stores the key as a mode-600 file under `~/.config/opensynapse/private/`, and passes only a `file:` reference to the official `tunnel-client`.
+
 ### 3-minute first-value proof
 
 On Linux or Termux, create one dedicated workspace, install OpenSynapse, inspect the boundary, and prove a real bounded write -> readback in one command:
