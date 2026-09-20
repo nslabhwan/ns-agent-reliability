@@ -309,7 +309,7 @@ Repository:
 
 https://github.com/nslabhwan/ns-agent-reliability
 
-If you try OpenSynapse, use the repository feedback issue form and include:
+If you try OpenSynapse, use the [OpenSynapse Alpha feedback form](https://github.com/nslabhwan/ns-agent-reliability/issues/new?template=opensynapse-feedback.yml). It also asks where you heard about the project so we can distinguish real acquisition sources. Include:
 
 - Linux or Android/Termux;
 - the last step that worked;
