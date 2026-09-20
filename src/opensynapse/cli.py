@@ -12,6 +12,7 @@ from pathlib import Path
 from ns_direct_channel.config import DirectChannelConfig
 from ns_direct_channel.runtime import DirectChannelRuntime
 from ns_direct_channel.stdio_server import run_stdio_server
+from opensynapse.autostart import install_user_autostart, remove_user_autostart, user_autostart_status
 from opensynapse.tunnel import (
     TunnelClientError,
     default_profile_dir,
@@ -265,6 +266,30 @@ def cmd_connect_openai(args: argparse.Namespace) -> int:
     return run_profile(tunnel_binary, args.profile, profile_dir)
 
 
+
+def cmd_autostart_install(args: argparse.Namespace) -> int:
+    if detect_node_type() != "linux":
+        raise SystemExit("OpenSynapse autostart currently supports Linux systemd user services")
+    result = install_user_autostart(
+        tunnel_id=args.tunnel_id,
+        config_path=Path(args.config).expanduser().resolve(),
+        profile_dir=Path(args.profile_dir).expanduser().resolve(),
+        runtime_key_file=Path(args.runtime_key_file).expanduser().resolve(),
+        activate=not args.no_start,
+    )
+    print(json.dumps(result, indent=2))
+    return 0 if str(result.get("status", "")).startswith(("ENABLED", "UNIT_WRITTEN")) else 1
+
+
+def cmd_autostart_status(args: argparse.Namespace) -> int:
+    print(json.dumps(user_autostart_status(), indent=2))
+    return 0
+
+
+def cmd_autostart_remove(args: argparse.Namespace) -> int:
+    print(json.dumps(remove_user_autostart(), indent=2))
+    return 0
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="opensynapse",
@@ -304,6 +329,22 @@ def build_parser() -> argparse.ArgumentParser:
     serve.add_argument("--port", type=int, default=8767)
     serve.add_argument("--allow-nonloopback", action="store_true")
     serve.set_defaults(func=cmd_serve)
+
+    autostart = sub.add_parser("autostart", help="manage reboot recovery for the OpenSynapse tunnel")
+    autostart_sub = autostart.add_subparsers(dest="autostart_command", required=True)
+    autostart_install = autostart_sub.add_parser("install", help="install and enable a Linux systemd user service")
+    autostart_install.add_argument("--tunnel-id", required=True)
+    autostart_install.add_argument("--config", default=str(default_config_path()))
+    autostart_install.add_argument("--profile-dir", default=str(default_profile_dir()))
+    autostart_install.add_argument("--runtime-key-file", default=str(Path.home() / ".config" / "opensynapse" / "private" / "control-plane-api-key"))
+    autostart_install.add_argument("--no-start", action="store_true", help="write the user unit without enabling it")
+    autostart_install.set_defaults(func=cmd_autostart_install)
+
+    autostart_status = autostart_sub.add_parser("status", help="show systemd user service state")
+    autostart_status.set_defaults(func=cmd_autostart_status)
+
+    autostart_remove = autostart_sub.add_parser("remove", help="disable and remove the user service")
+    autostart_remove.set_defaults(func=cmd_autostart_remove)
 
     connect = sub.add_parser("connect", help="connect this OpenSynapse node to a supported AI host")
     connect_sub = connect.add_subparsers(dest="provider", required=True)

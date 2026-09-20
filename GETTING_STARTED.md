@@ -24,7 +24,7 @@ OpenSynapse turns a machine you own into a bounded MCP work node. The current pu
 | Android/Termux fresh public install | VERIFIED on a real device |
 | Android stdlib MCP, 7 tools, real write/readback | VERIFIED on a real device |
 | OpenAI Secure MCP Tunnel profile preparation | VERIFIED |
-| Real OpenAI account -> ChatGPT -> OpenSynapse E2E | NOT YET CLAIMED |
+| Real OpenAI account -> ChatGPT -> OpenSynapse write/readback E2E | VERIFIED 2026-09-20 |
 | Android -> ChatGPT remote E2E | NOT YET CLAIMED |
 | Windows / macOS package | NOT YET AVAILABLE |
 
@@ -168,7 +168,7 @@ Do not expose that unauthenticated loopback endpoint directly to the public Inte
 
 ## C. Connect a private node through OpenAI Secure MCP Tunnel
 
-This section is for the current OpenAI tunnel path. The OpenSynapse tunnel **preparation path** is verified; a real authorized OpenAI account -> ChatGPT -> OpenSynapse E2E is still listed as pending until that exact path is observed.
+This section is the verified OpenAI tunnel path. On 2026-09-20 a real ChatGPT plugin attached through OpenAI Secure MCP Tunnel, created a file in the configured OpenSynapse workspace, read it back, and matched an independently recomputed host SHA-256.
 
 OpenAI's current Secure MCP Tunnel documentation says you need:
 
@@ -178,50 +178,41 @@ OpenAI's current Secure MCP Tunnel documentation says you need:
 
 Official guide: https://developers.openai.com/api/docs/guides/secure-mcp-tunnels
 
-### 1. Prepare the OpenSynapse tunnel profile
+### 1. Create the two OpenAI account-side objects
+
+In OpenAI Platform, create one Tunnel and one restricted runtime API key with **Tunnels Read + Use**. Keep the raw API key local; do not paste it into ChatGPT.
+
+### 2. Run one local onboarding command
 
 ```bash
-opensynapse connect openai \
-  --tunnel-id tunnel_REPLACE_ME \
-  --prepare-only
+curl -fsSL https://raw.githubusercontent.com/nslabhwan/ns-agent-reliability/main/connect-openai.sh | bash -s -- tunnel_REPLACE_ME
 ```
 
-OpenSynapse stores an environment-variable reference for the API key, not the literal key value.
+The script:
 
-### 2. Load the runtime API key
+- reuses or installs OpenSynapse;
+- prompts for the runtime key only on the local TTY;
+- stores it in a mode-600 local file;
+- passes only a `file:` reference to the official tunnel-client;
+- runs the official Tunnel Doctor;
+- prefers a Linux `systemd --user` service for restart recovery;
+- falls back to a managed background process when the user service manager is unavailable.
+
+Check recovery state with:
 
 ```bash
-read -rsp "OpenAI runtime API key: " CONTROL_PLANE_API_KEY
-echo
-export CONTROL_PLANE_API_KEY
+opensynapse autostart status
 ```
 
-Do not commit the key to Git, paste it into issues, or put it in the OpenSynapse config.
+`READY_AFTER_LOGIN` means crash recovery is active and the service returns after the user logs in. For an unattended Linux server, the status output also prints the one-time `loginctl enable-linger` command when linger is disabled.
 
-### 3. Run the official tunnel Doctor
+### 3. Add the ChatGPT plugin once
 
-```bash
-opensynapse connect openai \
-  --tunnel-id tunnel_REPLACE_ME \
-  --no-run
-```
+In ChatGPT plugin settings create a custom MCP plugin, choose **Tunnel**, select the same Tunnel, and use **No authentication** for the tunneled stdio OpenSynapse target. Account/workspace UI availability can change, so use the options actually exposed by your ChatGPT workspace.
 
-### 4. Start the tunnel
+### 4. Prove real work
 
-```bash
-opensynapse connect openai \
-  --tunnel-id tunnel_REPLACE_ME
-```
-
-Keep that process running while the supported OpenAI client is discovering or calling the MCP tools.
-
-### 5. ChatGPT plan / workspace note
-
-OpenAI currently documents full MCP write/modify support for ChatGPT Business, Enterprise and Edu in beta. Pro can use custom MCPs in developer mode with read/fetch permissions, but full MCP write support is not currently documented for Pro.
-
-Because OpenAI product availability changes, check the current official page before troubleshooting a missing ChatGPT UI:
-
-https://help.openai.com/en/articles/12584461-developer-mode-and-mcp-apps-in-chatgpt
+Ask ChatGPT to inspect the OpenSynapse workspace, create a file, read it back, and verify SHA-256. The exact verified 2026-09-20 run is recorded in `docs/REAL_CHATGPT_E2E_20260920.md`.
 
 ---
 

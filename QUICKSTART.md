@@ -51,6 +51,13 @@ For OpenAI Tunnel credentials, prefer a local mode-600 key file and pass only it
 opensynapse connect openai --tunnel-id tunnel_... --runtime-key-file ~/.config/opensynapse/private/control-plane-api-key --no-run
 ```
 
+After connection, Linux can persist the tunnel with:
+
+```bash
+opensynapse autostart install --tunnel-id tunnel_...
+opensynapse autostart status
+```
+
 ## 3A. Local MCP only
 
 ```bash

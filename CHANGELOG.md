@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0a6 real ChatGPT E2E + autostart — 2026-09-20
+
+- Real authorized ChatGPT → OpenAI Secure MCP Tunnel → OpenSynapse stdio MCP E2E **PASS**.
+- ChatGPT created and read back a 97-byte workspace artifact; independent host SHA-256 matched exactly.
+- Added `opensynapse autostart install|status|remove` for Linux systemd user services.
+- Service uses `Restart=always`, key-file references only, and mode-600 unit storage.
+- Recovery state distinguishes `READY` from `READY_AFTER_LOGIN`; unattended servers are told when `loginctl enable-linger` is still required.
+- `connect-openai.sh` now prefers autostart and falls back to a managed background process if the user service manager is unavailable.
+- Updated public truth boundary: the real-account E2E is no longer pending.
+
 ## 0.2.0a5 secure runtime key file — 2026-09-20
 
 - Added `opensynapse connect openai --runtime-key-file PATH`.

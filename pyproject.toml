@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ns-agent-reliability"
-version = "0.2.0a5"
+version = "0.2.0a6"
 description = "OpenSynapse: bounded, verifiable AI work infrastructure for machines you own, with reliability diagnostics"
 requires-python = ">=3.11"
 license = "Apache-2.0"

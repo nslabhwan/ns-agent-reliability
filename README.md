@@ -11,7 +11,7 @@
 
 **Install once. Ask naturally. Let it work. Verify the result.**
 
-**New here? Start with [GETTING_STARTED.md](GETTING_STARTED.md).** It separates the verified Linux/Android paths from the still-pending ChatGPT account E2E so you can follow the current alpha without guessing.
+**New here? Start with [GETTING_STARTED.md](GETTING_STARTED.md).** Linux/Android bounded work and a real ChatGPT → OpenAI Secure MCP Tunnel → OpenSynapse write/readback E2E are now verified.
 
 ### Secure OpenAI Tunnel onboarding
 
@@ -21,7 +21,7 @@ After creating an OpenAI Tunnel and a restricted runtime key with Tunnels Read +
 curl -fsSL https://raw.githubusercontent.com/nslabhwan/ns-agent-reliability/main/connect-openai.sh | bash -s -- tunnel_...
 ```
 
-The script prompts on the local TTY, stores the key as a mode-600 file under `~/.config/opensynapse/private/`, and passes only a `file:` reference to the official `tunnel-client`.
+The script prompts on the local TTY, stores the key as a mode-600 file under `~/.config/opensynapse/private/`, passes only a `file:` reference to the official `tunnel-client`, runs Doctor, and prefers a `systemd --user` service for crash/session recovery when available.
 
 ### 3-minute first-value proof
 
@@ -31,7 +31,7 @@ On Linux or Termux, create one dedicated workspace, install OpenSynapse, inspect
 curl -fsSL https://raw.githubusercontent.com/nslabhwan/ns-agent-reliability/main/try.sh | bash
 ```
 
-The proof leaves `~/OpenSynapseWorkspace/OPENSYNAPSE_DEMO.txt` behind so the result is observable outside the CLI. This local proof does **not** claim the still-pending real-account ChatGPT tunnel E2E.
+The proof leaves `~/OpenSynapseWorkspace/OPENSYNAPSE_DEMO.txt` behind so the result is observable outside the CLI. A separate real-account ChatGPT tunnel E2E is also verified; see [docs/REAL_CHATGPT_E2E_20260920.md](docs/REAL_CHATGPT_E2E_20260920.md).
 
 OpenSynapse is open-source AI work infrastructure built from a real long-running system. Its goal is simple: remove the human copy-paste loop between AI chat and your machines.
 
@@ -74,19 +74,22 @@ you ask
   - `opensynapse demo`
   - `opensynapse serve`
   - `opensynapse connect openai`
+  - `opensynapse autostart install|status|remove`
 - portable bounded Direct Channel MCP core
-- OpenAI Secure MCP Tunnel **prepare path**
+- OpenAI Secure MCP Tunnel **real-account E2E verified**
   - pinned official `openai/tunnel-client v0.0.14`
   - official SHA256 verification before install
   - companion `cloudflared` extracted from the same official release bundle
-  - API key stored as `env:CONTROL_PLANE_API_KEY` reference, not written by OpenSynapse
+  - mode-600 runtime key file support; raw key is never placed in tunnel-client argv
+  - ChatGPT plugin attachment → bounded write → readback → independently recomputed SHA-256 PASS
+  - optional Linux `systemd --user` autostart with crash recovery and explicit linger detection
 - Reliability Doctor and incident-derived reliability regressions
 - verified workflow / deployment reference components
 - Apache-2.0 software licensing
 
 ### Important connection boundary
 
-The OpenAI tunnel **prepare path is verified**. A real OpenAI account tunnel → ChatGPT → OpenSynapse node E2E is **not yet claimed** until it is tested with a real authorized tunnel ID and runtime API key.
+A real authorized OpenAI account tunnel → ChatGPT → OpenSynapse node E2E was verified on 2026-09-20. ChatGPT created a 97-byte file in the configured workspace, read it back, and reported SHA-256 `20ea4c8216f211d4043b191d20c40d9905dc0865847c30e3e206232226ed6cb1`; the same file and digest were independently rechecked on the host. This proves the bounded workspace path, not unrestricted host access.
 
 ### Android / Termux verified alpha
 
@@ -96,8 +99,8 @@ The Android installer creates one writable workspace at `~/OpenSynapseWorkspace`
 
 ### Next integration milestones
 
-- real-account OpenAI Secure MCP Tunnel E2E
-- one-time ChatGPT connector/plugin onboarding
+- reduce the remaining OpenAI account-side setup to a guided first-run flow
+- unattended reboot recovery across supported Linux environments
 - portable Android media/device modules
 - multi-device pairing / routing
 - desktop packaging
