@@ -38,4 +38,4 @@ The architecture is explicitly designed to reduce risks from path traversal, pro
 
 ## Non-guarantee
 
-The reference implementation is a scaffold/publication candidate and has not yet completed a reproducible public security audit. Do not deploy it as a production control plane without adapting the policies to your environment and running the full negative/UAT suite.
+The current OpenSynapse public alpha has not completed an independent third-party security audit. Do not treat the alpha as a production control plane without adapting the policies to your environment, reviewing the configured read/write/command boundaries, and running the relevant negative/UAT suite.
