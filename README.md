@@ -13,15 +13,23 @@
 
 **New here? Start with [GETTING_STARTED.md](GETTING_STARTED.md).** Linux/Android bounded work and a real ChatGPT → OpenAI Secure MCP Tunnel → OpenSynapse write/readback E2E are now verified.
 
-### Secure OpenAI Tunnel onboarding
+### Guided ChatGPT onboarding
 
-After creating an OpenAI Tunnel and a restricted runtime key with Tunnels Read + Use, connect without pasting the key into chat or a command line:
+Start here on Linux. The guide shows the two OpenAI account pages, asks for the Tunnel ID, keeps the runtime key on the local TTY, runs Doctor, enables recovery, and prints the exact ChatGPT plugin settings:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/nslabhwan/ns-agent-reliability/main/connect-openai.sh | bash -s -- tunnel_...
+curl -fsSL https://raw.githubusercontent.com/nslabhwan/ns-agent-reliability/main/onboard-openai.sh | bash
 ```
 
-The script prompts on the local TTY, stores the key as a mode-600 file under `~/.config/opensynapse/private/`, passes only a `file:` reference to the official `tunnel-client`, runs Doctor, and prefers a `systemd --user` service for crash/session recovery when available.
+The customer still creates two OpenAI account-side objects once: **Tunnel** and a **Restricted runtime key with Tunnels Read + Use**. OpenSynapse handles the machine-side install, local key storage, Tunnel profile, Doctor, recovery, and final test instructions. The raw key is never stored in the onboarding state or passed in argv.
+
+To reopen the setup pages automatically on a desktop/Termux environment that supports URL opening:
+
+```bash
+OPENSYNAPSE_OPEN_BROWSER=1 curl -fsSL https://raw.githubusercontent.com/nslabhwan/ns-agent-reliability/main/onboard-openai.sh | bash
+```
+
+Advanced/direct connection remains available through `connect-openai.sh`.
 
 ### 3-minute first-value proof
 

@@ -182,21 +182,23 @@ Official guide: https://developers.openai.com/api/docs/guides/secure-mcp-tunnels
 
 In OpenAI Platform, create one Tunnel and one restricted runtime API key with **Tunnels Read + Use**. Keep the raw API key local; do not paste it into ChatGPT.
 
-### 2. Run one local onboarding command
+### 2. Run one guided onboarding command
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/nslabhwan/ns-agent-reliability/main/connect-openai.sh | bash -s -- tunnel_REPLACE_ME
+curl -fsSL https://raw.githubusercontent.com/nslabhwan/ns-agent-reliability/main/onboard-openai.sh | bash
 ```
 
-The script:
+The guide prints the official Platform pages, asks for the Tunnel ID, then delegates the local work to the verified connection path. It:
 
 - reuses or installs OpenSynapse;
 - prompts for the runtime key only on the local TTY;
 - stores it in a mode-600 local file;
+- does not store the raw key in onboarding state;
 - passes only a `file:` reference to the official tunnel-client;
 - runs the official Tunnel Doctor;
 - prefers a Linux `systemd --user` service for restart recovery;
-- falls back to a managed background process when the user service manager is unavailable.
+- falls back to a managed background process when the user service manager is unavailable;
+- prints the exact ChatGPT plugin fields and final E2E verification prompt.
 
 Check recovery state with:
 

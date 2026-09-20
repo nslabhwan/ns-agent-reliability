@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0a9 guided customer onboarding — 2026-09-21
+
+- Added `onboard-openai.sh` as the primary customer-facing first-run path.
+- The guide surfaces the OpenAI Tunnel/API-key pages, prompts for the Tunnel ID, delegates secure local setup, and prints the exact ChatGPT plugin fields + final E2E prompt.
+- Stores only non-secret onboarding state in `~/.config/opensynapse/onboarding.json`; raw runtime keys remain local mode-600 credentials and never enter argv or onboarding state.
+- Added `--status` resume/check mode and optional browser opening with `OPENSYNAPSE_OPEN_BROWSER=1`.
+- Added customer onboarding documentation and regression coverage for the guided path.
+
 ## 0.2.0a8 systemd venv interpreter fix — 2026-09-20
 
 - Fixed Linux autostart unit generation so it preserves the OpenSynapse virtualenv interpreter path instead of resolving its symlink to `/usr/bin/python3.x`.
