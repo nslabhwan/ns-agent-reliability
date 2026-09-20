@@ -202,12 +202,23 @@ def cmd_connect_openai(args: argparse.Namespace) -> int:
         install_missing=not args.no_install_client,
     )
     profile_dir = Path(args.profile_dir).expanduser().resolve()
+    key_file = Path(args.runtime_key_file).expanduser().resolve() if args.runtime_key_file else None
+    if key_file is not None:
+        if not key_file.is_file():
+            raise TunnelClientError(f"runtime key file not found: {key_file}")
+        api_key_ref = f"file:{key_file}"
+        secret_storage = f"runtime API key file reference: {key_file}; value is never read or written by OpenSynapse"
+    else:
+        api_key_ref = "env:CONTROL_PLANE_API_KEY"
+        secret_storage = "CONTROL_PLANE_API_KEY environment reference; value is not written by OpenSynapse"
+
     prepared = prepare_profile(
         tunnel_binary=tunnel_binary,
         tunnel_id=args.tunnel_id,
         config_path=config_path,
         profile=args.profile,
         profile_dir=profile_dir,
+        api_key_ref=api_key_ref,
     )
     if prepared.returncode != 0:
         detail = (prepared.stderr or prepared.stdout).strip()
@@ -223,16 +234,16 @@ def cmd_connect_openai(args: argparse.Namespace) -> int:
         "profile_dir": str(profile_dir),
         "config": str(config_path),
         "tunnel_id": args.tunnel_id,
-        "secret_storage": "CONTROL_PLANE_API_KEY environment reference; value is not written by OpenSynapse",
+        "secret_storage": secret_storage,
     }
 
     if args.prepare_only:
         print(json.dumps(result, indent=2))
         return 0
 
-    if not os.environ.get("CONTROL_PLANE_API_KEY"):
+    if key_file is None and not os.environ.get("CONTROL_PLANE_API_KEY"):
         raise TunnelClientError(
-            "CONTROL_PLANE_API_KEY is required for OpenAI Secure MCP Tunnel; create a runtime API key with Tunnels Read + Use and export it in the environment"
+            "CONTROL_PLANE_API_KEY is required for OpenAI Secure MCP Tunnel unless --runtime-key-file is used; create a runtime API key with Tunnels Read + Use"
         )
 
     doctor = doctor_profile(tunnel_binary, args.profile, profile_dir)
@@ -305,6 +316,10 @@ def build_parser() -> argparse.ArgumentParser:
     openai.add_argument("--profile", default="opensynapse")
     openai.add_argument("--profile-dir", default=str(default_profile_dir()))
     openai.add_argument("--tunnel-client", help="explicit path to an official tunnel-client binary")
+    openai.add_argument(
+        "--runtime-key-file",
+        help="path to a local runtime API key file; OpenSynapse passes only a file: reference to tunnel-client",
+    )
     openai.add_argument(
         "--no-install-client",
         action="store_true",

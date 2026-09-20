@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0a5 secure runtime key file — 2026-09-20
+
+- Added `opensynapse connect openai --runtime-key-file PATH`.
+- OpenSynapse now passes only a `file:` secret reference to the official `tunnel-client`; it never reads or writes the key value.
+- Preserved the existing environment-variable flow for compatibility.
+- Added regression coverage proving the raw key never appears in tunnel-client argv.
+- This change was triggered by real onboarding: the Direct Channel service uses `PrivateTmp=yes`, so files created in its `/tmp` are intentionally invisible to the operator SSH shell.
+
 ## 0.2.0a4 first-value proof — 2026-09-20
 
 - Added `opensynapse demo` to perform a real bounded write -> readback verification inside the configured writable workspace.

@@ -101,3 +101,46 @@ def test_connect_openai_requires_runtime_key_after_prepare(tmp_path: Path, monke
     ])
     assert rc == 2
     assert "CONTROL_PLANE_API_KEY is required" in capsys.readouterr().err
+
+
+def test_connect_openai_prepare_only_accepts_runtime_key_file_reference(tmp_path: Path, monkeypatch, capsys) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    config = tmp_path / "config.json"
+    assert main(["install", "--root", str(root), "--config", str(config)]) == 0
+    capsys.readouterr()
+
+    key_file = tmp_path / "runtime.key"
+    key_file.write_text("sk-test-placeholder", encoding="utf-8")
+    key_file.chmod(0o600)
+
+    log = tmp_path / "argv.json"
+    fake = tmp_path / "tunnel-client"
+    fake.write_text(
+        "#!/usr/bin/env python3\n"
+        "import json, os, sys\n"
+        "from pathlib import Path\n"
+        "Path(os.environ['FAKE_TUNNEL_LOG']).write_text(json.dumps(sys.argv[1:]))\n"
+        "raise SystemExit(0)\n",
+        encoding="utf-8",
+    )
+    fake.chmod(0o755)
+    monkeypatch.setenv("FAKE_TUNNEL_LOG", str(log))
+    monkeypatch.delenv("CONTROL_PLANE_API_KEY", raising=False)
+
+    rc = main([
+        "connect", "openai",
+        "--tunnel-id", "tunnel_0123456789abcdef",
+        "--config", str(config),
+        "--profile-dir", str(tmp_path / "profiles"),
+        "--tunnel-client", str(fake),
+        "--runtime-key-file", str(key_file),
+        "--prepare-only",
+    ])
+    assert rc == 0
+    output = json.loads(capsys.readouterr().out)
+    assert "file reference" in output["secret_storage"]
+    argv = json.loads(log.read_text())
+    ref_index = argv.index("--control-plane-api-key-ref") + 1
+    assert argv[ref_index] == f"file:{key_file.resolve()}"
+    assert "sk-test-placeholder" not in json.dumps(argv)

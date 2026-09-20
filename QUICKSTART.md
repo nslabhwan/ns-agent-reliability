@@ -45,6 +45,12 @@ If you configured a writable workspace, prove a real bounded write/readback befo
 opensynapse demo
 ```
 
+For OpenAI Tunnel credentials, prefer a local mode-600 key file and pass only its path:
+
+```bash
+opensynapse connect openai --tunnel-id tunnel_... --runtime-key-file ~/.config/opensynapse/private/control-plane-api-key --no-run
+```
+
 ## 3A. Local MCP only
 
 ```bash

@@ -236,6 +236,7 @@ def prepare_profile(
     config_path: Path,
     profile: str,
     profile_dir: Path,
+    api_key_ref: str = "env:CONTROL_PLANE_API_KEY",
 ) -> subprocess.CompletedProcess[str]:
     if not tunnel_id.startswith("tunnel_"):
         raise TunnelClientError("tunnel id must start with 'tunnel_'")
@@ -256,7 +257,7 @@ def prepare_profile(
         "--mcp-command",
         mcp_command,
         "--control-plane-api-key-ref",
-        "env:CONTROL_PLANE_API_KEY",
+        api_key_ref,
         "--health-listen-addr",
         "127.0.0.1:0",
         "--force",
