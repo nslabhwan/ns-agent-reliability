@@ -1,5 +1,11 @@
 # OpenSynapse
 
+> **Built by NS — AI execution infrastructure for real systems.**
+>
+> NS connects AI to servers, phones, cloud infrastructure, and code so work can move from request → execution → verification → recovery. OpenSynapse is the open-source work-node layer extracted from that real operating system.
+>
+> **NS:** https://getnslab.com/?utm_source=github&utm_medium=repo&utm_campaign=ns_identity_20260920
+
 **Let ChatGPT actually work on the computer, server, and phone you own.**
 
 **Install once. Ask naturally. Let it work. Verify the result.**
