@@ -12,6 +12,16 @@
 
 **New here? Start with [GETTING_STARTED.md](GETTING_STARTED.md).** It separates the verified Linux/Android paths from the still-pending ChatGPT account E2E so you can follow the current alpha without guessing.
 
+### 3-minute first-value proof
+
+On Linux or Termux, create one dedicated workspace, install OpenSynapse, inspect the boundary, and prove a real bounded write -> readback in one command:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/nslabhwan/ns-agent-reliability/main/try.sh | bash
+```
+
+The proof leaves `~/OpenSynapseWorkspace/OPENSYNAPSE_DEMO.txt` behind so the result is observable outside the CLI. This local proof does **not** claim the still-pending real-account ChatGPT tunnel E2E.
+
 OpenSynapse is open-source AI work infrastructure built from a real long-running system. Its goal is simple: remove the human copy-paste loop between AI chat and your machines.
 
 Instead of:
@@ -50,6 +60,7 @@ you ask
   - `opensynapse install`
   - `opensynapse doctor`
   - `opensynapse status`
+  - `opensynapse demo`
   - `opensynapse serve`
   - `opensynapse connect openai`
 - portable bounded Direct Channel MCP core
@@ -174,7 +185,7 @@ Current local/public-candidate verification includes:
 - bounded HTTP MCP write → readback → command E2E with `shell=false`
 - OpenAI official tunnel-client prepare-path integration
 - stdlib MCP tool-contract and write/readback tests
-- full regression suite: **49/49 PASS**
+- full regression suite: **51/51 PASS**
 
 Development rule:
 

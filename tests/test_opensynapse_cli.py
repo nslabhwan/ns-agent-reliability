@@ -93,3 +93,45 @@ def test_actual_android_platform_with_termux_is_allowed(tmp_path: Path, monkeypa
     output = json.loads(capsys.readouterr().out)
     assert output["node_type"] == "android-termux"
     assert output["doctor"]["authority"] == "SELF_HOSTED_ANDROID"
+
+
+def test_demo_writes_and_reads_back_proof(tmp_path: Path, capsys) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    config = tmp_path / "config.json"
+
+    rc = main([
+        "install",
+        "--root",
+        str(root),
+        "--write-root",
+        str(root),
+        "--config",
+        str(config),
+    ])
+    assert rc == 0
+    capsys.readouterr()
+
+    rc = main(["demo", "--config", str(config)])
+    assert rc == 0
+    output = json.loads(capsys.readouterr().out)
+    assert output["status"] == "PASS"
+    assert output["readback"]["content_match"] is True
+    assert output["readback"]["sha256_match"] is True
+    proof = root / "OPENSYNAPSE_DEMO.txt"
+    assert proof.exists()
+    assert "bounded execution demo" in proof.read_text(encoding="utf-8")
+
+
+def test_demo_requires_explicit_write_root(tmp_path: Path, capsys) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    config = tmp_path / "config.json"
+    assert main(["install", "--root", str(root), "--config", str(config)]) == 0
+    capsys.readouterr()
+    try:
+        main(["demo", "--config", str(config)])
+    except SystemExit as exc:
+        assert "explicit writable workspace" in str(exc)
+    else:
+        raise AssertionError("demo must refuse read-only configurations")

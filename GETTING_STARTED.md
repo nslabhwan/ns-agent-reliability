@@ -1,5 +1,16 @@
 # OpenSynapse — Getting Started
 
+## 3-minute first-value proof
+
+If you want to verify that OpenSynapse is doing real bounded machine work before configuring an AI connection:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/nslabhwan/ns-agent-reliability/main/try.sh | bash
+```
+
+This creates `~/OpenSynapseWorkspace`, installs the node with that single writable boundary, runs Doctor, writes `OPENSYNAPSE_DEMO.txt` through the bounded runtime, and reads it back to verify the observable result.
+
+
 Use this page if you want to try the current public alpha without reading the whole repository first.
 
 OpenSynapse turns a machine you own into a bounded MCP work node. The current public alpha supports Linux and Android/Termux.

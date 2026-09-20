@@ -39,6 +39,12 @@ opensynapse doctor
 opensynapse status
 ```
 
+If you configured a writable workspace, prove a real bounded write/readback before connecting an AI client:
+
+```bash
+opensynapse demo
+```
+
 ## 3A. Local MCP only
 
 ```bash

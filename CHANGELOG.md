@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0a4 first-value proof — 2026-09-20
+
+- Added `opensynapse demo` to perform a real bounded write -> readback verification inside the configured writable workspace.
+- Demo leaves an observable `OPENSYNAPSE_DEMO.txt` proof file and verifies content + SHA-256 readback.
+- When safe host commands are enabled, the demo also exercises the bounded `uptime` command with `shell=false`.
+- Added `try.sh` so a new Linux/Termux user can create a dedicated workspace, install, run Doctor, and complete the proof path from one command.
+- Fresh isolated Linux install smoke passed end-to-end.
+- Full regression suite: **51/51 PASS**.
+- This release does not change the truth boundary: real-account OpenAI tunnel -> ChatGPT -> OpenSynapse invocation remains pending until authorized E2E evidence exists.
+
 ## 0.2.0a3 Android / Termux verified — 2026-09-19
 
 - Added GETTING_STARTED.md as the canonical first-use guide for current Linux, Android/Termux, and OpenAI tunnel paths.

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import platform
@@ -125,6 +126,52 @@ def cmd_status(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_demo(args: argparse.Namespace) -> int:
+    runtime = _load_runtime(args.config)
+    if not runtime.config.write_roots:
+        raise SystemExit(
+            "demo needs one explicit writable workspace; reinstall with OPENSYNAPSE_WRITE_ROOT or opensynapse install --write-root"
+        )
+
+    workspace = Path(args.workspace).expanduser().resolve() if args.workspace else Path(runtime.config.write_roots[0])
+    target = workspace / "OPENSYNAPSE_DEMO.txt"
+    content = (
+        "OpenSynapse bounded execution demo\n"
+        "This file was written through the configured OpenSynapse runtime and read back for verification.\n"
+    )
+    write_result = runtime.write_text(str(target), content)
+    read_result = runtime.read_text(str(target))
+    content_match = read_result.get("content") == content
+    sha_match = write_result.get("after_sha256") == hashlib.sha256(content.encode("utf-8")).hexdigest()
+
+    command_result = None
+    if "uptime" in (runtime.config.commands or {}):
+        command_result = runtime.run_bounded("uptime", cwd=str(workspace))
+
+    result = {
+        "status": "PASS" if content_match and sha_match else "FAIL",
+        "product": "OpenSynapse",
+        "node_type": detect_node_type(),
+        "workspace": str(workspace),
+        "proof_file": str(target),
+        "write": {
+            "status": write_result.get("status"),
+            "bytes_written": write_result.get("bytes_written"),
+            "after_sha256": write_result.get("after_sha256"),
+        },
+        "readback": {
+            "status": read_result.get("status"),
+            "content_match": content_match,
+            "sha256_match": sha_match,
+            "redaction_count": read_result.get("redaction_count"),
+        },
+        "bounded_command": command_result,
+        "next": "Connect an MCP client and ask it to work inside this workspace.",
+    }
+    print(json.dumps(result, indent=2))
+    return 0 if result["status"] == "PASS" else 1
+
+
 def cmd_serve(args: argparse.Namespace) -> int:
     config = DirectChannelConfig.load(Path(args.config).expanduser())
     if args.transport == "stdio":
@@ -233,6 +280,11 @@ def build_parser() -> argparse.ArgumentParser:
     status = sub.add_parser("status", help="show this node's current OpenSynapse boundary")
     status.add_argument("--config", default=str(default_config_path()))
     status.set_defaults(func=cmd_status)
+
+    demo = sub.add_parser("demo", help="prove bounded write/readback on the configured workspace")
+    demo.add_argument("--config", default=str(default_config_path()))
+    demo.add_argument("--workspace", help="writable workspace to use; defaults to the first configured write root")
+    demo.set_defaults(func=cmd_demo)
 
     serve = sub.add_parser("serve", help="serve the local MCP node")
     serve.add_argument("--config", default=str(default_config_path()))
