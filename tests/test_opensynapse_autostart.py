@@ -103,3 +103,22 @@ def test_status_distinguishes_login_recovery_from_unattended_boot(tmp_path: Path
     out = autostart.user_autostart_status()
     assert out["reboot_recovery"] == "READY_AFTER_LOGIN"
     assert str(out["unattended_boot_next"]).startswith("sudo loginctl enable-linger")
+
+
+def test_user_unit_preserves_virtualenv_python_symlink_path(tmp_path: Path) -> None:
+    real_python = tmp_path / "usr" / "bin" / "python3.11"
+    real_python.parent.mkdir(parents=True)
+    real_python.write_text("python")
+    venv_python = tmp_path / "venv" / "bin" / "python"
+    venv_python.parent.mkdir(parents=True)
+    venv_python.symlink_to(real_python)
+
+    text = autostart.build_user_unit(
+        tunnel_id="tunnel_0123456789abcdef0123456789abcdef",
+        config_path=tmp_path / "config.json",
+        profile_dir=tmp_path / "profile",
+        runtime_key_file=tmp_path / "runtime.key",
+        python_executable=venv_python,
+    )
+    assert str(venv_python) in text
+    assert str(real_python) not in text

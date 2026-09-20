@@ -28,7 +28,10 @@ def build_user_unit(
 ) -> str:
     if not tunnel_id.startswith("tunnel_"):
         raise ValueError("tunnel id must start with 'tunnel_'")
-    py = (python_executable or Path(sys.executable)).resolve()
+    # Do not resolve the virtualenv interpreter symlink: resolving it can collapse
+    # ~/.local/share/opensynapse/venv/bin/python to /usr/bin/python3.x and lose
+    # the venv site-packages at service startup. Preserve the executable path.
+    py = Path(os.path.abspath(str(python_executable or sys.executable)))
     argv = [
         str(py),
         "-m",

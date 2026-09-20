@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0a8 systemd venv interpreter fix — 2026-09-20
+
+- Fixed Linux autostart unit generation so it preserves the OpenSynapse virtualenv interpreter path instead of resolving its symlink to `/usr/bin/python3.x`.
+- This prevents systemd startup from losing the OpenSynapse venv site-packages and leaving the service stuck/failing during activation.
+- Added a regression test that creates a real interpreter symlink and proves the generated unit keeps the venv path.
+
 ## 0.2.0a7 autostart migration hardening — 2026-09-20
 
 - Hardened migration from the earlier nohup tunnel to the systemd user service by terminating the tracked child process tree before managed restart.
