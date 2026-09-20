@@ -64,6 +64,17 @@ if [[ "${OPENSYNAPSE_NO_RUN:-0}" == "1" ]]; then
   exit 0
 fi
 
+terminate_tree() {
+  local parent="$1" child
+  if command -v pgrep >/dev/null 2>&1; then
+    while IFS= read -r child; do
+      [[ "$child" =~ ^[0-9]+$ ]] || continue
+      terminate_tree "$child"
+    done < <(pgrep -P "$parent" 2>/dev/null || true)
+  fi
+  kill -TERM "$parent" 2>/dev/null || true
+}
+
 OLD_PID=""
 if [[ -f "$PID_FILE" ]]; then
   OLD_PID="$(cat "$PID_FILE" 2>/dev/null || true)"
@@ -77,7 +88,7 @@ fi
 if [[ "${OPENSYNAPSE_NO_AUTOSTART:-0}" != "1" ]] && command -v systemctl >/dev/null 2>&1; then
   if [[ -n "$OLD_PID" ]]; then
     echo "Migrating the existing foreground-style tunnel to managed autostart..."
-    kill "$OLD_PID" 2>/dev/null || true
+    terminate_tree "$OLD_PID"
     for _ in 1 2 3 4 5; do
       kill -0 "$OLD_PID" 2>/dev/null || break
       sleep 1

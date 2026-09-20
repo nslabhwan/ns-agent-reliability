@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0a7 autostart migration hardening — 2026-09-20
+
+- Hardened migration from the earlier nohup tunnel to the systemd user service by terminating the tracked child process tree before managed restart.
+- Avoids orphaned tunnel-client/MCP children and duplicate tunnel connections during upgrade.
+- Public onboarding still preserves the existing config and stored runtime key.
+
 ## 0.2.0a6 real ChatGPT E2E + autostart — 2026-09-20
 
 - Real authorized ChatGPT → OpenAI Secure MCP Tunnel → OpenSynapse stdio MCP E2E **PASS**.
