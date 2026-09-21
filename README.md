@@ -207,7 +207,7 @@ Current local/public-candidate verification includes:
 - bounded HTTP MCP write → readback → command E2E with `shell=false`
 - OpenAI official tunnel-client prepare-path integration
 - stdlib MCP tool-contract and write/readback tests
-- full regression suite: **51/51 PASS**
+- full regression suite: **59/59 PASS**
 
 Development rule:
 

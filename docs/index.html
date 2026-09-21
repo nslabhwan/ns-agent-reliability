@@ -32,11 +32,11 @@ pre{overflow:auto;background:#07090c;border:1px solid var(--line);border-radius:
 <h1>Let AI actually work on the machines you own.</h1>
 <p>Stop copying commands, logs, and files back and forth. OpenSynapse gives an AI client bounded access to an authorized machine, lets it do real work, and checks the result.</p>
 <div class="actions">
-<a class="btn primary" href="https://github.com/nslabhwan/ns-agent-reliability/blob/main/GETTING_STARTED.md">Start here</a>
+<a class="btn primary" href="https://github.com/nslabhwan/ns-agent-reliability/blob/main/GETTING_STARTED.md">Try it in 3 minutes</a>
 <a class="btn secondary" href="https://github.com/nslabhwan/ns-agent-reliability">View source on GitHub</a>
 <a class="btn secondary" href="https://github.com/nslabhwan/ns-agent-reliability/issues/new?template=opensynapse-feedback.yml">I tried it — send feedback</a>
 </div>
-<div class="proof"><strong>Public Alpha evidence:</strong> fresh public install passed, 49/49 regressions passed, a real HTTP MCP write → readback → bounded-command E2E passed with shell disabled, and the official OpenAI tunnel prepare path passed.</div>
+<div class="proof"><strong>Public Alpha evidence:</strong> fresh public install passed, 59/59 regressions passed, Linux + Android bounded work passed, and a real ChatGPT → OpenAI Secure MCP Tunnel → OpenSynapse write → readback E2E passed.</div>
 </header>
 
 <section id="why">
@@ -72,8 +72,8 @@ opensynapse connect openai \
   --tunnel-id tunnel_REPLACE_ME \
   --prepare-only</code></pre>
 <div class="status">
-<div class="ok"><h3 class="check">Verified now</h3><p>Linux one-install bootstrap<br>Android/Termux fresh install on real device<br>Bounded MCP read / write / commands<br>Android stdlib MCP write + readback E2E<br>Official OpenAI tunnel prepare path<br>49/49 regressions</p></div>
-<div class="next"><h3>Next</h3><p class="muted">Real-account OpenAI tunnel → ChatGPT E2E<br>One-time ChatGPT connector/plugin onboarding<br>Multi-device pairing and routing<br>Desktop packaging and resumable jobs</p></div>
+<div class="ok"><h3 class="check">Verified now</h3><p>Linux one-install bootstrap<br>Android/Termux fresh install on real device<br>Bounded MCP read / write / commands<br>Android stdlib MCP write + readback E2E<br>Real ChatGPT Secure MCP Tunnel write + readback E2E<br>59/59 regressions</p></div>
+<div class="next"><h3>Next</h3><p class="muted">Reduce the remaining one-time account-side setup<br>Portable Android media/device modules<br>Multi-device pairing and routing<br>Desktop packaging and resumable jobs</p></div>
 </div>
 </section>
 
@@ -114,7 +114,7 @@ opensynapse connect openai \
 </div>
 </section>
 
-<footer class="footer">OpenSynapse is an early open-source project from the NS project lineage. Software is Apache-2.0 licensed. Public Alpha status is evidence-bounded. The OpenAI tunnel prepare path is verified, but real-account ChatGPT invocation, phone, desktop, and multi-device milestones are not claimed ready.</footer>
+<footer class="footer">OpenSynapse is an early open-source project from the NS project lineage. Software is Apache-2.0 licensed. Public Alpha status is evidence-bounded. Real-account ChatGPT tunnel invocation and bounded Linux/Android work are verified. Desktop packaging, portable Android media/device modules, and multi-device routing remain future milestones.</footer>
 </div>
 </body>
 </html>
