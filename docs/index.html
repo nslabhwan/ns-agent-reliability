@@ -54,7 +54,7 @@ pre{overflow:auto;background:#07090c;border:1px solid var(--line);border-radius:
 <div class="flow">
 <div class="step"><div class="num">1</div><div><strong>Install on a machine you own</strong><span>Choose Linux or Android/Termux in the Getting Started guide, then verify the explicit access boundary.</span></div></div>
 <div class="step"><div class="num">2</div><div><strong>Choose what AI may access</strong><span>Read roots, write roots, and allowed commands are explicit. Arbitrary shell is not enabled by default.</span></div></div>
-<div class="step"><div class="num">3</div><div><strong>Connect an AI client through MCP</strong><span>The local node exposes bounded tools. OpenSynapse can now prepare the official OpenAI Secure MCP Tunnel path. Real-account ChatGPT invocation is the next connection gate.</span></div></div>
+<div class="step"><div class="num">3</div><div><strong>Connect an AI client through MCP</strong><span>The local node exposes bounded tools through MCP. Real-account ChatGPT → OpenAI Secure MCP Tunnel → OpenSynapse write → readback is verified now.</span></div></div>
 <div class="step"><div class="num">4</div><div><strong>Verify the requested outcome</strong><span>OpenSynapse is designed around observable results rather than worker self-report alone.</span></div></div>
 </div>
 </section>
