@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0a10 privacy-preserving distribution measurement — 2026-10-05
+
+- Remote installs now use a versioned GitHub release source asset instead of installing directly from the moving `main` branch.
+- GitHub release-asset `download_count` becomes the aggregate install-attempt signal without adding custom product telemetry.
+- Local clone installs still use the checked-out source tree, preserving the existing developer path.
+- The first-value script now ends with an optional no-secrets feedback link so successful runs can be confirmed voluntarily.
+- Public documentation states the metric boundary: asset downloads are not unique users and do not prove successful execution.
+
 ## 0.2.0a9 guided customer onboarding — 2026-09-21
 
 - Added `onboard-openai.sh` as the primary customer-facing first-run path.

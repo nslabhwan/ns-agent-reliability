@@ -9,12 +9,14 @@ CONFIG="${OPENSYNAPSE_CONFIG:-$HOME/.config/opensynapse/config.json}"
 ROOT="${OPENSYNAPSE_ROOT:-$PWD}"
 WRITE_ROOT="${OPENSYNAPSE_WRITE_ROOT:-}"
 ENABLE_SAFE="${OPENSYNAPSE_ENABLE_SAFE_COMMANDS:-0}"
+RELEASE_VERSION="${OPENSYNAPSE_RELEASE_VERSION:-0.2.0a10}"
+RELEASE_ASSET_URL="https://github.com/nslabhwan/ns-agent-reliability/releases/download/v${RELEASE_VERSION}/opensynapse-${RELEASE_VERSION}-src.tar.gz"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || pwd)"
 
 if [[ -f "$SCRIPT_DIR/pyproject.toml" && -d "$SCRIPT_DIR/src" ]]; then
   SOURCE="${OPENSYNAPSE_SOURCE:-$SCRIPT_DIR}"
 else
-  SOURCE="${OPENSYNAPSE_SOURCE:-git+https://github.com/nslabhwan/ns-agent-reliability.git@main}"
+  SOURCE="${OPENSYNAPSE_SOURCE:-$RELEASE_ASSET_URL}"
 fi
 
 is_termux() {
@@ -80,7 +82,7 @@ fi
 if is_termux; then
   "$VENV/bin/python" -m pip install --upgrade "$SOURCE"
 else
-  if [[ "$SOURCE" == git+* ]]; then
+  if [[ "$SOURCE" == git+* ]] || [[ "$SOURCE" == http://* ]] || [[ "$SOURCE" == https://* ]]; then
     "$VENV/bin/python" -m pip install --upgrade "ns-agent-reliability[http] @ $SOURCE"
   else
     "$VENV/bin/python" -m pip install --upgrade "${SOURCE}[http]"

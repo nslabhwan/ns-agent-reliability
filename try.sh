@@ -27,3 +27,5 @@ echo
 echo "OpenSynapse first-value proof complete."
 echo "Proof file: $WORKSPACE/OPENSYNAPSE_DEMO.txt"
 echo "Next: connect your MCP client and keep work inside $WORKSPACE"
+echo "Optional 30-second feedback (no secrets):"
+echo "https://github.com/nslabhwan/ns-agent-reliability/issues/new?template=opensynapse-feedback.yml"

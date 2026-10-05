@@ -41,6 +41,8 @@ curl -fsSL https://raw.githubusercontent.com/nslabhwan/ns-agent-reliability/main
 
 The proof leaves `~/OpenSynapseWorkspace/OPENSYNAPSE_DEMO.txt` behind so the result is observable outside the CLI. A separate real-account ChatGPT tunnel E2E is also verified; see [docs/REAL_CHATGPT_E2E_20260920.md](docs/REAL_CHATGPT_E2E_20260920.md).
 
+Remote installs use the versioned source bundle attached to the current GitHub release. GitHub exposes the aggregate download count for that release asset, which we use only as an install-attempt signal. OpenSynapse itself sends no custom analytics event, device identifier, or usage payload. The count is not a unique-user count and does not prove a successful run.
+
 OpenSynapse is open-source AI work infrastructure built from a real long-running system. Its goal is simple: remove the human copy-paste loop between AI chat and your machines.
 
 Instead of:
