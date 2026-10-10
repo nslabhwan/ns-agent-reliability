@@ -1,5 +1,7 @@
 # OpenSynapse — Getting Started
 
+**[한국어 시작 안내](GETTING_STARTED_KO.md)**
+
 ## 3-minute first-value proof
 
 If you want to verify that OpenSynapse is doing real bounded machine work before configuring an AI connection:

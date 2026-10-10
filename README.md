@@ -1,5 +1,7 @@
 # OpenSynapse
 
+**[한국어로 시작하기](GETTING_STARTED_KO.md)** · [English guide](GETTING_STARTED.md)
+
 > **Built by NS — AI execution infrastructure for real systems.**
 >
 > NS connects AI to servers, phones, cloud infrastructure, and code so work can move from request → execution → verification → recovery. OpenSynapse is the open-source work-node layer extracted from that real operating system.
