@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0a11 bounded server-recovery proof — 2026-11-23
+
+- Added an isolated server-recovery demo: read failure evidence, identify the direct config cause, make the minimum change, and rerun an independent health check.
+- Added the fixed `opensynapse-demo-health` bounded command. It accepts no arguments and evaluates only the demo directory selected as its working directory.
+- `opensynapse demo --scenario server-recovery` seeds exactly one fault (`enabled=false`) while leaving listener and upstream settings valid.
+- Added `try-server-recovery.sh` as the one-command setup path for the first public killer-use-case proof.
+- The scenario is an isolated fixture and does not modify or restart a real production service.
+
 ## 0.2.0a10 privacy-preserving distribution measurement — 2026-10-05
 
 - Remote installs now use a versioned GitHub release source asset instead of installing directly from the moving `main` branch.

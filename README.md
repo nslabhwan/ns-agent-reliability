@@ -33,6 +33,20 @@ OPENSYNAPSE_OPEN_BROWSER=1 curl -fsSL https://raw.githubusercontent.com/nslabhwa
 
 Advanced/direct connection remains available through `connect-openai.sh`.
 
+### First killer use case: recover a broken service, then prove it is healthy
+
+The first public scenario is deliberately narrow: a broken service inside the isolated OpenSynapse workspace. The AI reads the failure log and config, changes only the setting that caused the failure, then runs a dedicated bounded health check. Success is not the model saying **done**. Success is `demohealth` returning `HEALTHY`.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/nslabhwan/ns-agent-reliability/main/try-server-recovery.sh | bash
+```
+
+The seeded fault is safe and deterministic. It does **not** restart or modify a real system service. The point is to prove the full operator loop before expanding the same bounded pattern to user-selected real workloads:
+
+```text
+failure evidence -> diagnosis -> minimum repair -> independent health check
+```
+
 ### 3-minute first-value proof
 
 On Linux or Termux, create one dedicated workspace, install OpenSynapse, inspect the boundary, and prove a real bounded write -> readback in one command:
@@ -84,6 +98,7 @@ you ask
   - `opensynapse doctor`
   - `opensynapse status`
   - `opensynapse demo`
+  - `opensynapse demo --scenario server-recovery`
   - `opensynapse serve`
   - `opensynapse connect openai`
   - `opensynapse autostart install|status|remove`
@@ -211,7 +226,7 @@ Current local/public-candidate verification includes:
 - bounded HTTP MCP write → readback → command E2E with `shell=false`
 - OpenAI official tunnel-client prepare-path integration
 - stdlib MCP tool-contract and write/readback tests
-- full regression suite: **59/59 PASS**
+- full regression suite: **63/63 PASS**
 
 Development rule:
 

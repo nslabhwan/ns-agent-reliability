@@ -44,7 +44,7 @@ class DirectChannelRuntime:
             "status": "OK",
             "product": "OpenSynapse",
             "component": "Direct Channel",
-            "version": "0.2.0a10",
+            "version": "0.2.0a11",
             "observed_at": datetime.now(timezone.utc).isoformat(),
             "host": platform.node(),
             "platform": platform.system(),

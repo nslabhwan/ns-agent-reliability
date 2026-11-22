@@ -1,0 +1,71 @@
+{
+  "schema_version": "OPENSYNAPSE_SERVER_RECOVERY_E2E_V1",
+  "observed_at_utc": "2026-11-22T16:23:14+00:00",
+  "version": "0.2.0a11",
+  "scenario": "server-recovery",
+  "environment": "fresh candidate install in isolated Linux workspace",
+  "safety": {
+    "real_service_mutation": false,
+    "fixture_only": true,
+    "write_scope": "isolated OpenSynapse workspace"
+  },
+  "initial_health": {
+    "status": "UNHEALTHY",
+    "reason": "SERVICE_DISABLED",
+    "checks": {
+      "enabled": false,
+      "listen_port": true,
+      "upstream": true
+    },
+    "bounded_command": "demohealth",
+    "exit_code": 3,
+    "shell": false
+  },
+  "mcp_recovery": {
+    "sequence": [
+      "dc_read_text(service.log)",
+      "dc_read_text(service.json)",
+      "dc_write_text(service.json, CAS)",
+      "dc_run_bounded(demohealth)"
+    ],
+    "direct_cause": "SERVICE_DISABLED",
+    "repair": {
+      "enabled": {
+        "before": false,
+        "after": true
+      }
+    },
+    "other_fields_unchanged": {
+      "service": true,
+      "listen_port": true,
+      "upstream": true
+    },
+    "cas_write_status": "OK"
+  },
+  "final_health": {
+    "status": "HEALTHY",
+    "reason": "HEALTHY",
+    "checks": {
+      "enabled": true,
+      "listen_port": true,
+      "upstream": true
+    },
+    "bounded_command": {
+      "command": "demohealth",
+      "exit_code": 0,
+      "shell": false
+    }
+  },
+  "verification_gates": {
+    "focused_recovery_tests": "12/12 PASS",
+    "full_regression": "63/63 PASS",
+    "content_qa": "49 files / 0 issues / PASS",
+    "public_scan": "124/124 PASS"
+  },
+  "remote_chatgpt_tunnel_note": {
+    "this_run": "NOT_REVERIFIED",
+    "reason": "OpenSynapse Main connector probe returned HTTP 429 before this candidate run",
+    "local_tunnel_doctor": "PASS",
+    "claim_boundary": "This receipt proves the installed MCP read/write/bounded-command recovery path, not a new remote ChatGPT tunnel E2E."
+  }
+}

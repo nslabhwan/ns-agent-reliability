@@ -47,6 +47,10 @@ def _safe_commands() -> dict[str, str]:
         found = shutil.which(name)
         if found:
             result[name] = str(Path(found).resolve())
+
+    demohealth = Path(sys.executable).parent / "opensynapse-demo-health"
+    if demohealth.is_file() and not demohealth.is_symlink():
+        result["demohealth"] = str(demohealth)
     return result
 
 
@@ -135,6 +139,52 @@ def cmd_demo(args: argparse.Namespace) -> int:
         )
 
     workspace = Path(args.workspace).expanduser().resolve() if args.workspace else Path(runtime.config.write_roots[0])
+
+    if args.scenario == "server-recovery":
+        if "demohealth" not in (runtime.config.commands or {}):
+            raise SystemExit(
+                "server-recovery demo needs bounded demohealth; reinstall with --enable-safe-commands using OpenSynapse 0.2.0a11+"
+            )
+        demo_dir = workspace / "server-recovery-demo"
+        config_path = demo_dir / "service.json"
+        log_path = demo_dir / "service.log"
+        broken_config = json.dumps(
+            {
+                "service": "demo-api",
+                "enabled": False,
+                "listen_port": 8080,
+                "upstream": "http://127.0.0.1:9000",
+            },
+            indent=2,
+        ) + "\n"
+        log_text = (
+            "demo-api boot sequence\n"
+            "ERROR startup refused: service is disabled by service.json\n"
+            "INFO listener and upstream settings passed validation\n"
+            "INFO recovery rule: change only the setting that caused the refusal, then rerun health\n"
+        )
+        runtime.write_text(str(config_path), broken_config)
+        runtime.write_text(str(log_path), log_text)
+        initial_health = runtime.run_bounded("demohealth", cwd=str(demo_dir))
+        result = {
+            "status": "READY_FOR_AI",
+            "product": "OpenSynapse",
+            "scenario": "server-recovery",
+            "workspace": str(workspace),
+            "demo_dir": str(demo_dir),
+            "log": str(log_path),
+            "config": str(config_path),
+            "initial_health": initial_health,
+            "agent_task": (
+                "Read service.log and service.json, identify the direct cause, make the smallest required config change, "
+                "then run demohealth in the demo directory. Only report success if it returns HEALTHY."
+            ),
+            "success_criterion": "demohealth exit_code=0 and JSON status=HEALTHY",
+            "safety": "isolated workspace fixture; no real system service is modified",
+        }
+        print(json.dumps(result, indent=2))
+        return 0
+
     target = workspace / "OPENSYNAPSE_DEMO.txt"
     content = (
         "OpenSynapse bounded execution demo\n"
@@ -317,9 +367,15 @@ def build_parser() -> argparse.ArgumentParser:
     status.add_argument("--config", default=str(default_config_path()))
     status.set_defaults(func=cmd_status)
 
-    demo = sub.add_parser("demo", help="prove bounded write/readback on the configured workspace")
+    demo = sub.add_parser("demo", help="prove bounded work on the configured workspace")
     demo.add_argument("--config", default=str(default_config_path()))
     demo.add_argument("--workspace", help="writable workspace to use; defaults to the first configured write root")
+    demo.add_argument(
+        "--scenario",
+        choices=("first-value", "server-recovery"),
+        default="first-value",
+        help="first-value writes and reads a proof file; server-recovery seeds a broken service for AI repair",
+    )
     demo.set_defaults(func=cmd_demo)
 
     serve = sub.add_parser("serve", help="serve the local MCP node")

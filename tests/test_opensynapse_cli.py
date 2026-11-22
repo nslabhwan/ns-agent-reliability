@@ -135,3 +135,53 @@ def test_demo_requires_explicit_write_root(tmp_path: Path, capsys) -> None:
         assert "explicit writable workspace" in str(exc)
     else:
         raise AssertionError("demo must refuse read-only configurations")
+
+def test_server_recovery_demo_seeds_one_direct_fault(tmp_path: Path, capsys) -> None:
+    root = tmp_path / "workspace"
+    root.mkdir()
+    config = tmp_path / "config.json"
+
+    rc = main([
+        "install",
+        "--root",
+        str(root),
+        "--write-root",
+        str(root),
+        "--enable-safe-commands",
+        "--config",
+        str(config),
+    ])
+    assert rc == 0
+    install_out = json.loads(capsys.readouterr().out)
+    assert "demohealth" in install_out["safe_commands"]
+
+    rc = main([
+        "demo",
+        "--scenario",
+        "server-recovery",
+        "--config",
+        str(config),
+    ])
+    assert rc == 0
+    output = json.loads(capsys.readouterr().out)
+    assert output["status"] == "READY_FOR_AI"
+    assert output["scenario"] == "server-recovery"
+    assert output["initial_health"]["exit_code"] == 3
+
+    health = json.loads(output["initial_health"]["stdout"])
+    assert health["status"] == "UNHEALTHY"
+    assert health["reason"] == "SERVICE_DISABLED"
+    assert health["checks"] == {
+        "enabled": False,
+        "listen_port": True,
+        "upstream": True,
+    }
+
+    demo_dir = root / "server-recovery-demo"
+    service = json.loads((demo_dir / "service.json").read_text(encoding="utf-8"))
+    assert service == {
+        "service": "demo-api",
+        "enabled": False,
+        "listen_port": 8080,
+        "upstream": "http://127.0.0.1:9000",
+    }

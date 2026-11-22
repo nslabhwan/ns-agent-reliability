@@ -119,7 +119,12 @@
     "src/ns_direct_channel/stdio_server.py",
     "tests/test_stdio_mcp.py",
     "release/REMOTE_ANDROID_PUBLICATION_RECEIPT_20260919_OPENSYNAPSE_A3.json",
-    "GETTING_STARTED.md"
+    "GETTING_STARTED.md",
+    "src/opensynapse/demo_health.py",
+    "tests/test_opensynapse_demo_health.py",
+    "try-server-recovery.sh",
+    "release/OPENSYNAPSE_SERVER_RECOVERY_E2E_20261123.json",
+    "GETTING_STARTED_KO.md"
   ],
   "excluded_runtime_artifacts": [
     ".ns-direct-channel.lock",

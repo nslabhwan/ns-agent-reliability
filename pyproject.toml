@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ns-agent-reliability"
-version = "0.2.0a10"
+version = "0.2.0a11"
 description = "OpenSynapse: bounded, verifiable AI work infrastructure for machines you own, with reliability diagnostics"
 requires-python = ">=3.11"
 license = "Apache-2.0"
@@ -19,6 +19,7 @@ dev = ["pytest>=8", "pytest-asyncio>=0.24", "fastmcp>=4.0.3,<5"]
 
 [project.scripts]
 opensynapse = "opensynapse.cli:main"
+opensynapse-demo-health = "opensynapse.demo_health:main"
 ns-reliability = "ns_agent_reliability.doctor:main"
 ns-direct-channel = "ns_direct_channel.cli:main"
 

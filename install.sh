@@ -9,7 +9,7 @@ CONFIG="${OPENSYNAPSE_CONFIG:-$HOME/.config/opensynapse/config.json}"
 ROOT="${OPENSYNAPSE_ROOT:-$PWD}"
 WRITE_ROOT="${OPENSYNAPSE_WRITE_ROOT:-}"
 ENABLE_SAFE="${OPENSYNAPSE_ENABLE_SAFE_COMMANDS:-0}"
-RELEASE_VERSION="${OPENSYNAPSE_RELEASE_VERSION:-0.2.0a10}"
+RELEASE_VERSION="${OPENSYNAPSE_RELEASE_VERSION:-0.2.0a11}"
 RELEASE_ASSET_URL="https://github.com/nslabhwan/ns-agent-reliability/releases/download/v${RELEASE_VERSION}/opensynapse-${RELEASE_VERSION}-src.tar.gz"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || pwd)"
 
