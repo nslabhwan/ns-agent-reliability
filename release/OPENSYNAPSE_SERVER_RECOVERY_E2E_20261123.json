@@ -3,7 +3,7 @@
   "observed_at_utc": "2026-11-22T16:23:14+00:00",
   "version": "0.2.0a11",
   "scenario": "server-recovery",
-  "environment": "fresh candidate install in isolated Linux workspace",
+  "environment": "candidate E2E plus fresh public GitHub release install in isolated Linux workspaces",
   "safety": {
     "real_service_mutation": false,
     "fixture_only": true,
@@ -67,5 +67,28 @@
     "reason": "OpenSynapse Main connector probe returned HTTP 429 before this candidate run",
     "local_tunnel_doctor": "PASS",
     "claim_boundary": "This receipt proves the installed MCP read/write/bounded-command recovery path, not a new remote ChatGPT tunnel E2E."
+  },
+  "remote_publication": {
+    "status": "PASS",
+    "release_tag": "v0.2.0a11",
+    "release_commit_sha": "16f70b39ce268e25a63617686f4b498638c82780",
+    "release_url": "https://github.com/nslabhwan/ns-agent-reliability/releases/tag/v0.2.0a11",
+    "asset_name": "opensynapse-0.2.0a11-src.tar.gz",
+    "asset_sha256": "be24076a7609748a2735486e8d057530691593838834d49f866dada62f9cd7cc",
+    "fresh_public_install": "PASS",
+    "fresh_public_recovery": "PASS",
+    "public_installed_version": "0.2.0a11",
+    "github_quality_gate_run": {
+      "id": 45043961132,
+      "status": "SUCCESS"
+    },
+    "github_pages_run": {
+      "id": 45043960840,
+      "status": "SUCCESS"
+    },
+    "pages_live_readback": "PASS",
+    "readme_live_readback": "PASS",
+    "controlled_self_downloads": 1,
+    "github_asset_download_count_observed_after_self_test": 0
   }
 }

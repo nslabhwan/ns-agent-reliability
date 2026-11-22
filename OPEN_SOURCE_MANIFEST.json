@@ -1,37 +1,46 @@
 {
   "schema_version": "OPENSYNAPSE_OPEN_SOURCE_MANIFEST_V1",
   "authority": "GPT_SANDBOX_NON_SSOT",
-  "publication_status": "PUBLIC_LIVE_0.2.0A10_A11_CANDIDATE_LOCAL_VERIFIED",
+  "publication_status": "PUBLIC_LIVE_0.2.0A11_REMOTE_VERIFIED",
   "updated_kst": "2026-11-23",
   "public_repository": "https://github.com/nslabhwan/ns-agent-reliability",
   "product_identity": "OpenSynapse",
   "public_user_promise": "Install once. Let AI work on machines you own through explicit bounded access, and verify the result.",
   "current_public_release": {
-    "version": "0.2.0a10",
-    "wedge": "OpenSynapse guided onboarding plus privacy-preserving install measurement",
-    "remotely_verified": true,
-    "tested_public_commit_sha": "3764580f1e6d4d13e82698e258c39fbda03b46ce",
-    "github_quality_gate": "PASS",
-    "github_pages": "PASS",
-    "linux_http_mcp_e2e": "PASS",
-    "android_fresh_public_install": "PASS",
-    "android_stdio_mcp_e2e": "PASS",
-    "real_chatgpt_tunnel_write_readback_e2e": "PASS"
-  },
-  "candidate": {
     "version": "0.2.0a11",
-    "status": "LOCAL_VERIFIED_PENDING_REMOTE_RELEASE",
-    "tests": "63/63 PASS",
-    "content_qa": "49 files / 0 issues / PASS",
-    "public_scan": "124/124 PASS",
-    "server_recovery_fixture": "PASS",
+    "wedge": "bounded server recovery: failure evidence -> diagnosis -> minimum repair -> independent health check",
+    "release_commit_sha": "16f70b39ce268e25a63617686f4b498638c82780",
+    "release_url": "https://github.com/nslabhwan/ns-agent-reliability/releases/tag/v0.2.0a11",
+    "release_asset": "opensynapse-0.2.0a11-src.tar.gz",
+    "release_asset_sha256": "be24076a7609748a2735486e8d057530691593838834d49f866dada62f9cd7cc",
+    "remotely_verified": true,
+    "fresh_public_release_install": "PASS",
+    "fresh_public_server_recovery": "PASS",
     "server_recovery_initial_reason": "SERVICE_DISABLED",
-    "server_recovery_mcp_sequence": "dc_read_text -> dc_write_text -> dc_run_bounded PASS",
-    "minimum_change_guard": "only enabled false -> true",
+    "server_recovery_minimum_change": "enabled false -> true; service/listen_port/upstream unchanged",
+    "server_recovery_final_health": "HEALTHY",
     "bounded_health_command": "demohealth",
     "real_service_mutation": false,
-    "remote_release_verification": "PENDING",
-    "server_recovery_receipt": "release/OPENSYNAPSE_SERVER_RECOVERY_E2E_20261123.json"
+    "full_regression": "63/63 PASS",
+    "content_qa": "49 files / 0 issues / PASS",
+    "public_scan": "124/124 PASS",
+    "github_quality_gate": {
+      "run_id": 45043961132,
+      "status": "SUCCESS"
+    },
+    "github_pages": {
+      "run_id": 45043960840,
+      "status": "SUCCESS",
+      "live_readback": "PASS"
+    },
+    "download_measurement": {
+      "controlled_self_public_install_runs": 1,
+      "github_asset_download_count_observed_after_self_test": 0,
+      "interpretation": "GitHub counter had not reflected the controlled download at observation time; do not infer zero installs from this immediate value."
+    },
+    "real_chatgpt_tunnel_write_readback_e2e": "PRIOR_PUBLIC_EVIDENCE_PRESERVED_NOT_REVERIFIED_THIS_RELEASE",
+    "current_release_remote_connector_probe": "HTTP_429",
+    "local_tunnel_doctor": "PASS"
   },
   "current_proven_components": [
     "OpenSynapse dependency-free bounded core",
@@ -62,7 +71,7 @@
     "narrative_docs": "CC-BY-4.0",
     "brand_assets": "reserved as described in TRADEMARKS.md"
   },
-  "truth_rule": "Historical evidence remains historical. Candidate readiness is not public-release completion; remote push and fresh public clone/install verification are required.",
+  "truth_rule": "Historical evidence remains historical. v0.2.0a11 is public and fresh-public-install verified. Release-asset download counts are aggregate signals and may lag; controlled self-tests are recorded separately from external usage.",
   "remote_publication_receipt": "release/REMOTE_PUBLICATION_RECEIPT_20260919_OPENSYNAPSE_A2.json",
   "android_remote_publication_receipt": "release/REMOTE_ANDROID_PUBLICATION_RECEIPT_20260919_OPENSYNAPSE_A3.json"
 }
