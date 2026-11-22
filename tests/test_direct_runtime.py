@@ -11,8 +11,9 @@ from ns_direct_channel.runtime import DirectChannelRuntime
 
 
 def make_runtime(root: Path) -> DirectChannelRuntime:
-    printf = Path("/usr/bin/printf")
-    commands = {"printf": str(printf)} if printf.is_file() else {}
+    printf_link = Path("/usr/bin/printf")
+    printf = printf_link.resolve() if printf_link.is_file() else printf_link
+    commands = {"printf": str(printf)} if printf.is_file() and not printf.is_symlink() else {}
     config = DirectChannelConfig.from_dict({
         "read_roots": [str(root)],
         "write_roots": [str(root)],
